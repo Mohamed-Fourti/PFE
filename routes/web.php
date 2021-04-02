@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\EnseignantsController;
+use App\Http\Controllers\Admin\EtudiantsController;
+use App\Http\Controllers\Admin\TechniciensController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +48,9 @@ Route::prefix('passe')->group(function () {
     Route::post('renouvellement', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 });
 
-
 Route::group(['middleware' => ['auth', 'role:admin']], function() { 
-    Route::get('/admin/admin', 'App\Http\Controllers\admin@admin')->name('admin.admin');
+    Route::name('admin')->get('/admin', [AdminController::class, 'index']);
+    Route::resource('usersEt', EtudiantsController::class);
+    Route::resource('usersEn', EnseignantsController::class);
+    Route::resource('usersTe', TechniciensController::class);
 });
