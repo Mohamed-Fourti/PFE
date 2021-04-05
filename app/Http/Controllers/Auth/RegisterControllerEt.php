@@ -104,8 +104,8 @@ class RegisterControllerEt extends Controller
         $cin = $request->input('cin');
   
 
-        $tab = Excel::toArray(new UsersImport, 'C:\Users\Mohamed Fourti\Downloads\L1 TI.xls');
-        $tabclass = Excel::toArray(new UsersImportClass, 'C:\Users\Mohamed Fourti\Downloads\L1 TI.xls');
+        $tab = Excel::toArray(new UsersImport, '..\excel\L1 TI.xls');
+        $tabclass = Excel::toArray(new UsersImportClass, '..\excel\L1 TI.xls');
 
         foreach ($tab as $index => $value) {
     
