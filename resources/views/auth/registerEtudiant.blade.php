@@ -8,7 +8,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('inscriptionp') }}" >
                         @csrf
@@ -31,15 +30,21 @@
 
                         <div  class="form-group row show">
                             <label for="prenom" class="col-md-4 col-form-label text-md-right">{{ __('prenom') }}</label>
-
                             <div class="col-md-6">
                                 <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom"    @if (!empty($ExcelImport)) value="{{$ExcelImport['prenom_fr']}}"     @else value="{{old('prenom')}}" @endif  readonly  >
-
+                              
                                 @error('prenom')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div  class="form-group row show">
+                            <label for="class" class="col-md-4 col-form-label text-md-right">{{ __('class') }}</label>
+                            <div class="col-md-6">
+                                <input id="class" type="text" class="form-control @error('class') is-invalid @enderror" name="class"    @if (!empty($ExcelImport)) value="{{ $tabclass[0][2][4] }}"     @else value="{{old('class')}}" @endif  readonly  >
                             </div>
                         </div>
 

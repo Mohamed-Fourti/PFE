@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -12,7 +12,7 @@ class TechniciensController extends Controller
     public function index()
     {
         $users=User::whereRoleIs('Techniciens')->get();
-        return view('AdminPanel.Users',compact('users'));
+        return view('AdminPanel.Users.UsersTe',compact('users'));
     }
 
  

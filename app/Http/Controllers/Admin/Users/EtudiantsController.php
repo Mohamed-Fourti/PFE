@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -12,7 +12,7 @@ class EtudiantsController extends Controller
     public function index()
     {
         $users=User::whereRoleIs('Etudiants')->get();
-        return view('AdminPanel.Users',compact('users'));
+        return view('AdminPanel.Users.UsersEt',compact('users'));
     }
 
  

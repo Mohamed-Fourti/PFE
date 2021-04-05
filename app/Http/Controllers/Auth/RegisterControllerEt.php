@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
+use App\Imports\UsersImportClass;
 
 class RegisterControllerEt extends Controller
 {
@@ -82,6 +83,7 @@ class RegisterControllerEt extends Controller
             'prenom' => $data['prenom'],
             'email' => $data['email'],
             'cin' => $data['cin'],
+            'class' => $data['class'],
             'password' => Hash::make($data['password']),
             
         ]));
@@ -103,6 +105,8 @@ class RegisterControllerEt extends Controller
   
 
         $tab = Excel::toArray(new UsersImport, 'C:\Users\Mohamed Fourti\Downloads\L1 TI.xls');
+        $tabclass = Excel::toArray(new UsersImportClass, 'C:\Users\Mohamed Fourti\Downloads\L1 TI.xls');
+
         foreach ($tab as $index => $value) {
     
             if (
@@ -111,7 +115,7 @@ class RegisterControllerEt extends Controller
                     return $value['cin'] == $cin;
                 })
             ) {
-                return view('auth.registerEtudiant',compact('ExcelImport'));
+                return view('auth.registerEtudiant',compact('ExcelImport','tabclass'));
                 
             }
           

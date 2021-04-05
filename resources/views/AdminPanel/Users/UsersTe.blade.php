@@ -6,21 +6,16 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Cin</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Class</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td @if (!empty($user->cin) style="background-color:#FF0000") @endif>{{ $user->cin }}</td>
+                <tr>                    
                     <td>{{ $user->nom }}</td>
                     <td>{{ $user->prenom }}</td>
                     <td>{{ $user->email }}</td>
