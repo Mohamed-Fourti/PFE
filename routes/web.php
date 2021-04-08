@@ -52,7 +52,12 @@ Route::prefix('passe')->group(function () {
 Route::group(['middleware' => ['auth', 'role:admin']], function() { 
     Route::name('admin')->get('/admin', [AdminController::class, 'index']);
     Route::resource('usersEt', EtudiantsController::class);
+    Route::post('updateEt','App\Http\Controllers\Admin\Users\EtudiantsController@update')->name('updateEt');
     Route::resource('usersEn', EnseignantsController::class);
+    Route::post('updateEn','App\Http\Controllers\Admin\Users\EnseignantsController@update')->name('updateEn');
     Route::resource('usersTe', TechniciensController::class);
+    Route::post('updateTe','App\Http\Controllers\Admin\Users\TechniciensController@update')->name('updateTe');
     Route::resource('event', EventController::class);
+
+
 });
