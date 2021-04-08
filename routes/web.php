@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Users\EnseignantsController;
 use App\Http\Controllers\Admin\Users\EtudiantsController;
 use App\Http\Controllers\Admin\Users\TechniciensController;
+use App\Http\Controllers\Admin\Event\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,4 +54,5 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('usersEt', EtudiantsController::class);
     Route::resource('usersEn', EnseignantsController::class);
     Route::resource('usersTe', TechniciensController::class);
+    Route::resource('event', EventController::class);
 });

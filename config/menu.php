@@ -24,4 +24,14 @@ return [
             ],
         ],
     ],
+    'Evenement' => [
+        'route'  => 'Evenement',
+        'icon'   => 'calendar-week',
+        'children' => [
+            [
+                'name'  => 'Ajouter Evenement',
+                'route' => 'event.create',
+            ],
+        ],
+    ],
 ];
