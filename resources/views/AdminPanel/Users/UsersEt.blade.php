@@ -3,7 +3,21 @@
 @section('main')
 <div class="container-fluid">
     <div class="row">
-        <table class="table">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="searchEt" method="get">
+                <div class="input-group">
+                    <input type="search" name="search" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">Seach</button></span>
+                </div>
+            </form>
+            </div>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -95,7 +109,7 @@
                             <input type="email" id="f_email" name="email" class="form-control" value="" />
                         </div>
                     </div>
-                        <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Class</label>
                         <div class="col-sm-9">
                             <input type="text" id="f_class" name="class" class="form-control" value="" />
@@ -123,7 +137,6 @@
 
 @push('scripts')
 <script>
-    // select update js
     $(document).on('click', '.edit', function() {
         var _this = $(this).parents('tr');
         $('#id').val(_this.find('.id').text());
@@ -132,6 +145,42 @@
         $('#f_email').val(_this.find('.email').text());
         $('#f_class').val(_this.find('.class').text());
 
+    });
+</script>
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#ajaxSubmit').click(function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            jQuery.ajax({
+                url: "{{ url('/chempionleague') }}",
+                method: 'post',
+                data: {
+                    name: jQuery('#name').val(),
+                    club: jQuery('#club').val(),
+                    country: jQuery('#country').val(),
+                    score: jQuery('#score').val(),
+                },
+                success: function(result) {
+                    if (result.errors) {
+                        jQuery('.alert-danger').html('');
+
+                        jQuery.each(result.errors, function(key, value) {
+                            jQuery('.alert-danger').show();
+                            jQuery('.alert-danger').append('<li>' + value + '</li>');
+                        });
+                    } else {
+                        jQuery('.alert-danger').hide();
+                        $('#open').hide();
+                        $('#myModal').modal('hide');
+                    }
+                }
+            });
+        });
     });
 </script>
 

@@ -12,10 +12,17 @@ class EnseignantsController extends Controller
 
     public function index()
     {
-        $users=User::whereRoleIs('Enseignants')->get();
+        $users=User::whereRoleIs('Enseignants')->paginate(3);
         return view('AdminPanel.Users.UsersEn',compact('users'));
     }
 
+    public function search(Request $request)
+    {
+        $search =$request->get('search');
+        $users=User::whereRoleIs('Enseignants')->where('nom','like','%'.$search.'%')->paginate(3);
+        return view('AdminPanel.Users.UsersEn',compact('users'));
+        
+    }
 
     public function create()
     {

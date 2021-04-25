@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Facade\FlareClient\Stacktrace\File;
 
-class EventsController extends Controller
+
+class testing extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,19 @@ class EventsController extends Controller
      */
     public function index()
     {
-        return view('AdminPanel');
-
+        
+        $filesInFolder = \File::allFiles('..\storage\excel\uploads\\');
+        $fileNames = [];
+        $path = '..\storage\excel\uploads\\';
+        $files = \File::allFiles($path);
+    
+        foreach($files as $file) {
+            array_push($fileNames, pathinfo($file)['dirname']);
+        }
+    
+        return view('testfile',compact('fileNames'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

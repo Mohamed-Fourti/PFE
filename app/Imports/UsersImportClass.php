@@ -17,9 +17,7 @@ class UsersImportClass implements  ToCollection
         foreach ($rows as $row) 
         {
             importation::create([
-                'CIN'     => $row['CIN'],
-                'nom_fr'     => $row['nom_fr'],
-                'prenom_fr'    => $row['prenom_fr'],
+
             ]);
     }
    }

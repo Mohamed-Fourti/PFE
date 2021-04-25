@@ -14,5 +14,9 @@ return [
     'usersEt' => ['index'=> 'Etudiants'],
     'usersEn' => ['index'=> 'Enseignants'],
     'usersTe' => ['index'=> 'Techniciens'],
+    'usersTe' => ['index'=> 'Techniciens'],
+    'event' => ['create'=> 'Ajouter Evenement'],
+    'class' => ['index'=> 'Classes'],
+    
     
 ];

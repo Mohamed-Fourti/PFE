@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 class EtudiantsController extends Controller
@@ -13,10 +14,18 @@ class EtudiantsController extends Controller
 
     public function index()
     {
-        $users=User::whereRoleIs('Etudiants')->get();
+
+        $users=User::whereRoleIs('Etudiants')->paginate(3);
         return view('AdminPanel.Users.UsersEt',compact('users'));
     }
 
+    public function search(Request $request)
+    {
+        $search =$request->get('search');
+        $users=User::whereRoleIs('Etudiants')->where('nom','like','%'.$search.'%')->paginate(3);
+        return view('AdminPanel.Users.UsersEt',compact('users'));
+        
+    }
  
     public function create()
     {
@@ -62,6 +71,18 @@ class EtudiantsController extends Controller
     
     else {
 
+        $validator = Validator::make($request->all(), [
+            'nom' => 'required',
+            'prenom' => 'required',
+            'email' => 'required',
+            'class' => 'required',
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+
         $update = [
             'nom'       =>  $request->nom,
             'prenom'    =>  $request->prenom,
@@ -71,6 +92,7 @@ class EtudiantsController extends Controller
          
  
         ];
+    
         
         
     DB::table('Users')->where('id',$request->id)->update($update);

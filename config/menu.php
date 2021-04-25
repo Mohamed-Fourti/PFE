@@ -8,7 +8,6 @@ return [
     ],
     'Utilisateurs' => [
         'icon'   => 'address-book',
-        'route'  => 'Utilisateurs',
         'children' => [
             [
                 'name'  => 'Etudiants',
@@ -25,7 +24,6 @@ return [
         ],
     ],
     'Evenement' => [
-        'route'  => 'Evenement',
         'icon'   => 'calendar-week',
         'children' => [
             [
@@ -34,4 +32,11 @@ return [
             ],
         ],
     ],
+ 
+    'Class' => [
+        'icon'   => 'glasses',
+        'route' => 'class.index',
+
+    ],
+
 ];

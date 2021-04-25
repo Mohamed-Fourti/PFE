@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Classes\ClassesController;
 use App\Http\Controllers\Admin\Users\EnseignantsController;
 use App\Http\Controllers\Admin\Users\EtudiantsController;
 use App\Http\Controllers\Admin\Users\TechniciensController;
 use App\Http\Controllers\Admin\Event\EventController;
+use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,13 +53,23 @@ Route::prefix('passe')->group(function () {
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() { 
     Route::name('admin')->get('/admin', [AdminController::class, 'index']);
+    
     Route::resource('usersEt', EtudiantsController::class);
     Route::post('updateEt','App\Http\Controllers\Admin\Users\EtudiantsController@update')->name('updateEt');
+    Route::get('searchEt', 'App\Http\Controllers\Admin\Users\EtudiantsController@search');
+
     Route::resource('usersEn', EnseignantsController::class);
     Route::post('updateEn','App\Http\Controllers\Admin\Users\EnseignantsController@update')->name('updateEn');
+    Route::get('searchEn', 'App\Http\Controllers\Admin\Users\EnseignantsController@search');
+
     Route::resource('usersTe', TechniciensController::class);
     Route::post('updateTe','App\Http\Controllers\Admin\Users\TechniciensController@update')->name('updateTe');
+    Route::get('searchTe', 'App\Http\Controllers\Admin\Users\TechniciensController@search');
+
     Route::resource('event', EventController::class);
-
-
+    Route::resource('class', ClassesController::class);
+    Route::get('delete/{name}/{id}','App\Http\Controllers\Admin\Classes\ClassesController@delete')->name('delete');
 });
+
+
+Route::resource('test', testing::class);

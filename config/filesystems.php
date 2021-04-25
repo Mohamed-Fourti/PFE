@@ -51,6 +51,13 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        
+        'excel' => [
+            'driver' => 'local',
+            'root' => storage_path('/excel'),
+            'url' => env('APP_URL').'/excel',
+            'visibility' => 'public',
+        ],
 
     ],
 

@@ -11,13 +11,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
+  
+
+
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light navcolorc">
     <!-- Left navbar links -->
     <ul class="navbar-nav">      
       <li class="nav-item">
@@ -42,7 +46,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Sidebar -->
     <div class="sidebar">
 
@@ -93,11 +97,12 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1 class="m-0 text-dark">@lang($title)</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+        <div class="col-md-6 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">@lang($title)</h3>
+    </div>
+    <div class="col-md-6 col-4 align-self-center">
+
+    </div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -105,7 +110,11 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+      <div class="card border-primary">
+      <div class="card-body">
+
         @yield('main')
+        </div></div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -124,10 +133,12 @@
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" ></script>
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js"></script>
+<!-- Bootstrap File input-->
+<link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet">
+<script src="{{ asset('js/fileinput.js') }}" ></script>
+<script src="{{ asset('js/fr.js') }}" ></script>
 @stack('scripts')
 </body>
 </html>

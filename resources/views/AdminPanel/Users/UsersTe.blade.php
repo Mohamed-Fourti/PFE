@@ -3,7 +3,21 @@
 @section('main')
 <div class="container-fluid">
     <div class="row">
-        <table class="table">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="searchTe" method="get">
+                <div class="input-group">
+                    <input type="search" name="search" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">Seach</button></span>
+                </div>
+            </form>
+            </div>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -30,6 +44,7 @@
 
             </tbody>
         </table>
+        {{ $users->links() }}
     </div>
 </div>
 

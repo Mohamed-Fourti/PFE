@@ -1,9 +1,25 @@
 @extends('AdminPanel.layout')
 
 @section('main')
+
 <div class="container-fluid">
+
     <div class="row">
-        <table class="table">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="searchEn" method="get">
+                <div class="input-group">
+                    <input type="search" name="search" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">Seach</button></span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -32,7 +48,7 @@
         </table>
     </div>
 </div>
-
+      
 
 
 <div id="delete" class="modal fade">
