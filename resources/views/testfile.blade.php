@@ -3,8 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-     <h1>adm</h1>
+    @for ($i =0 ; $i < count($fileNames); $i++)
 
+  {{$fileNames[$i]}}<br>
+  @endfor
     </div>
 </div>
 @endsection
