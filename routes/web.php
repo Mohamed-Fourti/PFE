@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\Users\EnseignantsController;
 use App\Http\Controllers\Admin\Users\EtudiantsController;
 use App\Http\Controllers\Admin\Users\TechniciensController;
 use App\Http\Controllers\Admin\Event\EventController;
+use App\Http\Controllers\Réclamation\RéclamationController;
+use App\Http\Controllers\Réclamation\TraitementController;
 use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\RootingController@index')->name('home');
+
+/* login/register */
 
 Route::post('deconnexion', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 Route::middleware('guest')->group(function () {
@@ -51,6 +55,8 @@ Route::prefix('passe')->group(function () {
     Route::post('renouvellement', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 });
 
+/* Admin */
+
 Route::group(['middleware' => ['auth', 'role:admin']], function() { 
     Route::name('admin')->get('/admin', [AdminController::class, 'index']);
     
@@ -69,6 +75,20 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('event', EventController::class);
     Route::resource('class', ClassesController::class);
     Route::get('delete/{name}/{id}','App\Http\Controllers\Admin\Classes\ClassesController@delete')->name('delete');
+});
+
+/* Tickets */
+Route::group(['middleware' => ['auth', 'role:Enseignants']], function() {
+    Route::get('réclamation',[RéclamationController::class,'index']);
+    Route::post('réclamation/enregistrer',[RéclamationController::class,'store'])->name('réclamation/enregistrer');
+});
+
+Route::group(['middleware' => ['auth', 'role:Techniciens']], function() {
+    Route::get('réclamations',[RéclamationController::class,'index']);
+    Route::get('réclamations/{id}/consulter',[RéclamationController::class,'consulter']);
+    Route::get('réclamations/{id}/traiter',[TraitementController::class,'create']);
+    Route::post('traitement/enregistrer',[TraitementController::class,'store'])->name('traitement/enregistrer');
+
 });
 
 

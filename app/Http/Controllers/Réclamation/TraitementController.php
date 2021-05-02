@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Réclamation;
 
+use App\Http\Controllers\Controller;
+use App\Mail\RéclamationTraite;
+use App\Models\Réclamation;
+use App\Models\Traitement;
 use Illuminate\Http\Request;
-use Facade\FlareClient\Stacktrace\File;
-
-
-class testing extends Controller
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail ;
+class TraitementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,28 +19,18 @@ class testing extends Controller
      */
     public function index()
     {
-        
-        $filesInFolder = \File::allFiles('..\storage\excel\uploads\\');
-        $fileNames = [];
-        $path = '..\storage\excel\uploads\\';
-        $files = \File::allFiles($path);
-    
-        foreach($files as $file) {
-            array_push($fileNames, pathinfo($file)['filename']);
-        }
-    
-        return view('testfile',compact('fileNames'));
+        //
     }
-    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+    $Réclamation=Réclamation::findOrFail($id);
+      return view('Réclamation.traitement',compact('Réclamation'));
     }
 
     /**
@@ -47,7 +41,21 @@ class testing extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        $data['hardware'] = $request->input('hardware');
+        $data=Arr::add($data,'technicien_id',Auth::user()->id);
+        Traitement::create($data);
+
+          if($request->input('résultat')=='avec succès')
+          {
+  
+            $Réclamation=Réclamation::where('id',$request->input('réclamation_id'))->first();
+            $Réclamation->etat='traité';
+            $Réclamation->save();
+            Mail::to($Réclamation->user->email)->send(new RéclamationTraite($Réclamation));
+
+          }
+          return redirect('/home')->with('message','Le traitement a été enrgistrée avec succès');;
     }
 
     /**

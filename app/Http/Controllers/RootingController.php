@@ -11,7 +11,7 @@ class RootingController extends Controller
     {
         
         
-        if(Auth::user()->hasRole('admin')){
+      /*  if(Auth::user()->hasRole('admin')){
             return view('AdminIndex');
        }
        elseif(Auth::user()->hasRole('Enseignants')){
@@ -23,7 +23,9 @@ class RootingController extends Controller
        elseif(Auth::user()->hasRole('Etudiants')){
         return view('Etudiants');}
         else{
-            return view('index');}
+            return view('index');}*/
+     return view('Index');
+
     }
 
 }

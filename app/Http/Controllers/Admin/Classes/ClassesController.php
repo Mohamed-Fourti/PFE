@@ -48,7 +48,7 @@ class ClassesController extends Controller
      
             File::insert($insert);
      
-            return back()->with('success', 'File uploaded');
+            return back()->with('success', 'Succès');
 
         
            
