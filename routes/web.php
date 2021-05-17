@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('accueil');
 });
 
 Auth::routes();
@@ -91,5 +91,28 @@ Route::group(['middleware' => ['auth', 'role:Techniciens']], function() {
 
 });
 
+
+Route::get('Accueil', function(){
+    return View('accueil'); 
+});
+Route::get('Évènements', function(){
+    return View('Publication.Évènements.évènements'); 
+});
+Route::get('Évènement', function(){
+    return View('Publication.Évènements.évènement'); 
+});
+Route::get('Formation', function(){
+    return View('Publication.Évènements.formation'); 
+});
+
+Route::get('Nouveautés', function(){
+    return View('Publication.Nouveautés.nouveautés'); 
+});
+Route::get('Nouveauté', function(){
+    return View('Publication.Nouveautés.nouveauté'); 
+});
+Route::get('contact', function(){
+    return View('contact'); 
+});
 
 Route::resource('test', testing::class);

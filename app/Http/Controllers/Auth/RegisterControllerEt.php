@@ -104,8 +104,7 @@ class RegisterControllerEt extends Controller
         $cin = $request->input('cin');
   
 
-        $tab = Excel::toArray(new UsersImport, '..\storage\excel\uploads\L2 DSI.xls');
-        $tabclass = Excel::toArray(new UsersImportClass, '..\storage\excel\uploads\L2 DSI.xls');
+        $tab = Excel::toArray(new UsersImport, '..\storage\excel\uploads\etu.xls');
 
         foreach ($tab as $index => $value) {
     
@@ -115,7 +114,7 @@ class RegisterControllerEt extends Controller
                     return $value['cin'] == $cin;
                 })
             ) {
-                return view('auth.registerEtudiant',compact('ExcelImport','tabclass'));
+                return view('auth.registerEtudiant',compact('ExcelImport'));
                 
             }
           

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid pb-5">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
@@ -24,7 +24,7 @@
                                 <input id="Matiére" name="matiére" type="text" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label for="text" class="col-4 col-form-label">Séance (horaire):</label>
+                                <label for="text" class="col-4 col-form-label">Labo:</label>
 
                                 <input id="text" name="séance" type="text" class="form-control">
                             </div>
@@ -45,7 +45,7 @@
                                                 <th scope="row">Post infecté</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie1' }}][nom]" value="Post infecté">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie1' }}][quantity]" min="1">
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie1' }}][quantity]" min="0">
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie1' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -54,7 +54,7 @@
                                                 <th scope="row">Post Non Fonctionnel</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie2' }}][nom]" value="Post Non Fonctionnel">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie2' }}][quantity]" min="1">
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie2' }}][quantity]" min="0">
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie2' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -63,7 +63,7 @@
                                                 <th scope="row">Insuffisance Postes</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie3' }}][nom]" value="Insuffisance Postes">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie3' }}][quantity]" min="1">
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie3' }}][quantity]" min="0">
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie3' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -72,7 +72,7 @@
                                                 <th scope="row">Logiciels Manquants</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie4' }}][nom]" value="Logiciels Manquants">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie4' }}][quantity]" min="1">
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie4' }}][quantity]" min="0" >
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie4' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -81,7 +81,7 @@
                                                 <th scope="row">Périphériques Manquants</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie5' }}][nom]" value="Périphériques Manquants">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie5' }}][quantity]" min="1">
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie5' }}][quantity]" min="0" >
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie5' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -90,7 +90,7 @@
                                                 <th scope="row">Autres</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie6' }}][nom]" value="Autres">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie6' }}][quantity]" min="1">
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie6' }}][quantity]" min="0">
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie6' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -179,7 +179,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($Réclamation->propriétés as $property)
-                                                @if (isset($property['quantity']))
+                                                @if (($property['quantity'])>0)
                                                 <tr>
 
                                                     <td>{{ $property['nom'] }}</td>

@@ -4,7 +4,7 @@
 <div class="container">
 
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pb-5">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
@@ -44,7 +44,7 @@
                         <div  class="form-group row show">
                             <label for="class" class="col-md-4 col-form-label text-md-right">{{ __('class') }}</label>
                             <div class="col-md-6">
-                                <input id="class" type="text" class="form-control @error('class') is-invalid @enderror" name="class"    @if (!empty($ExcelImport)) value="{{ $tabclass[0][2][4] }}"     @else value="{{old('class')}}" @endif  readonly  >
+                                <input id="class" type="text" class="form-control @error('class') is-invalid @enderror" name="class"    @if (!empty($ExcelImport)) value="{{ $ExcelImport['class']}}"     @else value="{{old('class')}}" @endif  readonly  >
                             </div>
                         </div>
 
@@ -65,7 +65,7 @@
                         
 
                         <div  class="form-group row show">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse e-mail') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autofocus autocomplete="email">
@@ -79,7 +79,7 @@
                         </div>
 
                         <div  class="form-group row show show">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -93,7 +93,7 @@
                         </div>
 
                         <div  class="form-group row show">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmer mot de passe') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

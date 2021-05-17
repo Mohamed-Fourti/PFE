@@ -54,20 +54,30 @@ Les traitements effectué
 Votre Réclamation  N° {{ $Réclamation->id }} a été triaté .<br>
           </mj-text>
           <mj-text color="#637381" font-size="16px">
-<table table  table-bordered table-hover>
-  <tr>
-    <td>Traitement</td>
-    <td>Par</td>
-  </tr>
-  @foreach ($Réclamation->traitements as $traitement)
-    <tr>
-      <td>{{ $traitement->created_at}}</td>
-      <td>{{ $traitement->technicien->nom}}</td>
-    </tr>
-  @endforeach
-</table>
-          </mj-text>
-            <mj-text>
+              <mj-section>
+      <mj-column>
+        <table>
+          <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Traitement</th>
+            <th style="padding: 0 15px;">résultat</th>
+            <th style="padding: 0 0 0 15px;">Par</th>
+          </tr>
+            @foreach ($Réclamation->traitements as $traitement)
+
+          <tr>
+            <td style="padding: 0 15px 0 0;">{{ $traitement->created_at}}</td>
+            <td style="padding: 0 15px;">{{ $traitement->résultat}}</td>
+            <td style="padding: 0 0 0 15px;">{{ $traitement->technicien->nom}}</td>
+          </tr>
+            @endforeach
+
+         
+        </-table>
+      </mj-column>
+    </mj-section>
+ 
+         </mj-text>
+            <mj-text color="#637381" font-size="16px">
 Cordialement<br>
 </mj-text>
         </mj-column>
