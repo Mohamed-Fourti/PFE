@@ -86,7 +86,7 @@
 
                         <nav class="navbar navbar-expand-lg">
                             <div class="logo pr-5 pt-2">
-                                <a href="{{ url('Accueil') }}">
+                                <a href="{{ url('/') }}">
                                     <img src="{{ asset('images/logo.png') }}" alt="Logo">
                                 </a>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item">
-                                        <a class="active" href="{{ url('Accueil') }}">Accueil</a>
+                                        <a class="active" href="{{ url('/') }}">Accueil</a>
                                     </li>
 
                                     <li class="nav-item ">
@@ -209,7 +209,7 @@
                                 <h6>Sitemap</h6>
                             </div>
                             <ul>
-                                <li><a href="{{ url('Accueil') }}"><i class="fa fa-angle-right"></i>Accueil</a></li>
+                                <li><a href="{{ url('/') }}"><i class="fa fa-angle-right"></i>Accueil</a></li>
                                 <li><a href="courses.html"><i class="fa fa-angle-right"></i>Évènements</a></li>
                                 <li><a href="blog.html"><i class="fa fa-angle-right"></i>Formation</a></li>
                                 <li><a href="events.html"><i class="fa fa-angle-right"></i>Nouveautés</a></li>
@@ -297,6 +297,7 @@
 
     <!--====== Count Down js ======-->
     <script src="{{ asset('js/jquery.countdown.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.jscroll.min.js') }}" defer></script>
 
 
     <!--====== Main js ======-->

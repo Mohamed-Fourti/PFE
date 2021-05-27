@@ -14,7 +14,6 @@ class CreateTraitementsTable extends Migration
     public function up()
     {
         Schema::create('traitements', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('hardware')->nullable();
             $table->text('software')->nullable();

@@ -89,8 +89,8 @@
             </div>
             <form action="{{route('updateTe')}}" method="post">
                 {{ csrf_field() }}
-                <input type="text" hidden class="col-sm-9 form-control" id="id" name="id" value="" />
-                <div class="modal-body">
+                <input id="id" name="id">
+                                <div class="modal-body">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">nom</label>
                         <div class="col-sm-9">

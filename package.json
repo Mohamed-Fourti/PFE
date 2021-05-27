@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "bootstrap-fileinput": "^5.1.5",
+        "jscroll": "^2.4.1",
         "mjml": "^4.9.3"
     }
 }

@@ -50,38 +50,34 @@
                         <h3>Évènements-Formation à venir</h3>
                     </div>
                     <ul>
+                    @if($formEtevens->isEmpty())
+
+
+            
+<div>pas de Évènements-Formation</div>
+
+
+
+
+@else
+                    @foreach($formEtevens as $formEteven )
+
                         <li>
                             <div class="singel-event">
-                                <span><i class="fa fa-calendar"></i> 2 December 2021</span>
-                                <a href="{{ url('Évènement') }}">
-                                    <h4>Évènement1</h4>
+                                <span><i class="fa fa-calendar"></i>{{ $formEteven->created_at }}</span>
+                                <a href="{{ route('Publication/.display', [$formEteven->slug, 'ca' => $formEteven->categories_id ] )  }}">
+                                    <h4>{{ $formEteven->title }}</h4>
                                 </a>
                                 <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
                                 <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
                             </div>
                         </li>
-                        <li>
-                            <div class="singel-event">
-                                <span><i class="fa fa-calendar"></i> 2 December 2021</span>
-                                <a href="{{ url('Formation') }}">
-                                    <h4>Formation1</h4>
-                                </a>
-                                <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                                <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="singel-event">
-                                <span><i class="fa fa-calendar"></i> 2 December 2021</span>
-                                <a href="events-singel.html">
-                                    <h4>Évènement3</h4>
-                                </a>
-                                <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                                <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            </div>
-                        </li>
+                    
+                        @endforeach
+                        @endif
+
                     </ul>
-                    <a href="#" class="main-btn mt-55">Voir tout</a>
+                    <a href="{{ route('Publications') }}" class="main-btn mt-55">Voir tout</a>
                 </div> <!-- about event -->
             </div>
         </div> <!-- row -->
@@ -104,86 +100,82 @@
         </div> <!-- row -->
         <div class="row">
             <div class="col-lg-6">
+            @if($nouveautélasts->isEmpty())
+
+
+            
+            <div>no news</div>
+
+   
+   
+    
+  @else
+@foreach($nouveautélasts->where('categories_id',3) as $nouveautélast)
+
                 <div class="singel-news mt-30">
                     <div class="news-thum pb-25">
-                        <img src="images/news/n-1.jpg" alt="News">
+                    <a href="{{ route('Publication/.display', [$nouveautélast->slug, 'ca' => $nouveautélast->categories_id ] )  }}">
+                    <img src="{{ getImage($nouveautélast, false) }}" alt="" style="width:100%"></a>
                     </div>
+                    
                     <div class="news-cont">
                         <ul>
-                            <li><i class="fa fa-calendar"></i>2 December 2018 </li>
-                            <li><span>By</span> Adam linn</li>
+                            <li><a><i class="fa fa-calendar"></i>{{ $nouveautélast->created_at }}</a></li>
+                            <li><span>By</span>{{ $nouveautélast->user->nom }}</li>
                         </ul>
-                        <a href="{{ url('Nouveauté') }}">
-                            <h3>Tips to grade high cgpa in university life</h3>
+                        <a href="{{ route('Publication/.display', $nouveautélast->slug) }}">
+                            <h3>{{ $nouveautélast->title }}</h3>
                         </a>
-                        <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt .</p>
+                        <p>{{ $nouveautélast->excerpt }}</p>
                     </div>
                 </div> <!-- singel news -->
+                @endforeach 
+                 
+ @endif
             </div>
-            <div class="col-lg-6">
-                <div class="singel-news news-list">
-                    <div class="row">
+ <div class="singel-news news-list">
+ @if($nouveautés->isEmpty())
+
+ <div class="row">
+ <div class="col-sm-4">
+
+            
+<div>pas de nouvelles</div>
+
+</div>
+</div>
+
+
+@else
+                @foreach($nouveautés->where('categories_id',3) as $nouveauté )
+                                 <div class="row">
+
                         <div class="col-sm-4">
+                
                             <div class="news-thum mt-30">
-                                <img src="images/news/ns-1.jpg" alt="News">
-                            </div>
+                            <a href="{{ route('Publication/.display', [$nouveauté->slug, 'ca' => $nouveauté->categories_id ] )  }}">
+
+          <img src="{{ getImage($nouveauté, true) }}" alt="" style="width:100%"></a>
+                           </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="news-cont mt-30">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-calendar"></i>2 December 2018 </a></li>
-                                    <li><a href="#"> <span>By</span> Adam linn</a></li>
+                                    <li><a><i class="fa fa-calendar"></i>{{ $nouveauté->created_at }} </a></li>
+                                    <li><span>By </span>{{ $nouveauté->user->nom }}</li>
                                 </ul>
-                                <a href="{{ url('Nouveauté') }}">
-                                    <h3>Intellectual communication</h3>
+                                <a>
+                            <a href="{{ route('Publication/.display', $nouveauté->slug) }}">
+                                    <h3>{{ $nouveauté->title }}</h3></a>
                                 </a>
-                                <p>Gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons vel.</p>
+                                <p>{{ $nouveauté->excerpt }}</p>
                             </div>
                         </div>
                     </div> <!-- row -->
-                </div> <!-- singel news -->
-                <div class="singel-news news-list">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="news-thum mt-30">
-                                <img src="images/news/ns-2.jpg" alt="News">
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="news-cont mt-30">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-calendar"></i>2 December 2018 </a></li>
-                                    <li><a href="#"> <span>By</span> Adam linn</a></li>
-                                </ul>
-                                <a href="blog-singel.html">
-                                    <h3>Study makes you perfect</h3>
-                                </a>
-                                <p>Gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons vel.</p>
-                            </div>
-                        </div>
-                    </div> <!-- row -->
-                </div> <!-- singel news -->
-                <div class="singel-news news-list">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="news-thum mt-30">
-                                <img src="images/news/ns-3.jpg" alt="News">
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="news-cont mt-30">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-calendar"></i>2 December 2018 </a></li>
-                                    <li><a href="#"> <span>By</span> Adam linn</a></li>
-                                </ul>
-                                <a href="blog-singel.html">
-                                    <h3>Technology edcution is now....</h3>
-                                </a>
-                                <p>Gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons vel.</p>
-                            </div>
-                        </div>
-                    </div> <!-- row -->
-                </div> <!-- singel news -->
+                @endforeach  
+                @endif
+              </div> <!-- singel news -->
+
             </div>
         </div> <!-- row -->
     </div> <!-- container -->

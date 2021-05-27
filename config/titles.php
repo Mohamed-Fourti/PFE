@@ -17,6 +17,8 @@ return [
     'usersTe' => ['index'=> 'Techniciens'],
     'event' => ['create'=> 'Ajouter Evenement'],
     'class' => ['index'=> 'Classes'],
+    'Publication' => ['index'=> 'Classes'],
+    'categories' => [ 'index'  => 'Categories'],
     
     
 ];

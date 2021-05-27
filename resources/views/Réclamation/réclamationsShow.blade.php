@@ -20,8 +20,12 @@
               <td>{{ $Réclamations->remarques}}</td>
             </tr>
             <tr>
-              <td>Labo:</td>
+              <td>séance:</td>
               <td>{{ $Réclamations->séance}}</td>
+            </tr>
+            <tr>
+              <td>Labo:</td>
+              <td>{{ $Réclamations->labo}}</td>
             </tr>
             <tr>
               <td>Anomalies :</td>

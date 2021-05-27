@@ -18,6 +18,7 @@ class CreateRéclamationsTable extends Migration
             $table->increments('id');
             $table->string('matiére')->nullable();
             $table->string('séance')->nullable();
+            $table->string('labo')->nullable();
             $table->json('propriétés');
             $table->text('remarques')->nullable();
             $table->string('etat')->default('création');
@@ -42,3 +43,5 @@ class CreateRéclamationsTable extends Migration
         
     }
 }
+
+

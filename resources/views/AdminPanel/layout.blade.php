@@ -144,5 +144,6 @@
 <script src="{{ asset('js/fileinput.js') }}" ></script>
 <script src="{{ asset('js/fr.js') }}" ></script>
 @stack('scripts')
+@yield('js')
 </body>
 </html>

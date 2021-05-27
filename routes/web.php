@@ -6,10 +6,15 @@ use App\Http\Controllers\Admin\Users\EnseignantsController;
 use App\Http\Controllers\Admin\Users\EtudiantsController;
 use App\Http\Controllers\Admin\Users\TechniciensController;
 use App\Http\Controllers\Admin\Event\EventController;
+use App\Http\Controllers\Admin\Publication\CategoriesController;
+use App\Http\Controllers\Admin\Publication\PublicationController as BackPublicationController;
+use App\Http\Controllers\Front\PublicationController as FrontPublicationController;
 use App\Http\Controllers\Réclamation\RéclamationController;
 use App\Http\Controllers\Réclamation\TraitementController;
 use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('accueil');
 });
+
 
 Auth::routes();
 
@@ -73,8 +79,17 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('searchTe', 'App\Http\Controllers\Admin\Users\TechniciensController@search');
 
     Route::resource('event', EventController::class);
+    
     Route::resource('class', ClassesController::class);
     Route::get('delete/{name}/{id}','App\Http\Controllers\Admin\Classes\ClassesController@delete')->name('delete');
+
+    Route::resource('publication', BackPublicationController::class);
+    Route::post('publication/{id}',[BackPublicationController::class,'destroy']);
+
+    Route::resource('categories', CategoriesController::class);
+    Route::post('categories/{id}',[CategoriesController::class,'destroy']);
+
+
 });
 
 /* Tickets */
@@ -92,11 +107,12 @@ Route::group(['middleware' => ['auth', 'role:Techniciens']], function() {
 });
 
 
-Route::get('Accueil', function(){
-    return View('accueil'); 
-});
-Route::get('Évènements', function(){
-    return View('Publication.Évènements.évènements'); 
+
+
+
+
+Route::get('Publication', function(){
+    return View('Publication.publications'); 
 });
 Route::get('Évènement', function(){
     return View('Publication.Évènements.évènement'); 
@@ -116,3 +132,18 @@ Route::get('contact', function(){
 });
 
 Route::resource('test', testing::class);
+
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'auth'], function () {
+    Lfm::routes();
+});
+
+Route::get('/', [FrontPublicationController::class,'index']);
+
+Route::prefix('Publications')->group(function () {
+    Route::name('Publication/.display')->get('{slug}', [FrontPublicationController::class, 'show']);
+    Route::get('réclamations',[RéclamationController::class,'index']);
+
+    Route::get('/',[FrontPublicationController::class, 'showall'])->name('Publications');;
+
+});
