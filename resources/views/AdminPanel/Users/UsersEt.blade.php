@@ -40,7 +40,7 @@
                     <td class="email">{{ $user->email }}</td>
                     <td class="class">{{ $user->class }}</td>
                     <td>
-                        <a data-toggle="modal" data-target="#delete"><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:16px;"></i></a>
+                        <a class="delete" data-toggle="modal" data-target="#delete"  data-id="{{$user->id}}" ><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:16px;"></i></a>
                         <a class="edit" data-toggle="modal" data-target="#update"><i class="fa fa-edit" style="color: #2196f3;font-size:16px;"></i></a>
                     </td>
                 </tr>
@@ -57,8 +57,12 @@
 
 <div id="delete" class="modal fade">
     <div class="modal-dialog">
-        <div class="modal-content">@foreach($users as $user)
-            <form method="DELETE" action="{{ route('usersEt.destroy',$user->id) }}"> @endforeach
+        <div class="modal-content">
+            <form method="POST" action="{{ route('usersEt.destroy','test' )}}"> 
+            {{method_field('delete')}}
+
+      		{{csrf_field()}}
+              <input type="text" hidden class="col-sm-9 form-control" id="deleteid" name="id" value="" />
 
                 <div class="modal-header">
                     <h4 class="modal-title">supprimer</h4>
@@ -149,42 +153,10 @@
         $('#f_class').val(_this.find('.class').text());
 
     });
-</script>
-<script>
-    jQuery(document).ready(function() {
-        jQuery('#ajaxSubmit').click(function(e) {
-            e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            jQuery.ajax({
-                url: "{{ url('/chempionleague') }}",
-                method: 'post',
-                data: {
-                    name: jQuery('#name').val(),
-                    club: jQuery('#club').val(),
-                    country: jQuery('#country').val(),
-                    score: jQuery('#score').val(),
-                },
-                success: function(result) {
-                    if (result.errors) {
-                        jQuery('.alert-danger').html('');
-
-                        jQuery.each(result.errors, function(key, value) {
-                            jQuery('.alert-danger').show();
-                            jQuery('.alert-danger').append('<li>' + value + '</li>');
-                        });
-                    } else {
-                        jQuery('.alert-danger').hide();
-                        $('#open').hide();
-                        $('#myModal').modal('hide');
-                    }
-                }
-            });
-        });
-    });
+    $(document).on('click', '.delete', function() {
+        var _this = $(this).parents('tr');
+        $('#deleteid').val(_this.find('.id').text());
+})
 </script>
 
 @endpush

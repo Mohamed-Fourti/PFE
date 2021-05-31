@@ -17,16 +17,11 @@ class UsersImport implements  ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) 
         {
-            importation::create([
-                'CIN'     => $row['CIN'],
-                'nom_fr'     => $row['nom_fr'],
-                'prenom_fr'    => $row['prenom_fr'],
-            ]);
     }
    }
    public function headingRow(): int
    {
-       return 6;
+       return 1;
    }
 
   

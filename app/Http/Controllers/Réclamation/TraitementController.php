@@ -55,7 +55,7 @@ class TraitementController extends Controller
             Mail::to($Réclamation->user->email)->send(new RéclamationTraite($Réclamation));
 
           }
-          return redirect('/home')->with('message','Le traitement a été enrgistrée avec succès');;
+          return redirect('/réclamations')->with('message','Le traitement a été enrgistrée avec succès');;
     }
 
     /**

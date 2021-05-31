@@ -1,21 +1,12 @@
 @extends('AdminPanel.layout')
-<?php $y = 0; ?>
-<?php $z = 0; ?>
 @section('main')
 <div class="container-fluid">
   <div class="row">
-    @foreach($ExcelImportClass as $class)
-    <div class="card m-5">
-  <div class="card-body font-weight-bold">#{{$y++}} {{$class[2][4]}}</div>
-</div>
 
-    @endforeach
   </div>
   <div class="row">
     @for ($i =0 ; $i < count($ExcelImport); $i++) <table class="table table-bordered table-hover">
-      
-        <div class="font-weight-bold">#{{$z++}}</div>
-      
+            
 
       <thead>
 

@@ -11,6 +11,7 @@ class Réclamation extends Model
     protected $fillable=[
       'matiére',
       'séance',
+      'labo',
       'propriétés',
       'remarques',
       'priorite',

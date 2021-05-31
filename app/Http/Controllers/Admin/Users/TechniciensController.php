@@ -63,9 +63,9 @@ class TechniciensController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(request $request)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->id);
         $user->delete();
         return back();
     }
