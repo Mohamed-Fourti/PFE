@@ -9,9 +9,15 @@ use App\Http\Controllers\Admin\Event\EventController;
 use App\Http\Controllers\Admin\Publication\CategoriesController;
 use App\Http\Controllers\Admin\Publication\PublicationController as BackPublicationController;
 use App\Http\Controllers\Front\PublicationController as FrontPublicationController;
+use App\Http\Controllers\Admin\FicheDeVœux\FicheDeVœuxController as BackFicheDeVœuxController;
+use App\Http\Controllers\Front\FicheDeVœuxController as FrontFicheDeVœuxController;
+use App\Http\Controllers\Front\InscriptionController as FrontInscriptionController;
+use App\Http\Controllers\Admin\Publication\InscriptionController as BackInscriptionController;
+use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\Réclamation\RéclamationController;
 use App\Http\Controllers\Réclamation\TraitementController;
 use App\Http\Controllers\testing;
+use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -34,7 +40,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'App\Http\Controllers\RootingController@index')->name('home');
+Route::post('inscriptionPub',[FrontInscriptionController::class,'store'] )->name('inscriptionPub');
 
 /* login/register */
 
@@ -89,13 +95,26 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('categories', CategoriesController::class);
     Route::post('categories/{id}',[CategoriesController::class,'destroy']);
 
+    Route::resource('Fiche-De-Vœux', BackFicheDeVœuxController::class);
+    Route::get('Fiche-De-Vœux/Ouverture/{id}',[BackFicheDeVœuxController::class,'Ouverture'])->name('Ouverture');
+    Route::get('Fiche-De-Vœux/Fermeture/{id}',[BackFicheDeVœuxController::class,'Fermeture'])->name('Fermeture');
+
+    Route::resource('Inscriptions-list',BackInscriptionController::class );
+    Route::post('Inscriptions-list/{id}',[BackPublicationController::class,'destroy']);
+    
 
 });
 
-/* Tickets */
+
 Route::group(['middleware' => ['auth', 'role:Enseignants']], function() {
+    /* Tickets */
     Route::get('réclamation',[RéclamationController::class,'index']);
     Route::post('réclamation/enregistrer',[RéclamationController::class,'store'])->name('réclamation/enregistrer');
+    
+    Route::get('Fiche-De-Vœux/{sem}',[FrontFicheDeVœuxController::class,'index']);
+    Route::post('Fiche-De-Vœux/enregistrer',[FrontFicheDeVœuxController::class,'store'])->name('réclamation/enregistrer');
+    Route::get('/', [FrontPublicationController::class,'index']);
+
 });
 
 Route::group(['middleware' => ['auth', 'role:Techniciens']], function() {
@@ -121,12 +140,6 @@ Route::get('Formation', function(){
     return View('Publication.Évènements.formation'); 
 });
 
-Route::get('Nouveautés', function(){
-    return View('Publication.Nouveautés.nouveautés'); 
-});
-Route::get('Nouveauté', function(){
-    return View('Publication.Nouveautés.nouveauté'); 
-});
 Route::get('contact', function(){
     return View('contact'); 
 });
@@ -143,7 +156,6 @@ Route::get('/', [FrontPublicationController::class,'index']);
 Route::prefix('Publications')->group(function () {
     Route::name('Publication/.display')->get('{slug}', [FrontPublicationController::class, 'show']);
     Route::get('réclamations',[RéclamationController::class,'index']);
-
-    Route::get('/',[FrontPublicationController::class, 'showall'])->name('Publications');;
+    Route::get('/',[FrontPublicationController::class, 'showall'])->name('Publications');
 
 });

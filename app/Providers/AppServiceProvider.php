@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\FichedevœuxOF;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\{ Blade, View, Route };
 
@@ -27,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
         View::composer('AdminPanel.layout', function ($view) {
             $title = config('titles.' . Route::currentRouteName());
             $view->with(compact('title'));
+        });
+        View::composer('layouts.app', function($view){
+            $FichedevœuxOF=FichedevœuxOF::where('Active','1')->first();
+            $view->with('FichedevœuxOF',$FichedevœuxOF);
         });
     }
 }

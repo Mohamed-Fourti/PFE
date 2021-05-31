@@ -3,11 +3,11 @@
 @section('main')
 <div class="container">
     <form method="post" action="{{Route::currentRouteName() === 'publication.edit' ? route('publication.update', $datas->id) :route('publication.store')}}">
-    @if(Route::currentRouteName() === 'publication.edit')
-            @method('PUT')
+        @if(Route::currentRouteName() === 'publication.edit')
+        @method('PUT')
         @endif
         @csrf
-        <input name="id" type="text" hidden value="{{ isset($datas->id) ? $datas->id : '' }}" >
+        <input name="id" type="text" hidden value="{{ isset($datas->id) ? $datas->id : '' }}">
 
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-7 col-6">
@@ -17,7 +17,7 @@
                         Titre
                     </div>
                     <div class="card-body">
-                        <input name="title" type="text" class="form-control" value="{{ isset($datas->title) ? $datas->title : '' }}" >
+                        <input name="title" id="title" type="text" class="form-control" value="{{ isset($datas->title) ? $datas->title : '' }}">
 
                     </div>
                 </div>
@@ -28,41 +28,143 @@
                         Publication
                     </div>
                     <div class="card-body">
-                        <input name="active" id="Publié" type="checkbox" value="false">
-                        <label for="Publié" class="" >Publié</label>
+                        @if($active)
+                        @if($datas->active==1 )
+
+
+                        <input name="active" id="Publié" type="checkbox" value="false" checked>
+                        <label for="Publié" class="">Publié</label>
+                        @else
+                        <input name="active" id="Publié" type="checkbox" value="false" }}>
+                        <label for="Publié" class="">Publié</label>
+                        @endif
+
+                        @else
+                        <input name="active" id="Publié" type="checkbox" value="false" }}>
+                        <label for="Publié" class="">Publié</label>
+                        @endif
+
                     </div>
                 </div>
 
 
-            </div>              
-      @if($categories)
-            <div class="col-lg-4 col-md-4 col-sm-3 col-2">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
                 <div class="card">
                     <div class="card-header">
-                        Publication
+                        Categories
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="select" class="col-4 col-form-label">Select</label>
-                            <div class="col-8">
-                                <select id="select" name="categories_id" class="">
-                                @foreach($categories as $categorie)
-                                <option value="{{$categorie->id}}">{{$categorie->title}}</option>
-                                @endforeach
-                                
+                            <div class="col-12">
+                                @if($categories)
+                                <select id="categories" name="categories_id" class="form-control">
 
-                               
+                                    @foreach($categories as $categorie)
+                                    <option value="{{$categorie->id}}">{{$categorie->title}}</option>
+                                    @endforeach
                                 </select>
+
+                                @else
+                                <select id="categories" name="categories_id" class="form-control" disabled>
+
+                                    <option value="{{$datas->id}}">{{ $datas->categories->title }}</option>
+                                </select>
+
+                                @endif
+
+
                             </div>
                         </div>
                     </div>
                 </div>
-                      </div>
+            </div>
 
-@else
-<input name="categories_id" type="text" hidden value="{{ isset($datas->categories_id) ? $datas->categories_id : '' }}" >
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+                <div class="card">
+                    <div class="card-header">
+                        Date Début
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input id="disable1" name="date_début" type="datetime-local" value="{{ isset($datas->date_début) ? Carbon\Carbon::parse($datas->date_début)->format('Y-m-d')."T".Carbon\Carbon::parse($datas->date_début)->format('H:i') : Carbon\Carbon::now()->format('Y-m-d')."T".Carbon\Carbon::now()->format('H:i') }}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+                <div class="card">
+                    <div class="card-header">
+                        Date Finale
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input id="disable2" name="date_finale" type="datetime-local" value="{{ isset($datas->date_finale) ? Carbon\Carbon::parse($datas->date_finale)->format('Y-m-d')."T".Carbon\Carbon::parse($datas->date_finale)->format('H:i') : Carbon\Carbon::now()->format('Y-m-d')."T".Carbon\Carbon::now()->format('H:i') }}" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d')."T".Carbon\Carbon::now()->format('H:i')}}">
 
-       @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+                <div class="card">
+                    <div class="card-header">
+                        Lieu
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input id="disable3" name="lieu" type="text" class="form-control" value="{{ isset($datas->lieu) ? $datas->lieu : 'Iset Djerba' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+                <div class="card">
+                    <div class="card-header">
+                        Formateur
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input  id="enabled1" name="formateur" type="text" class="form-control" value="{{ isset($datas->formateur) ? $datas->formateur : '' }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+                <div class="card">
+                    <div class="card-header">
+                    Durée
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input id="enabled2" name="durée" type="text" class="form-control" value="{{ isset($datas->durée) ? $datas->durée : '' }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+                <div class="card">
+                    <div class="card-header">
+                    Nombre de seance
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input id="enabled3" name="Nbseance" type="text" class="form-control" value="{{ isset($datas->Nbseance) ? $datas->Nbseance : '' }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -127,7 +229,7 @@
                         slug
                     </div>
                     <div class="card-body">
-                        <input name="slug" type="text" class="form-control" value="{{ isset($datas->slug) ? $datas->slug : '' }}" >
+                        <input name="slug" id="slug" type="text" class="form-control" value="{{ isset($datas->slug) ? $datas->slug : '' }}">
                     </div>
                 </div>
                 <div class="card">
@@ -136,9 +238,9 @@
                     </div>
                     <div class="card-body">
 
-                        <div id="holder" class="text-center" style="margin-bottom:15px;">
+                        <div  id="holder" class="text-center" style="margin-bottom:15px; ">
                             @isset($datas)
-                            <img style="width:100%;" src="{{ getImage($datas, true) }}" alt="">
+                            <img  style="width:100%;" src="{{ getImage($datas, true) }}" alt="">
                             @endisset
                         </div>
                         <div class="input-group">
@@ -162,5 +264,34 @@
 @push('scripts')
 
 @include('AdminPanel.editorScript')
+<script>
+    $(document).on('change', '#categories', function() {
+        var shouldEnable = $(this).val() == '3';
+        $('#disable1').prop('disabled', shouldEnable);
+        $('#disable2').prop('disabled', shouldEnable);
+        $('#disable3').prop('disabled', shouldEnable);
+
+        var foramation = $(this).val() != "2";
+        $('#enabled1').prop('disabled', foramation);
+        $('#enabled2').prop('disabled', foramation);
+        $('#enabled3').prop('disabled', foramation);
+    });
+
+    $(function() {
+        $('#slug').keyup(function() {
+            $(this).val(getSlug($(this).val()))
+        })
+
+        $('#title').keyup(function() {
+            $('#slug').val(getSlug($(this).val()))
+        })
+        
+        $('#title').keyup(function() {
+            $('#slug').val(getSlug($(this).val()))
+        })
+    });
+
+</script>
+
 
 @endpush

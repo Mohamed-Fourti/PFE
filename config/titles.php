@@ -15,7 +15,6 @@ return [
     'usersEn' => ['index'=> 'Enseignants'],
     'usersTe' => ['index'=> 'Techniciens'],
     'usersTe' => ['index'=> 'Techniciens'],
-    'event' => ['create'=> 'Ajouter Evenement'],
     'class' => ['index'=> 'Classes'],
     'Publication' => ['index'=> 'Classes'],
     'categories' => [ 'index'  => 'Categories'],

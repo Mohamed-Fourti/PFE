@@ -7,20 +7,38 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="events-left">
-                            <h3>{{ $Publication->title }}</h3>
-                            <a href="#"><span><i class="fa fa-calendar"></i> 2 December 2018</span></a>
-                            <a href="#"><span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span></a>
-                            <a href="#"><span><i class="fa fa-map-marker"></i>{{ $Publication->lieu }}</span></a>
+                        <span><h3>{{ $Publication->title }}</h3></span>
+                            <span><i class="fa fa-calendar"></i> {{ $Publication->created_at }}</span>
                             <img src="{{ getImage($Publication) }}" alt="Event" style="width:100%">
                             {!! $Publication->body !!}                        
                             </div> <!-- events left -->
                     </div>
                     <div class="col-lg-4">
-                        <div class="events-right">
-                            <div class="events-coundwon bg_cover" data-overlay="8" style="background-image: url(images/event/singel-event/coundown.jpg)">
-                                <div data-countdown="2021-05-25"></div>
+                        <div class="events-right " style=" margin-top: 105px;">
+                            <div class="events-coundwon bg_cover" data-overlay="8" style="background-image: url({{ getImage($Publication) }})" >
+                                <div data-countdown="{{ $Publication->date_finale }}"></div>
                                 <div class="events-coundwon-btn pt-30">
-                                    <a href="#" class="main-btn">S'inscrire</a>
+                                @if(Auth::user())
+                                <form action="{{route('inscriptionPub')}}" method="post">
+                                 @csrf
+                                  <input name="publications_id" type="text" hidden value="{{ $Publication->id }}">
+                                  <input name="user_id" type="text" hidden value="{{  Auth::user()->id }}">
+                                  @if($Publication->date_finale<=Carbon\Carbon::now())
+                                  <button name="submit" type="submit" class="main-btn2" disabled>L'inscription est fermée</button>
+                                  @else
+                                  @if($inscrite==0)
+                                 <button name="submit" type="submit" class="main-btn">S'inscrire</button>
+                                @else
+                                <button name="submit" type="submit" class="main-btn2" disabled>Vous êtes déjà inscrit</button>
+                                @endif
+                                
+                                @endif
+                                </form>
+                                @else
+                                                                <a href="{{ route('login') }}"><button name="submit" type="submit" class="main-btn2">Connectez-vous pour inscrire</button></a>
+
+                                @endif
+
                                 </div>
                             </div> <!-- events coundwon -->
                             <div class="events-address mt-30">
@@ -32,7 +50,7 @@
                                             </div>
                                             <div class="cont">
                                                 <h6>Heure de début</h6>
-                                                <span>12:00 Am</span>
+                                                <span>{{ Carbon\Carbon::parse($Publication->date_début)->format('H:i') }}</span>
                                             </div>
                                         </div> <!-- singel address -->
                                     </li>
@@ -43,7 +61,7 @@
                                             </div>
                                             <div class="cont">
                                                 <h6>Heure de fin</h6>
-                                                <span>05:00 Am</span>
+                                                <span>{{ Carbon\Carbon::parse($Publication->date_finale)->format('H:i') }}</span>
                                             </div>
                                         </div> <!-- singel address -->
                                     </li>
@@ -54,12 +72,11 @@
                                             </div>
                                             <div class="cont">
                                                 <h6>Adresse</h6>
-                                                <span>Street Park ,America</span>
+                                                <span>{{ $Publication->lieu }}</span>
                                             </div>
                                         </div> <!-- singel address -->
                                     </li>
                                 </ul>
-                                <div id="contact-map" class="mt-25"></div> <!-- Map -->
                             </div> <!-- events address -->
                         </div> <!-- events right -->
                     </div>
@@ -67,5 +84,7 @@
             </div> <!-- events-area -->
         </div> <!-- container -->
     </section>
-    
-    @endsection
+
+   
+   
+   @endsection

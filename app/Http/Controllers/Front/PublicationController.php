@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Publication;
 use App\Http\Requests\Front\SearchRequest;
+use App\Models\Inscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PublicationController extends Controller
@@ -51,8 +53,14 @@ class PublicationController extends Controller
               'body',
               'created_at',
               'categories_id',
+              'date_finale',
+              'date_début',
+              'lieu',
               'excerpt',
-              'user_id')
+              'user_id',
+              'formateur',
+              'durée',
+              'Nbseance',)
             ->whereActive(true)->latest()->where('created_at', '<',$nlast->created_at)->take(4)->get();}
             else{
               $nouveautés = Publication::all()
@@ -70,8 +78,14 @@ class PublicationController extends Controller
             'body',
             'created_at',
             'categories_id',
+            'date_finale',
+            'date_début',
+            'lieu',
             'excerpt',
-            'user_id')
+            'user_id',
+            'formateur',
+            'durée',
+            'Nbseance',)
           ->whereActive(true)->where('id',$nlast->id)->get();}
           else{
             $nouveautélasts = Publication::all()->where('categories_id',3);
@@ -94,19 +108,30 @@ class PublicationController extends Controller
         'body',
         'created_at',
         'categories_id',
+        'date_finale',
+        'date_début',
+        'lieu',
         'excerpt',
-        'user_id')
+        'user_id',
+        'formateur',
+        'durée',
+        'Nbseance',)
       ->with('user:id,nom')
       ->whereActive(true)
       ->where('slug',$slug)->first();
+      if($user = Auth::user())
+      {
+        $inscrite=Inscription::where('user_id',Auth::user()->id)->where('publications_id',$Publication->id)->count();
+      }
+      else{$inscrite='';}
   if($categories_id==1){
-    return view('Publication.évènement', compact('Publication'));
+    return view('Publication.évènement', compact('Publication','inscrite'));
  }
   if($categories_id==2){
-    return view('Publication.formation', compact('Publication'));
+    return view('Publication.formation', compact('Publication','inscrite'));
   }
   if($categories_id==3){
-    return view('Publication.nouveauté', compact('Publication'));
+    return view('Publication.nouveauté', compact('Publication','inscrite'));
   }
  }
 
@@ -124,7 +149,10 @@ class PublicationController extends Controller
       'body',
       'created_at',
       'categories_id',
-      'user_id')
+      'user_id',
+      'formateur',
+      'durée',
+      'Nbseance',)
     ->whereActive(true)->latest()->paginate(2);
     return view('Publication.publications', compact('publications'));
   }

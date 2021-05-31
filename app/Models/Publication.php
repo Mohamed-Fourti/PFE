@@ -24,6 +24,9 @@ class Publication extends Model
         'date_début',
         'date_finale',
         'lieu',
+        'formateur',
+        'durée',
+        'Nbseance',
     ];
 
     public function user()
@@ -35,4 +38,6 @@ class Publication extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+
 }

@@ -31,13 +31,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <script src="{{ asset('js/app.js') }}" ></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -122,11 +118,24 @@
                                         @role('admin')
                                             <a href="{{ url('admin') }}">Admin</a>
                                         @endrole
+                                        </li>
+                                        <li class="nav-item ">
                                         @role('Techniciens')
                                             <a href="{{ url('réclamations') }}">Réclamation</a>
                                         @endrole
+                                        </li>
+                                        <li class="nav-item ">
                                         @role('Enseignants')
                                             <a href="{{ url('réclamation') }}">Creér un ticket</a>
+                                            @if($FichedevœuxOF !=null)
+                                            @if($FichedevœuxOF->sem=='S1')
+                                            <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S1</a>
+                                            @else
+                                            <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S2</a>
+                                            @endif
+                                            @else 
+
+                                            @endif
                                         @endrole
                                     </li>
                                 </ul>
@@ -306,9 +315,6 @@
 
     <!--====== Map js ======-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
-    <script src="js/map-script.js"></script>
     <script>
         function menuToggle() {
             const toggleMenu = document.querySelector('.menu');

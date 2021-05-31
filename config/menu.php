@@ -23,15 +23,6 @@ return [
             ],
         ],
     ],
-    'Evenement' => [
-        'icon'   => 'calendar-week',
-        'children' => [
-            [
-                'name'  => 'Ajouter Evenement',
-                'route' => 'event.create',
-            ],
-        ],
-    ],
  
     'Class' => [
         'icon'   => 'glasses',
@@ -50,6 +41,10 @@ return [
                 'name'  => 'Ajouter Publication',
                 'route' => 'publication.create',
             ],
+            [
+                'name'  => 'Linscriptions',
+                'route' => 'Inscriptions-list.index',
+            ],
         ],
     ],
 
@@ -66,6 +61,19 @@ return [
             ],
         ],
     ],
-
-
+    'fiche de vœux' => [
+    ],
+    'fiche de vœux' => [
+        'icon'   => 'file-alt',
+        'children' => [
+            [
+                'name'  => 'Ouverture/Fermeture',
+                'route'  => 'Fiche-De-Vœux.index',
+            ],
+            [
+                'name'  => 'Result',
+                'route' => 'categories.create',
+            ],
+        ],
+    ],
 ];

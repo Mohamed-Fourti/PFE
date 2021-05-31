@@ -17,6 +17,7 @@ class PublicationController extends Controller
     {
         $datas=Publication::all();
         return view('AdminPanel.Publications.publications',compact('datas'));
+        
     }
 
     /**
@@ -27,8 +28,9 @@ class PublicationController extends Controller
      */
     public function create()
     {
+        $active='';
         $categories=Category::all();
-        return view('AdminPanel.Publications.newpublication',compact('categories'));
+        return view('AdminPanel.Publications.newpublication',compact('categories','active'));
     }
 
     /**
@@ -59,9 +61,10 @@ class PublicationController extends Controller
      */
     public function edit($id)
     {
+        $active='1';
         $categories='';
         $datas=Publication::all()->where('id',$id)->first();
-        return view('AdminPanel.Publications.newpublication', compact('datas','categories'));
+        return view('AdminPanel.Publications.newpublication', compact('datas','categories','active'));
     }
 
     /**

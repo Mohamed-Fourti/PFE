@@ -18,11 +18,11 @@ class CreatePublicationsTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('seo_title')->nullable();
             $table->text('excerpt');
             $table->text('body');
-            $table->text('meta_description');
-            $table->text('meta_keywords');
+            $table->string('seo_title')->nullable();
+            $table->text('meta_description')->nullable();;
+            $table->text('meta_keywords')->nullable();;
             $table->boolean('active')->default(false);
             $table->string('image')->nullable();
             $table->foreignId('user_id')
@@ -36,6 +36,9 @@ class CreatePublicationsTable extends Migration
             $table->dateTime('date_début')->nullable();
             $table->dateTime('date_finale')->nullable();
             $table->string('lieu')->nullable();
+            $table->string('formateur')->nullable();
+            $table->string('durée')->nullable();
+            $table->string('Nbseance')->nullable();
 
         });
     }
@@ -47,6 +50,6 @@ class CreatePublicationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nouveautés');
+        Schema::dropIfExists('publications');
     }
 }

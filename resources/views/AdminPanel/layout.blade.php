@@ -12,10 +12,14 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" />
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Datatable style -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}"/>
 
+
+  <script src="{{ asset('js/app.js') }}" defer></script>
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+  <script src="{{ asset('js/jquery-3.6.0.min.js') }}" defer></script>
 
 
 
@@ -32,7 +36,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('home') }}" class="nav-link">@lang('home')</a>
+        <a href="{{ url('/') }}" class="nav-link">@lang('Accueil')</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <form action="{{ route('logout') }}" method="POST" hidden>
@@ -136,13 +140,16 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js"></script>
 <!-- Bootstrap File input-->
 <link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet">
 <script src="{{ asset('js/fileinput.js') }}" ></script>
 <script src="{{ asset('js/fr.js') }}" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/speakingurl/14.0.1/speakingurl.min.js"></script>
+
+<script src="{{ asset('DataTables/datatables.min.js') }}" defer></script>
 @stack('scripts')
 @yield('js')
 </body>

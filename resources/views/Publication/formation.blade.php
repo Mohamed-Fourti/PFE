@@ -8,60 +8,23 @@
                 <div class="col-lg-8">
                     <div class="corses-singel-left mt-30">
                         <div class="title">
-                            <h3>Learn basis javascirpt from start for beginner</h3>
-                        </div> <!-- title -->
-                        <div class="course-terms">
-                            <ul>
-                                <li>
-                                    <div class="teacher-name">
-                                        <div class="thum">
-                                            <img src="images/course/teacher/t-1.jpg" alt="Teacher">
-                                        </div>
-                                        <div class="name">
-                                            <span>Teacher</span>
-                                            <h6>Mark anthem</h6>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="course-category">
-                                        <span>Category</span>
-                                        <h6>Programaming </h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="review">
-                                        <span>Review</span>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li class="rating">(20 Reviws)</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> <!-- course terms -->
-                        
+                           <span class="mr-3"><h3>{{ $Publication->title }}</h3></span>               
+                                          <span><i class="fa fa-calendar"></i> {{ $Publication->created_at }}</span>
+                        </div> <!-- title -->             
                         <div class="corses-singel-image pt-50">
-                            <img src="images/course/cu-1.jpg" alt="Courses">
+                            <img src="{{ getImage($Publication) }}" alt="Courses">
                         </div> <!-- corses singel image -->
                         
                         <div class="corses-tab mt-30">
                             <ul class="nav nav-justified" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                                    <a class="active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Aperçu</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="curriculam-tab" data-toggle="tab" href="#curriculam" role="tab" aria-controls="curriculam" aria-selected="false">Curriculam</a>
+                                    <a id="instructor-tab" data-toggle="tab" href="#instructor" role="tab" aria-controls="instructor" aria-selected="false">Formateur</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="instructor-tab" data-toggle="tab" href="#instructor" role="tab" aria-controls="instructor" aria-selected="false">Instructor</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                                    <a id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Commenter</a>
                                 </li>
                             </ul>
                             
@@ -69,151 +32,13 @@
                                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                     <div class="overview-description">
                                         <div class="singel-description pt-40">
-                                            <h6>Course Summery</h6>
-                                            <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
+                                            <h6>Résumé du cours</h6>
+                                            {!! $Publication->body !!}                        
                                         </div>
-                                        <div class="singel-description pt-40">
-                                            <h6>Requrements</h6>
-                                            <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
-                                        </div>
+
                                     </div> <!-- overview description -->
                                 </div>
-                                <div class="tab-pane fade" id="curriculam" role="tabpanel" aria-labelledby="curriculam-tab">
-                                    <div class="curriculam-cont">
-                                        <div class="title">
-                                            <h6>Learn basis javascirpt Lecture Started</h6>
-                                        </div>
-                                        <div class="accordion" id="accordionExample">
-                                            <div class="card">
-                                                <div class="card-header" id="headingOne">
-                                                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        <ul>
-                                                            <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.1</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
-                                                        </ul>
-                                                    </a>
-                                                </div>
 
-                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header" id="headingTow">
-                                                    <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapseTow" aria-expanded="true" aria-controls="collapseTow">
-                                                        <ul>
-                                                            <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.2</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
-                                                        </ul>
-                                                    </a>
-                                                </div>
-
-                                                <div id="collapseTow" class="collapse" aria-labelledby="headingTow" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card">
-                                                <div class="card-header" id="headingThree">
-                                                    <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        <ul>
-                                                            <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.3</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card">
-                                                <div class="card-header" id="headingFore">
-                                                    <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapseFore" aria-expanded="false" aria-controls="collapseFore">
-                                                        <ul>
-                                                            <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.4</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                                <div id="collapseFore" class="collapse" aria-labelledby="headingFore" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card">
-                                                <div class="card-header" id="headingFive">
-                                                    <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                        <ul>
-                                                            <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.5</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header" id="headingSix">
-                                                    <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                        <ul>
-                                                            <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.6</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header" id="headingSeven">
-                                                    <a href="#" data-toggle="collapse" class="collapsed" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                                        <ul>
-                                                            <li><i class="fa fa-file-o"></i></li>
-                                                            <li><span class="lecture">Lecture 1.7</span></li>
-                                                            <li><span class="head">What is javascirpt</span></li>
-                                                            <li><span class="time d-none d-md-block"><i class="fa fa-clock-o"></i> <span> 00.30.00</span></span></li>
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <p>Ut quis scelerisque risus, et viverra nisi. Phasellus ultricies luctus augue, eget maximus felis laoreet quis. Maecenasbibendum tempor eros.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- curriculam cont -->
-                                </div>
                                 <div class="tab-pane fade" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
                                     <div class="instructor-cont">
                                         <div class="instructor-author">
@@ -221,14 +46,7 @@
                                                 <img src="images/instructor/i-1.jpg" alt="Instructor">
                                             </div>
                                             <div class="author-name">
-                                                <a href="#"><h5>Sumon Hasan</h5></a>
-                                                <span>Senior WordPress Developer</span>
-                                                <ul class="social">
-                                                    <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                </ul>
+                                                <a href="#"><h5>{{ $Publication->formateur }}</h5></a>
                                             </div>
                                         </div>
                                         <div class="instructor-description pt-25">
@@ -377,58 +195,35 @@
                             <div class="course-features mt-30">
                                <h4>Course Features </h4>
                                 <ul>
-                                    <li><i class="fa fa-clock-o"></i>Duaration : <span>10 Hours</span></li>
-                                    <li><i class="fa fa-clone"></i>Leactures : <span>09</span></li>
-                                    <li><i class="fa fa-beer"></i>Quizzes :  <span>05</span></li>
-                                    <li><i class="fa fa-user-o"></i>Students :  <span>100</span></li>
+                                    <li><i class="fa fa-clock-o"></i>Durée :<span>{{ $Publication->durée }}</span></li>
+                                    <li><i class="fa fa-clone"></i>Nombre de seance :<span>{{ $Publication->Nbseance }}</span></li>
+                                    <li><i class="fa fa-user-o"></i>Students :  <span></span></li>
                                 </ul>
-                                <div class="price-button pt-10">
-                                    <span>Price : <b>$25</b></span>
-                                    <a href="#" class="main-btn">Enroll Now</a>
+                            <div class="events-coundwon bg_cover" data-overlay="8" style="background-image: url({{ getImage($Publication) }})">
+                                <div data-countdown="{{ $Publication->date_finale }}"></div>
+                                <div class="events-coundwon-btn pt-30">
+                                @if(Auth::user())
+                                <form action="{{route('inscriptionPub')}}" method="post">
+                                 @csrf
+                                  <input name="publications_id" type="text" hidden value="{{ $Publication->id }}">
+                                  <input name="user_id" type="text" hidden value="{{  Auth::user()->id }}">
+                                  @if($Publication->date_finale<=Carbon\Carbon::now())
+                                  <button name="submit" type="submit" class="main-btn2" disabled>L'inscription est fermée</button>
+                                  @else
+                                  @if($inscrite==0)
+                                 <button name="submit" type="submit" class="main-btn">S'inscrire</button>
+                                @else
+                                <button name="submit" type="submit" class="main-btn2" disabled>Vous êtes déjà inscrit</button>
+                                @endif
+                                
+                                @endif
+                                </form>
+                                @else
+                                 <a href="{{ route('login') }}"><button name="submit" type="submit" class="main-btn2">Connectez-vous pour inscrire</button></a>
+                                @endif
+
                                 </div>
-                            </div> <!-- course features -->
-                        </div>
-                        <div class="col-lg-12 col-md-6">
-                            <div class="You-makelike mt-30">
-                                <h4>You make like </h4> 
-                                <div class="singel-makelike mt-20">
-                                    <div class="image">
-                                        <img src="images/your-make/y-1.jpg" alt="Image">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#"><h4>Introduction to machine languages</h4></a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i>31</a></li>
-                                            <li>$50</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="singel-makelike mt-20">
-                                    <div class="image">
-                                        <img src="images/your-make/y-1.jpg" alt="Image">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#"><h4>How to build a basis game with java </h4></a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i>31</a></li>
-                                            <li>$50</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="singel-makelike mt-20">
-                                    <div class="image">
-                                        <img src="images/your-make/y-1.jpg" alt="Image">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#"><h4>Basic accounting from primary</h4></a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i>31</a></li>
-                                            <li>$50</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </div> <!-- events coundwon -->
                     </div>
                 </div>
             </div> <!-- row -->

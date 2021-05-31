@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Event;
+namespace App\Http\Controllers\Admin\FicheDeVœux;
 
 use App\Http\Controllers\Controller;
+use App\Models\FichedevœuxOF;
 use Illuminate\Http\Request;
-use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
-class EventController extends Controller
+class FicheDeVœuxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $datas=FichedevœuxOF::all();
+        return view('AdminPanel.FicheDeVœux.fichedevœux',compact('datas'));
+
     }
 
     /**
@@ -25,17 +28,7 @@ class EventController extends Controller
      */
     public function create()
     {
-       /* 'title' => 'required|max:255',
-        'body' => 'required|max:65000',
-        'slug' => ['required', 'max:255', new Slug, 'unique:posts,slug' . $id],
-        'excerpt' => 'required|max:500',
-        'meta_description' => 'required|max:160',
-        'meta_keywords' => 'required|regex:' . $regex,
-        'seo_title' => 'required|max:60',
-        'image' => 'required|max:255',
-        'categories' => 'required',*/
-
-        return view('AdminPanel.Events.nouveauEvent');
+        //
     }
 
     /**
@@ -78,9 +71,29 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+    }
+
+    public function Ouverture($id)
+    {
+
+
+        DB::table('fichedevœux_o_f_s')->where('id',$id)->update(array('active' => '1'));
+        return back();
+
+
+    }
+
+    public function Fermeture($id)
+    {
+
+
+        DB::table('fichedevœux_o_f_s')->where('id',$id)->update(array('active' => '0'));
+        return back();
+
+
     }
 
     /**
