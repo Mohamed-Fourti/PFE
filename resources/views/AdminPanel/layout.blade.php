@@ -29,11 +29,11 @@
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light navcolorc">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light navcolorc" >
     <!-- Left navbar links -->
     <ul class="navbar-nav">      
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" id="navAdmin"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ url('/') }}" class="nav-link">@lang('Accueil')</a>
@@ -44,8 +44,8 @@
         </form>
         <a class="nav-link"
             href="{{ route('logout') }}"
-            onclick="event.preventDefault(); this.previousElementSibling.submit();">
-            @lang('Logout')
+            onclick="event.preventDefault(); this.previousElementSibling.submit();" id="navAdmin">
+            @lang('Déconnexion')
         </a>
       </li>
     </ul>
@@ -60,6 +60,7 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
+        <div id="imgDep"><img src="../images/depti.jpg" /></div>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           @foreach(config('menu') as $name => $elements)
@@ -132,7 +133,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2021 {{ config('app.name', 'Laravel') }}.</strong>
+    <strong>&copy; 2021 ISET Djerba.</strong>
   </footer>
 </div>
 <!-- ./wrapper -->
