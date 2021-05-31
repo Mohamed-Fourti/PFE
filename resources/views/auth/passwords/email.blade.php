@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" id="cardAuth">
                 <div class="card-header">{{ __('Renouvellement du mot de passe') }}</div>
 
                 <div class="card-body">
