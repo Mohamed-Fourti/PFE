@@ -33,21 +33,26 @@
 <section id="about-part  ">
     <div class="container">
         <div class="row">
-            <div class="col-lg-5">
-                <div class="section-title mt-50">
-                    <h3>Bienvenue à l'ISET de djerba </h3>
-                </div>
-                <div class="about-cont">
-                    <p>L'ISET de Djerba, créé en 2000, fait partie d'un réseau de 25 instituts supérieurs des études technologiques. Il assure, dans le cadre du LMD, une formation supérieure technologique dans les spécialités : Génie électrique, Génie mécanique, Sciences Economique et Gestion, Technologies de l'Informatique.
-
-                        Au terme de trois ans d'études, les étudiants obtiennent le diplôme national de la Licence Appliquée.
-                        En partenariat avec le milieu économique, l'ISET de Djerba assure des formations co-construites en Mécatronique Automobile et en Développement et Référencement des sites Web, couronnées par l'obtention de la Licence appliquée. De même, l'ISET de Djerba propose, depuis 2013, le programme de Mastère Professionnel en Hôtellerie et Tourisme.
-                </div>
+            <div class="col-sm-7">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img src="../images/accueil/ti.jpg" class="d-block" alt="image1">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="../images/accueil/banner.jpg" class="d-block" alt="image2">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="../images/accueil/pc.jpg" class="d-block" alt="image3">
+                        </div>
+                    </div>
+                    </div>
             </div>
-            <div class="col-lg-6 offset-lg-1">
+        
+            <div class="col-sm-5">
                 <div class="about-event mt-50">
                     <div class="event-title">
-                        <h3>Évènements-Formation à venir</h3>
+                        <h4>Évènements et Formations</h4>
                     </div>
                     <ul>
                     @if($formEtevens->isEmpty())
@@ -63,7 +68,7 @@
                     @foreach($formEtevens as $formEteven )
 
                         <li>
-                            <div class="singel-event">
+                            <div class="single-event">
                                 <span><i class="fa fa-calendar"></i>{{ $formEteven->created_at }}</span>
                                 <a href="{{ route('Publication/.display', [$formEteven->slug, 'ca' => $formEteven->categories_id ] )  }}">
                                     <h4>{{ $formEteven->title }}</h4>

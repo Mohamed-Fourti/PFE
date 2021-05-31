@@ -2,7 +2,7 @@
 
 return [
 
-    'Dashboard' => [
+    'Tableau de bord' => [
         'route'  => 'admin',
         'icon'   => 'tachometer-alt',
     ],
