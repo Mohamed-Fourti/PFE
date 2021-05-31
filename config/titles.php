@@ -10,7 +10,7 @@ return [
     | Set Titles for each admin routes names
     */
 
-    'admin' => 'Dasboard',
+    'admin' => 'Tableau de bord',
     'usersEt' => ['index'=> 'Etudiants'],
     'usersEn' => ['index'=> 'Enseignants'],
     'usersTe' => ['index'=> 'Techniciens'],
