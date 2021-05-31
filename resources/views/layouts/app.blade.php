@@ -127,7 +127,8 @@
                                             @endif
                                             @else 
 
-                                            @endif                                        @endrole
+                                            @endif                                  
+                                                  @endrole
                                     </li>
                                     <li class="nav-item ">
                                         <a href="{{ url('contact') }}">Contact</a>
