@@ -31,13 +31,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <script src="{{ asset('js/app.js') }}" ></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -46,7 +42,6 @@
 <body>
 
     <!--====== PRELOADER PART START ======-->
-    <!--
     <div class="preloader">
         <div class="loader rubix-cube">
             <div class="layer layer-1"></div>
@@ -58,28 +53,31 @@
             <div class="layer layer-7"></div>
             <div class="layer layer-8"></div>
         </div>
-    </div>-->
+    </div>
     <div class="header-top pt-15 pb-15">
         <div class="container">
             <div class="row ">
-                <div class="col-lg-12 col-md-12 d-flex flex-row">
+                <div class="col-lg-5 col-md-5 d-flex flex-row">
                     <div class="pr-2">
 
                         <img src="{{ asset('images/flag.png') }}" alt="Logo">
 
                     </div>
-                    <div id="ministry_logo">République Tunisienne 
-                        <br>Ministère de l’Enseignement Supérieur et de la Recherche Scientifique
-                        <br>Direction générale des études technologiques
-                    </div>
-                </div> 
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div><!-- header logo support -->
+                    <div id="ministry_logo">République Tunisienne <br>Ministère de l’Enseignement Supérieur et de la Recherche Scientifique<br>Direction générale des études technologiques</div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- header logo support -->
+    </div>
     <header id="header-part">
+        <div class="container">
+
+            <div class="col-lg-4 col-md-4">
+
+            </div>
+        </div>
         <div class="navigation">
             <div class="container">
-                <div class="row" id="rowPading">
+                <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-7 col-6">
 
                         <nav class="navbar navbar-expand-lg">
@@ -88,11 +86,15 @@
                                     <img src="{{ asset('images/logo.png') }}" alt="Logo">
                                 </a>
                             </div>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> </button>
 
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item">
-                                        <a href="{{ url('/') }}">Accueil</a>
+                                        <a class="active" href="{{ url('/') }}">Accueil</a>
                                     </li>
 
                                     <li class="nav-item ">
@@ -102,7 +104,7 @@
                                             <li><a href="{{ url('Évènements') }}">Évènements</a></li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item col-3 ">
+                                    <li class="nav-item ">
                                         <a>Liens utiles</a>
                                         <ul class="sub-menu">
                                             <li><a href="">Emplois du temps</a></li>
@@ -110,14 +112,20 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item ">
+                                        <a href="{{ url('contact') }}">Contact</a>
+                                    </li>
+                                    <li class="nav-item ">
                                         @role('admin')
-                                            <a href="{{ url('admin') }}">Administration</a>
+                                            <a href="{{ url('admin') }}">Admin</a>
                                         @endrole
+                                        </li>
+                                        <li class="nav-item ">
                                         @role('Techniciens')
                                             <a href="{{ url('réclamations') }}">Réclamation</a>
                                         @endrole
+                                        </li>
+                                        <li class="nav-item ">
                                         @role('Enseignants')
-                                        <a href="{{ url('réclamation') }}">Réclamation</a>
                                             <a href="{{ url('réclamation') }}">Creér un ticket</a>
                                             @if($FichedevœuxOF !=null)
                                             @if($FichedevœuxOF->sem=='S1')
@@ -127,17 +135,14 @@
                                             @endif
                                             @else 
 
-                                            @endif                                  
-                                                  @endrole
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a href="{{ url('contact') }}">Contact</a>
+                                            @endif
+                                        @endrole
                                     </li>
                                 </ul>
                             </div>
                         </nav> <!-- nav -->
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-5" id="rightNav">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-5">
                         <div class="right-icon text-right ">
 
                             <ul>
@@ -162,10 +167,10 @@
                                         <div class="menu">
                                             <h3>{{ Auth::user()->nom }}<br><span>{{ Auth::user()->role }}</span></h3>
                                             <ul>
-                                                <li><img src="{{ asset('images/618631.svg') }}"><a href="#">Profile</a></li>
+                                                <li><img src="{{ asset('images/618631.svg') }}"><a href="#">profile</a></li>
                                                 <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                        {{ __('Déconnexion') }}
+                                                        {{ __('Logout') }}
                                                     </a></li>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                     @csrf
@@ -176,9 +181,6 @@
                                 </li>
                             </ul>
                             @endguest
-                            
-                           
-
                         </div> <!-- right icon -->
                     </div>
                 </div> <!-- row -->
@@ -196,20 +198,24 @@
         <div class="footer-top pt-40 pb-70">
             <div class="container">
                 <div class="row">
-                    <!--<div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="footer-about mt-40">
                             <div class="logo">
                                 <a href="#"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
                             </div>
+                            <p>Gravida nibh vel velit auctor aliquetn quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate.</p>
                             <ul class="mt-20">
-                                <li><a href="https://www.facebook.com/djerba.iset"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             </ul>
-                        </div> 
-                    </div>--><!-- footer about -->
-                    <div class="col-sm">
+                        </div> <!-- footer about -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="footer-link mt-40">
                             <div class="footer-title pb-25">
-                                <h6>Navigation</h6>
+                                <h6>Sitemap</h6>
                             </div>
                             <ul>
                                 <li><a href="{{ url('/') }}"><i class="fa fa-angle-right"></i>Accueil</a></li>
@@ -217,21 +223,23 @@
                                 <li><a href="blog.html"><i class="fa fa-angle-right"></i>Formation</a></li>
                                 <li><a href="events.html"><i class="fa fa-angle-right"></i>Nouveautés</a></li>
                             </ul>
+                            <ul>
+                                <li><a href="contact.html"><i class="fa fa-angle-right"></i>Contact</a></li>
+                            </ul>
                         </div> <!-- footer link -->
                     </div>
-                    <div class="col-sm">
+                    <div class="col-lg-2 col-md-6 col-sm-6">
                         <div class="footer-link support mt-40">
                             <div class="footer-title pb-25">
                                 <h6>Service en ligne</h6>
                             </div>
                             <ul>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Cours en ligne</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Emploi de temps en ligne</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
 
                             </ul>
                         </div> <!-- support -->
                     </div>
-                    <div class="col-sm">
+                    <div class="col-lg-3 col-md-6">
                         <div class="footer-address mt-40">
                             <div class="footer-title pb-25">
                                 <h6>Contactez nous</h6>
@@ -255,7 +263,7 @@
                                 </li>
                                 <li>
                                     <div class="icon">
-                                        <i class="fas fa-envelope"></i>
+                                        <i class="fa fa-envelope-o"></i>
                                     </div>
                                     <div class="cont">
                                         <p>isetjb@gmail.com</p>
@@ -307,9 +315,6 @@
 
     <!--====== Map js ======-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ"></script>
-    <script src="js/map-script.js"></script>
     <script>
         function menuToggle() {
             const toggleMenu = document.querySelector('.menu');
