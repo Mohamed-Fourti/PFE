@@ -32,7 +32,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" id="navAdmin"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('home') }}" class="nav-link" id="navAdmin">@lang('Accueil')</a>
+      <a href="{{ url('/') }}" class="nav-link">@lang('Accueil')</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <form action="{{ route('logout') }}" method="POST" hidden>

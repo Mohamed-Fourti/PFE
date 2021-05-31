@@ -117,8 +117,17 @@
                                             <a href="{{ url('réclamations') }}">Réclamation</a>
                                         @endrole
                                         @role('Enseignants')
-                                            <a href="{{ url('réclamation') }}">Réclamation</a>
-                                        @endrole
+                                        <a href="{{ url('réclamation') }}">Réclamation</a>
+                                            <a href="{{ url('réclamation') }}">Creér un ticket</a>
+                                            @if($FichedevœuxOF !=null)
+                                            @if($FichedevœuxOF->sem=='S1')
+                                            <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S1</a>
+                                            @else
+                                            <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S2</a>
+                                            @endif
+                                            @else 
+
+                                            @endif                                        @endrole
                                     </li>
                                     <li class="nav-item ">
                                         <a href="{{ url('contact') }}">Contact</a>
