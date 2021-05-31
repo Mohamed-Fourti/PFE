@@ -1791,7 +1791,7 @@ p {
     border: 0;
 }
 
-.card{
+#cardAuth{
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;

@@ -6,7 +6,7 @@
 
     <div class="row justify-content-center pb-5">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" id="cardAuth">
             <div class="fadeIn first">
                     <img src="../images/depti.png" id="icon" />
                 </div>
