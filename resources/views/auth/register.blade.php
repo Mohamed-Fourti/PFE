@@ -4,8 +4,8 @@
 <div class="container pb-5">
 
 
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center pb-5">
+        <div class="col-md-6">
             <div class="card" id="cardAuth">
             <div class="fadeIn first">
                     <img src="../images/depti.png" id="icon" />
@@ -23,12 +23,16 @@
                                     <option value="Techniciens" @if (old('role_id') == 'Techniciens') selected="selected" @endif>Techniciens</option>
                                 </select>
                             </div>
+                            <!--hover de selection-->  
+         
+
+                            <!--End hover de selection--> 
                         </div>
 
                         <div style='display:none;' class="form-group row show" >
 
                             <div class="fadeIn second">
-                                <input id="nom" type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ old('nom') }}" required autocomplete="nom" autofocus placeholder="Nom">
+                                <input id="inputType" type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ old('nom') }}" required autocomplete="nom" autofocus placeholder="Nom">
 
                                 @error('nom')
                                 <span class="invalid-feedback" role="alert">
@@ -41,7 +45,7 @@
                         <div style='display:none;' class="form-group row show" >
 
                             <div class="fadeIn second">
-                                <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" required autocomplete="prenom" autofocus placeholder="Prénom">
+                                <input id="inputType" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" required autocomplete="prenom" autofocus placeholder="Prénom">
 
                                 @error('prenom')
                                 <span class="invalid-feedback" role="alert">
@@ -58,7 +62,7 @@
                         <div style='display:none;' class="form-group row show">
 
                             <div class="fadeIn second">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Adresse E-mail">
+                                <input id="inputType" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Adresse E-mail">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -70,7 +74,7 @@
 
                         <div style='display:none;' class="form-group row show show">
                             <div class="fadeIn second">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mot de passe">
+                                <input id="inputType" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mot de passe">
 
                                 @error('password')
                                 <span class="{{ $error }}" role="alert">
@@ -83,7 +87,7 @@
                         <div style='display:none;' class="form-group row show">
 
                             <div class="fadeIn second">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmation du mot de passe">
+                                <input id="inputType" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmation du mot de passe">
                             </div>
                         </div>
 
@@ -104,7 +108,7 @@
                     <div class="form-group row a">
 
                         <div class="fadeIn second">
-                            <input id="cin" type="text" class="form-control @error('cin') is-invalid @enderror form-control" id="cin" name="cin" required placeholder="CIN">
+                            <input id="inputType" type="text" class="form-control @error('cin') is-invalid @enderror form-control" id="cin" name="cin" required placeholder="CIN">
                             
                             @if ($errors->any())
 

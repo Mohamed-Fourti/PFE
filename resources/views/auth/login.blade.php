@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pb-5">
         <div class="col-md-6">
             <div class="card" id="cardAuth">
                 <div class="fadeIn first">
@@ -17,7 +17,7 @@
                         <div class="form-group row">
 
                             <div class="fadeIn second">
-                                <input id="email" type="email"  class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Adresse E-mail">
+                                <input id="inputType" type="email"  class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Adresse E-mail">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -30,7 +30,7 @@
                         <div class="form-group row">
 
                             <div class="fadeIn third">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Mot de passe">
+                                <input id="inputType" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Mot de passe">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
