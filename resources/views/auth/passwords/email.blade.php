@@ -2,10 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center pb-5">
+        <div class="col-md-6">
             <div class="card" id="cardAuth">
-                <div class="card-header">{{ __('Renouvellement du mot de passe') }}</div>
+            <div class="fadeIn first">
+                    <img src="../images/depti.png" id="icon" />
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -18,10 +20,8 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right"><i class="fas fa-envelope"></i>{{ __('Adresse E-mail') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="fadeIn second">
+                                <input id="inputType" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Adresse E-mail">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -32,10 +32,8 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Envoyer le lien de renouvellement') }}<i class="fas fa-unlock-alt"></i>
-                                </button>
+                            <div class="fadeIn fourth">
+                                <input type="submit" class="logbtn" value="{{ __('Envoyer le lien de renouvellement') }}">
                             </div>
                         </div>
                     </form>

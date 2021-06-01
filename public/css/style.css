@@ -25,7 +25,7 @@
   
   /* FORM TYPOGRAPHY*/
   
-  input[type=email], input[type=password],input[type=text] {
+ #inputType {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -33,7 +33,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    width: 150%;
+    width: 290px;
     height: 60px;
     border: 2px solid #f6f6f6;
     -webkit-transition: all 0.5s ease-in-out;
@@ -45,12 +45,12 @@
     border-radius: 5px 5px 5px 5px;
   }
   
-  input[type=email]:focus,input[type=password]:focus,input[type=text]:focus {
+  #inputType:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
   
-  input[type=email]:placeholder,input[type=password]:placeholder,input[type=text]::placeholder {
+  #inputType::placeholder {
     color: #cccccc;
   }
 
@@ -157,9 +157,25 @@
   }
      
 /*EndLogin*/
- 
+
+ #navItem{
+    width: 115px;
+    margin-bottom: 20px;
+ }
+
+ #conex{
+    margin-left:100px;
+    margin-bottom: 10px;
+ }
+
+ #logoIset{
+    margin-bottom: 20px;
+    width: 100px;
+    margin-bottom: 20px;
+ }
+
 .logbtn{
-    width: 400%;
+    width: 290px;
     height: 60px;
     border: none;
     background-color: rgb(46, 85, 202);
@@ -168,7 +184,8 @@
     outline: none;
     cursor: pointer;
     transition: .5s;
-    margin-left: 18px;
+    margin-left: 76.6px;
+    margin-right: 76.6px;
   }
   
   .logbtn:hover{
@@ -195,10 +212,6 @@
     padding-left: -43px;
     color:white;
     flex: 2;
-}
-
-#text-intro{
-    text-align: justify;
 }
 
 #title-acc{
@@ -348,6 +361,7 @@
 .action .menu ul li:hover a{
     color: #ff5d94;
 }
+
 
 
 /* CSS Index 
@@ -835,7 +849,7 @@ p {
     top: 110%;
     left: 0;
     background-color: #07294d;
-    width: 200px;
+    width: 250px;
     opacity: 0;
     visibility: hidden;
     -webkit-transition: all 0.4s linear;
@@ -1576,7 +1590,6 @@ p {
     22. COURSES PAGE css 
 ======================================================*/
 
-.tab-content{}
 .tab-content .singel-course .course-teacher .name {
     bottom: 0;
 }
@@ -1796,12 +1809,18 @@ p {
     border-radius: 10px 10px 10px 10px;
     background: #fff;
     padding: 30px;
-    width: 90%;
+    width: 1000px;
     max-width: 450px;
     position: relative;
     padding: 0px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+    
+}
+
+#role_id{
+    width: 290px;
     text-align: center;
 }
 

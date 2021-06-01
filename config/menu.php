@@ -42,7 +42,7 @@ return [
                 'route' => 'publication.create',
             ],
             [
-                'name'  => 'Linscriptions',
+                'name'  => 'Les inscrits',
                 'route' => 'Inscriptions-list.index',
             ],
         ],
