@@ -8,7 +8,7 @@
         <div class="row">
         <div class="col-md-12">
         <label class="form-label" for="File"></label>
-              <input type="file" id="input-fr"  data-browse-on-zone-click="true" name="files[]" placeholder="Choose files" class="form-control file" id="File" multiple >
+              <input type="file" id="input-fr"  data-browse-on-zone-click="true" name="file" placeholder="Choose files" class="form-control file" id="File"  >
         
             </div>
         

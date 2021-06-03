@@ -48,19 +48,6 @@ return [
         ],
     ],
 
-    'Categories' => [
-        'icon' => 'list',
-        'children' => [
-            [
-                'name'  => 'All categories',
-                'route' => 'categories.index',
-            ],
-            [
-                'name'  => 'Add',
-                'route' => 'categories.create',
-            ],
-        ],
-    ],
     'fiche de vœux' => [
     ],
     'fiche de vœux' => [
@@ -71,8 +58,8 @@ return [
                 'route'  => 'Fiche-De-Vœux.index',
             ],
             [
-                'name'  => 'Result',
-                'route' => 'categories.create',
+                'name'  => 'List matières',
+                'route' => 'Listmatières.index',
             ],
         ],
     ],

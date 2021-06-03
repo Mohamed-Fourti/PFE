@@ -23,7 +23,6 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
-        "bootstrap-fileinput": "^5.2.1",
         "jscroll": "^2.4.1",
         "mjml": "^4.9.3"
     }

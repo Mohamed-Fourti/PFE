@@ -24,7 +24,9 @@ class CreateFichedevœuxesTable extends Migration
             $table->string('gsm');
             $table->string('chargeS1')->nullable();
             $table->string('chargeS2')->nullable();
-            $table->json('jours')->nullable();
+            $table->string('remarques')->nullable();
+            $table->json('jours1');
+            $table->json('jours2');
             $table->foreignId('user_id')
                   ->constrained()
                   ->onDelete('cascade')

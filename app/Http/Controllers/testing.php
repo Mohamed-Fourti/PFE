@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MatiereImport;
 use Illuminate\Http\Request;
 use Facade\FlareClient\Stacktrace\File;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class testing extends Controller
 {
@@ -16,16 +17,10 @@ class testing extends Controller
     public function index()
     {
         
-        $filesInFolder = \File::allFiles('..\storage\excel\uploads\\');
-        $fileNames = [];
-        $path = '..\storage\excel\uploads\\';
-        $files = \File::allFiles($path);
+        $tab = Excel::toArray(new MatiereImport, '..\storage\app\Admin-uploads\etu.xls');
+
     
-        foreach($files as $file) {
-            array_push($fileNames, pathinfo($file)['filename']);
-        }
-    
-        return view('testfile',compact('fileNames'));
+        return view('testfile',compact('tab'));
     }
     
 

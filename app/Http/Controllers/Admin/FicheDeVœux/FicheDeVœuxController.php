@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\FicheDeVœux;
 
 use App\Http\Controllers\Controller;
+use App\Models\EtuMat;
 use App\Models\FichedevœuxOF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class FicheDeVœuxController extends Controller
@@ -16,8 +18,12 @@ class FicheDeVœuxController extends Controller
      */
     public function index()
     {
+        
         $datas=FichedevœuxOF::all();
-        return view('AdminPanel.FicheDeVœux.fichedevœux',compact('datas'));
+        $EtuMats=EtuMat::all();
+        $S1=FichedevœuxOF::where('sem','S1')->where('active','1')->count();
+        $S2=FichedevœuxOF::where('sem','S2')->where('active','1')->count();
+        return view('AdminPanel.FicheDeVœux.fichedevœux',compact('datas','S1','S2','EtuMats'));
 
     }
 
@@ -37,10 +43,26 @@ class FicheDeVœuxController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePlanEtuFichesMat(Request $request)
     {
-        //
+        
+
+        if($request->file()) {
+            $fileName = $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('plansétudes-fichesmatières', $fileName, 'app/Admin-uploads');
+            $file_path = '/storage/' . $filePath;
+            
+           $fileModel=$request->all();
+           $fileModel=Arr::add($fileModel,'file_path',$file_path);
+           $fileModel=Arr::add($fileModel,'name',$fileName);
+           EtuMat::create($fileModel);        
+
+
+     
+            return back()->with('success', 'Succès');   
+        
     }
+   }
 
     /**
      * Display the specified resource.
