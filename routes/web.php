@@ -33,6 +33,18 @@ use UniSharp\LaravelFilemanager\Lfm;
 |
 */
 
+/* Page admin*/
+Route::post('deconnexionAdmin', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::middleware('guest')->group(function () {
+    Route::prefix('Administrateur')->group(function () {
+        Route::get('/', 'App\Http\Controllers\Admin\AdminController@loginAdmin')->name('loginAdmin');
+        Route::post('/', 'App\Http\Controllers\Admin\AdminController@index');
+    });
+});
+//Route::get('Administrateur', 'App\Http\Controllers\Admin\AdminController@loginAdmin');
+
+
+
 Route::get('/', function () {
     return view('accueil');
 });

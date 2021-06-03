@@ -35,12 +35,12 @@
                         <input name="active" id="Publié" type="checkbox" value="false" checked>
                         <label for="Publié" class="">Publié</label>
                         @else
-                        <input name="active" id="Publié" type="checkbox" value="false" }}>
+                        <input name="active" id="Publié" type="checkbox" value="false">
                         <label for="Publié" class="">Publié</label>
                         @endif
 
                         @else
-                        <input name="active" id="Publié" type="checkbox" value="false" }}>
+                        <input name="active" id="Publié" type="checkbox" value="false">
                         <label for="Publié" class="">Publié</label>
                         @endif
 
@@ -97,7 +97,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-2">
                 <div class="card">
                     <div class="card-header">
-                        Date Finale
+                        Date de fin
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
@@ -154,7 +154,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-2">
                 <div class="card">
                     <div class="card-header">
-                    Nombre de seance
+                    Nombre de seances
                     </div>
                     <div class="card-body">
                         <div class="form-group row">

@@ -50,32 +50,25 @@
             </div>
         
             <div class="col-sm-5">
-                <div class="about-event mt-50">
+                <div class="about-event" id="boxEvent">
                     <div class="event-title">
-                        <h4>Évènements et Formations</h4>
+                        <h2>Évènements et Formations</h2>
                     </div>
                     <ul>
-                    @if($formEtevens->isEmpty())
-
-
-            
-<div>pas de Évènements-Formation</div>
-
-
-
-
-@else
+                    @if($formEtevens->isEmpty())   
+                        <div><h4>Pas des évènements et formations</h4></div>
+                    @else
                     @foreach($formEtevens as $formEteven )
 
                         <li>
                             <div class="single-event">
-                                <span><i class="fa fa-calendar"></i>{{ $formEteven->created_at }}</span>
+                                <div><i class="fa fa-calendar" id="temps"></i><span id="spanTemps">{{ $formEteven->created_at }}</span></div>
                                 <a href="{{ route('Publication/.display', [$formEteven->slug, 'ca' => $formEteven->categories_id ] )  }}">
-                                    <h4>{{ $formEteven->title }}</h4>
+                                    <h4 id="spanTemps">{{ $formEteven->title }}</h4>
                                 </a>
-                                <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                                <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
-                            </div>
+                                <div><i class="fa fa-clock-o" id="temps"></i> <span id="spanTemps"> 10:00 Am - 3:00 Pm</span>
+                                <i class="fa fa-map-marker" id="temps"></i><span id="spanTemps"> Rc Auditorim</span></div>
+                            </div><hr>
                         </li>
                     
                         @endforeach
@@ -90,6 +83,15 @@
     <div class="about-bg">
     </div>
 </section>
+
+<!--chekbox
+<div class="checkbox">
+    <label style="font-size: 2.5em">
+        <input type="checkbox" value="" id="inputChek">
+        <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+    </label>
+</div>
+Endchekbox-->
 
 <!--====== ABOUT PART ENDS ======-->
 <!--====== NEWS PART START ======-->
@@ -109,7 +111,7 @@
 
 
             
-            <div>no news</div>
+            <div><h4>Pas de nouveautés</h4></div>
 
    
    
@@ -145,7 +147,7 @@
  <div class="col-sm-4">
 
             
-<div>pas de nouvelles</div>
+<div><h4>Pas de nouveautés</h4></div>
 
 </div>
 </div>
@@ -191,7 +193,7 @@
 
 <!--====== VIDEO FEATURE PART START ======-->
 
-<section class="bg_cover pt-60 pb-110" style="background-image: url(images/bg-1.jpg)">
+<section class="bg_cover pt-60 pb-110" style="background-image: url(../images/accimg.jpg)">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 order-last order-lg-first">
@@ -201,40 +203,37 @@
             <div class="col-lg-5 offset-lg-1 order-first order-lg-last">
                 <div class="feature pt-50">
                     <div class="feature-title">
-                        <h3>Notre site Web</h3>
+                        <h3 id="featureId">Notre site Web</h3>
                     </div>
                     <ul>
                         <li>
                             <div class="singel-feature">
-                                <div class="icon">
+                                <span class="icon">
                                     <img src="images/all-icon/f-1.png" alt="icon">
-                                </div>
-                                <div class="cont">
-                                    <h4>Emplois du temps en ligne</h4>
-                                    <p>Gravida nibh vel velit auctor aliquetn auci elit cons solliazcitudirem sem quibibendum sem nibhutis.</p>
-                                </div>
+                                </span>
+                                <span class="cont">
+                                    <h4 id="featureId">Emplois du temps en ligne</h4>
+                                    </span>
                             </div> <!-- singel feature -->
                         </li>
                         <li>
-                            <div class="singel-feature">
-                                <div class="icon">
+                            <div class="singel-feature" id="singelId">
+                                <span class="icon">
                                     <img src="images/all-icon/f-2.png" alt="icon">
-                                </div>
-                                <div class="cont">
-                                    <h4>Supports de cours</h4>
-                                    <p>Gravida nibh vel velit auctor aliquetn auci elit cons solliazcitudirem sem quibibendum sem nibhutis.</p>
-                                </div>
+                                </span>
+                                <span class="cont">
+                                    <h4 id="featureId">Supports de cours</h4>
+                                </span>
                             </div> <!-- singel feature -->
                         </li>
                         <li>
                             <div class="singel-feature">
-                                <div class="icon">
+                                <span class="icon">
                                     <img src="images/all-icon/f-3.png" alt="icon">
-                                </div>
-                                <div class="cont">
-                                    <h4>Inscription en Évènement</h4>
-                                    <p>Gravida nibh vel velit auctor aliquetn auci elit cons solliazcitudirem sem quibibendum sem nibhutis.</p>
-                                </div>
+                                </span>
+                                <span class="cont">
+                                    <h4 id="featureId">Inscription en Évènement</h4>
+                                   </span>
                             </div> <!-- singel feature -->
                         </li>
                     </ul>
