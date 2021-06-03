@@ -52,12 +52,13 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
         
-        'excel' => [
+        'Admin-uploads' => [
             'driver' => 'local',
-            'root' => storage_path('/excel'),
-            'url' => env('APP_URL').'/excel',
-            'visibility' => 'public',
+            'root' => storage_path('/app/Admin-uploads'),
+
         ],
+
+
 
     ],
 

@@ -32,27 +32,24 @@ class ClassesController extends Controller
 
     public function store(Request $request)
     {
-      
-            if($request->hasfile('files'))
-             {
-                foreach($request->file('files') as $key => $file)
-                {
-                    $name = $file->getClientOriginalName();
-                    $path = $file->storeAs('uploads', $name, 'excel');
-     
-                    $insert[$key]['name'] = $name;
-                    $insert[$key]['file_path'] = $path;
-     
-                }
-             }
-     
-            File::insert($insert);
+        $fileModel = new File;
+
+        if($request->file()) {
+            $fileName = $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('ListEtudiants', $fileName, 'Admin-uploads');
+
+            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->save();
+
+            
+
      
             return back()->with('success', 'Succès');
 
         
            
-    }
+    }}
 
  
     public function show($name)

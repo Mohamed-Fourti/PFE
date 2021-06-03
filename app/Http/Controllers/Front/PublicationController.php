@@ -164,20 +164,4 @@ class PublicationController extends Controller
 
 
 
-
-    /**
-     * Get posts with search
-     *
-     * @param  \App\Http\Requests\SearchRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function search(SearchRequest $request)
-    {
-        $search = $request->search;
-        $posts = $this->postRepository->search($this->nbrPages, $search);
-        $title = __('Posts found with search: ') . '<strong>' . $search . '</strong>';
-
-        return view('front.index', compact('posts', 'title'));
-    }
-
 }

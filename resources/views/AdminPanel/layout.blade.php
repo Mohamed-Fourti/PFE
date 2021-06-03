@@ -19,7 +19,6 @@
   <script src="{{ asset('js/app.js') }}" ></script>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-  <script src="{{ asset('js/jquery-3.6.0.min.js') }}" defer></script>
 
 
 
@@ -141,7 +140,6 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js"></script>
 <!-- Bootstrap File input-->

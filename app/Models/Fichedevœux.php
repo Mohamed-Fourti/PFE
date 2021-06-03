@@ -14,9 +14,17 @@ class Fichedevœux extends Model
         'gsm',
         'chargeS1',
         'chargeS2',
-        'jours',
+        'remarques',
+        'jours1',
+        'jours2',
         'user_id',
     ];
+    protected $casts = [
+        'Matieres' => 'array',
+        'jours1' => 'array',
+        'jours2' => 'array',
+        ];
+    
 
     public function FichedevœuxOF()
     {

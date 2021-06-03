@@ -17,7 +17,6 @@ return [
     'usersTe' => ['index'=> 'Techniciens'],
     'class' => ['index'=> 'Classes'],
     'Publication' => ['index'=> 'Classes'],
-    'categories' => [ 'index'  => 'Categories'],
     
     
 ];
