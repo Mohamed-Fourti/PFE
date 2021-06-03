@@ -19,6 +19,7 @@
   <script src="{{ asset('js/app.js') }}" ></script>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+  
 
 
 
@@ -35,7 +36,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" id="navAdmin"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ url('/') }}" class="nav-link">@lang('Accueil')</a>
+        <a href="{{ url('/') }}" class="nav-link" id="navAdmin">@lang('Accueil')</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <form action="{{ route('logout') }}" method="POST" hidden>
@@ -59,7 +60,7 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <div id="imgDep"><img src="../images/depti.jpg" /></div>
+        <div id="imgDep"><img src="../images/depti.png" /></div>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           @foreach(config('menu') as $name => $elements)
@@ -140,6 +141,7 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
+
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js"></script>
 <!-- Bootstrap File input-->
