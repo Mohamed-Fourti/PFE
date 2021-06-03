@@ -17,5 +17,9 @@ class AdminController extends Controller
     {
         return view('AdminPanel.index');
     }
+    public function loginAdmin()
+    {
+        return view('auth.loginAdmin');
+    }
 
 }

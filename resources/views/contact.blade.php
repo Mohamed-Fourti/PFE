@@ -56,7 +56,7 @@
                     </div> <!--  contact from -->
                 </div>
                 <div class="col-lg-5">
-                    <div class="contact-address mt-30">
+                    <div class="contact-address mt-30" id="contactId">
                         <ul>
                             <li>
                                 <div class="singel-address">
@@ -70,6 +70,7 @@
                                     </div>
                                 </div> <!-- singel address -->
                             </li>
+                            <br>
                             <li>
                                 <div class="singel-address">
                                     <div class="icon">
@@ -80,11 +81,11 @@
                                         <p>75 733 110</p>
                                     </div>
                                 </div> <!-- singel address -->
-                            </li>
+                            </li><br>
                             <li>
                                 <div class="singel-address">
                                     <div class="icon">
-                                        <i class="fa fa-envelope-o"></i>
+                                        <i class="fas fa-envelope"></i>
                                     </div>
                                     <div class="cont">
                                         <p>isetjb@gmail.com</p>
