@@ -208,17 +208,17 @@
     left: 20%;
 }
 
-#inputChek{
+.chekb{
     display: none;
 }
 
-#inputChek + .cr > .cr-icon{
+.chekb + .cr > .cr-icon{
     transform: scale(3) rotateZ(-20deg);
     opacity: 0;
     transition: all .3s ease-in;
 }
 
-#inputChek:checked + .cr > .cr-icon{
+.chekb:checked + .cr > .cr-icon{
     transform: scale(1) rotateZ(0deg);
     opacity: 1;
 }

@@ -26,10 +26,21 @@ return [
  
     'Class' => [
         'icon'   => 'glasses',
-        'route' => 'class.index',
+        'children' => [
+            [
+                'name'  => 'List Etudiants',
+                'route' => 'Liste-etudiants.index',
+            ],
+            [
+                'name'  => 'List Class',
+                'route' => 'Liste-class.index',
+            ],
 
+        ],
     ],
 
+
+   
     'Publication' => [
         'icon'   => 'calendar-week',
         'children' => [
@@ -61,6 +72,11 @@ return [
                 'name'  => 'List matières',
                 'route' => 'Listmatières.index',
             ],
+            [
+                'name'  => 'List des fiche de vœux',
+                'route' => 'Fiche-De-Vœux.résultats',
+            ],
+
         ],
     ],
 ];

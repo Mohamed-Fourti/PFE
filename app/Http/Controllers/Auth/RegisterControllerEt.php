@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use App\Imports\UsersImportClass;
+use App\Models\ListEtudiant;
 
 class RegisterControllerEt extends Controller
 {
@@ -104,7 +105,8 @@ class RegisterControllerEt extends Controller
         $cin = $request->input('cin');
   
 
-        $tab = Excel::toArray(new UsersImport, '..\storage\excel\uploads\etu.xls');
+        $data=ListEtudiant::latest()->first();
+        $tab = Excel::toCollection(new UsersImport,'../storage/app/'. $data->file_path);
 
         foreach ($tab as $index => $value) {
     

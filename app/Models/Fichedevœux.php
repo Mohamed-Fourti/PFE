@@ -10,7 +10,7 @@ class Fichedevœux extends Model
     use HasFactory;
     protected $fillable = [
         'Matieres',
-        'sem',
+        'fichedevœux_o_f_s_id',
         'gsm',
         'chargeS1',
         'chargeS2',
@@ -28,7 +28,7 @@ class Fichedevœux extends Model
 
     public function FichedevœuxOF()
     {
-        return $this->belongsTo(FichedevœuxOF::class);
+        return $this->belongsTo(FichedevœuxOF::class,'fichedevœux_o_f_s_id');
     }
 
     public function user()

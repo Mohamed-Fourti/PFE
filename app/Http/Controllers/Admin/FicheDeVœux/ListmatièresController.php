@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\ListMatière;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class ListmatièresController extends Controller
 {
     public function index()
     {
         
-        $datas =ListMatière::all();
+        $datas =DB::table('list_matières')->get();
+
 
         return view('AdminPanel.FicheDeVœux.listmatières',compact('datas'));
 
@@ -26,12 +28,12 @@ class ListmatièresController extends Controller
 
         if($request->file()) {
             $fileName = $request->file->getClientOriginalName();
-            $filePath = $request->file('file')->storeAs('app/Admin-uploads/ListMatière', $fileName);
+            $filePath = $request->file('file')->storeAs('Admin-uploads/ListMatière', $fileName);
             if($request->file()) {
                 
             }
             $fileModel->name = $request->file->getClientOriginalName();
-            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->file_path =$filePath;
             $fileModel->save();
 
             
@@ -41,5 +43,6 @@ class ListmatièresController extends Controller
 
         
            
-    }}
+    }
+}
 }
