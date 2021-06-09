@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Imports\MatiereImport;
+use App\Models\EtuMat;
 use App\Models\Fichedevœux;
 use App\Models\FichedevœuxOF;
 use App\Models\ListMatière;
@@ -19,10 +20,12 @@ class FicheDeVœuxController extends Controller
     {
 
         $datas=FichedevœuxOF::all();
-
+  
+        $extension = pathinfo(storage_path('/uploads/my_image.jpg'), PATHINFO_EXTENSION);
+        
         if (FichedevœuxOF::where('sem', 'S1')->where('Active','1')->count()==1) {
             $data=ListMatière::latest()->first();
-            $Mat = Excel::toCollection(new MatiereImport,'..'. $data->file_path);
+            $Mat = Excel::toCollection(new MatiereImport,'../storage/app/'. $data->file_path);
             $S1 = $Mat[0]->where('sem', 'S1');
             $S3 = $Mat[0]->where('sem', 'S3');
             $S5 = $Mat[0]->where('sem', 'S5');
@@ -34,12 +37,13 @@ class FicheDeVœuxController extends Controller
             $sem='S1';
             $semid='1';
             $Matieres->all();
+            $EtuMats=EtuMat::where('sem', '1')->get();
             
         }
 
         if (FichedevœuxOF::where('sem', 'S2')->where('Active','1')->count()==1) {
             $data=ListMatière::latest()->first();
-            $Mat = Excel::toCollection(new MatiereImport,'..'. $data->file_path);
+            $Mat = Excel::toCollection(new MatiereImport,'../storage/app/'. $data->file_path);
             $S2 = $Mat[0]->where('sem', 'S2');
             $S4 = $Mat[0]->where('sem', 'S4');
 
@@ -49,12 +53,13 @@ class FicheDeVœuxController extends Controller
             $sem='S2';
             $semid='2';
             $Matieres->all();
+            $EtuMats=EtuMat::where('sem', '2')->get();
 
         }
         else{
         }
 
-        return view('FicheDeVœux.fichedevœux', compact('Matieres','sem','semid'));
+        return view('FicheDeVœux.fichedevœux', compact('Matieres','sem','semid','EtuMats'));
     }
 
     

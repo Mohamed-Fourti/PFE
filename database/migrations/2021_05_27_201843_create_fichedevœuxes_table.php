@@ -17,8 +17,8 @@ class CreateFichedevœuxesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->json('Matieres');
-            $table->foreignId('sem')
-            ->constrained('fichedevœux_o_f_s')
+            $table->foreignId('fichedevœux_o_f_s_id')
+            ->constrained()
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->string('gsm');

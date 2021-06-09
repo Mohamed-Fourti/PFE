@@ -19,8 +19,9 @@
 
                        </div>
                        <div class="blog-cont">
-                           <a href="blog-singel.html"><h3>{{ $publication->title }}</h3></a>
-                           <ul>
+                       <a href="{{ route('Publication/show', [$publication->slug, 'ca' => $publication->categories_id ] )  }}">
+                                    <h4 id="spanTemps">{{ $publication->title }}</h4>
+                                </a>                           <ul>
                                <li><a href="#"><i class="fa fa-calendar"></i>{{ $publication->created_at }}</a></li>
                            </ul>
                            {!! $publication->excerpt !!}             
@@ -31,6 +32,7 @@
  
                    @endif
                    {{ $publications->links() }}
+                   
                    </div>
 
                    <!-- courses pagination -->
@@ -46,16 +48,12 @@
                                    </form>
                                </div> <!-- saidbar search -->
                                <div class="categories mt-30">
-                                   <h4>Categories</h4>
+                                   <h4>Categories</h4>                    
                                    <ul>
-                                       <li><a href="#">Fronted</a></li>
-                                       <li><a href="#">Backend</a></li>
-                                       <li><a href="#">Photography</a></li>
-                                       <li><a href="#">Teachnology</a></li>
-                                       <li><a href="#">GMET</a></li>
-                                       <li><a href="#">Language</a></li>
-                                       <li><a href="#">Science</a></li>
-                                       <li><a href="#">Accounting</a></li>
+                                       <li><a href="{{ route('Publications') }}" >Voir tout</a></li>
+                                       <li><a href="{{ route('Publications/cat','1' )  }}">Évènement</a></li>
+                                       <li><a href="{{ route('Publications/cat','2' )  }}">Formation</a></li>
+                                       <li><a href="{{ route('Publications/cat','3' )  }}">Nouveauté</a></li>  
                                    </ul>
                                </div>
                            </div> <!-- categories -->
@@ -81,9 +79,15 @@
             contentSelector: 'div.scrolling-pagination',
             callback: function() {
                 $('ul.pagination').remove();
-            }
+            },
+            loadingHtml: '<div style="text-align: center;"><img src="Dual Ball-1s-200px.svg" alt="Loading" class="ml-auto mr-auto"/></div>',
+    padding: 20,
+
         });
     });
+
+
+
 </script>
 
 
