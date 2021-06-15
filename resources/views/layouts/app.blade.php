@@ -92,11 +92,7 @@
                                     </li>
 
                                     <li class="nav-item " id="navItem">
-                                        <a>Publication</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ url('Nouveautés')}}">Nouveautés</a></li>
-                                            <li><a href="{{ url('Évènements') }}">Évènements</a></li>
-                                        </ul>
+                                        <a href="{{url('Publications')}}">Publications</a>
                                     </li>
                                     <li class="nav-item" id="navItem">
                                         <a>Liens utiles</a>
@@ -139,6 +135,15 @@
                                                     @endif 
 
                                                     @endif
+                                                    @if($FichedevœuxOF->sem=='S1')
+                                                        <li>
+                                                            <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
+                                                        </li>
+                                                            @else
+                                                        <li>
+                                                            <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
+                                                        </li>  
+                                                    @endif 
                                                 </ul>
                                         </li>
                                            
@@ -170,9 +175,9 @@
                                                     <div class="action act">
                                                         <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/profile_img.png') }}"></div>
                                                         <div class="menu">
-                                                            <h3>{{ Auth::user()->nom }}<br><span>{{ Auth::user()->role }}</span></h3>
+                                                            <h3>{{ Auth::user()->nom }} {{ Auth::user()->prenom }}<br><span>{{ Auth::user()->role }}</span></h3>
                                                             <ul>
-                                                                <li><img src="{{ asset('images/618631.svg') }}"><a href="#">Profile</a></li>
+                                                                <li><img src="{{ asset('images/618631.svg') }}"><a href="{{ url('profile',Auth::user()->id ) }}">Profile</a></li>
                                                                 <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                     document.getElementById('logout-form').submit();">
                                                                         {{ __('Déconnexion') }}

@@ -8,6 +8,7 @@ use App\Models\Réclamation;
 use App\Models\Traitement;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RéclamationController extends Controller
 {
@@ -57,6 +58,11 @@ class RéclamationController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'matiére' => 'required|string|max:255',
+            'séance' => 'required|string|max:255',
+            'labo' => 'required|string|max:255',
+        ]);
         $data=$request->all();
         $data=Arr::add($data,'user_id',Auth::user()->id);
         Réclamation::create($data);

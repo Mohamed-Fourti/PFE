@@ -12,35 +12,41 @@
                             <h5>Contactez nous</h5>
                         </div> <!-- section title -->
                         <div class="main-form pt-45">
-                            <form id="contact-form" action="#" method="post" data-toggle="validator">
+                            <form id="contact-form" action="{{route('contact.enregistrer')}}" method="post" data-toggle="validator">
+                            {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="singel-form form-group">
-                                            <input name="name" type="text" placeholder="Votre nom" data-error="Name is required." required="required">
+                                            <input name="nom" type="text" placeholder="Votre Nom" data-error="Name is required." required="required">
                                             <div class="help-block with-errors"></div>
                                         </div> <!-- singel form -->
+                                        @error('nom')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <div class="singel-form form-group">
-                                            <input name="email" type="email" placeholder="Email" data-error="Valid email is required." required="required">
-                                            <div class="help-block with-errors"></div>
-                                        </div> <!-- singel form -->
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="singel-form form-group">
-                                            <input name="subject" type="text" placeholder="Sujet" data-error="Subject is required." required="required">
+                                            <input name="prenom" type="text" placeholder="Votre Prénom" data-error="First Name is required." required="required">
                                             <div class="help-block with-errors"></div>
                                         </div> <!-- singel form --> 
                                     </div>
                                     <div class="col-md-6">
                                         <div class="singel-form form-group">
-                                            <input name="phone" type="text" placeholder="Numéro de téléphone" data-error="Phone is required." required="required">
+                                            <input name="email" type="email" placeholder=" Votre Email" data-error="Valid email is required." required="required">
+                                            <div class="help-block with-errors"></div>
+                                        </div> <!-- singel form -->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="singel-form form-group">
+                                            <input name="tel" type="text" placeholder="Numéro de téléphone" data-error="Phone is required." required="required">
                                             <div class="help-block with-errors"></div>
                                         </div> <!-- singel form -->
                                     </div>
                                     <div class="col-md-12">
                                         <div class="singel-form form-group">
-                                            <textarea name="messege" placeholder="Messege" data-error="Please,leave us a message." required="required"></textarea>
+                                            <textarea name="message" placeholder="Votre Message" data-error="Please,leave us a message." required="required"></textarea>
                                             <div class="help-block with-errors"></div>
                                         </div> <!-- singel form -->
                                     </div>

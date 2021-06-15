@@ -39,7 +39,7 @@ class FicheDeVœuxController extends Controller
 
         if (FichedevœuxOF::where('sem', 'S2')->where('Active','1')->count()==1) {
             $data=ListMatière::latest()->first();
-            $Mat = Excel::toCollection(new MatiereImport,'..'. $data->file_path);
+            $Mat = Excel::toCollection(new MatiereImport,'Admin-uploads/ListMatière/Mat.xlsx');
             $S2 = $Mat[0]->where('sem', 'S2');
             $S4 = $Mat[0]->where('sem', 'S4');
 
@@ -60,6 +60,15 @@ class FicheDeVœuxController extends Controller
     
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'gsm' => 'required|numeric',
+            'chargeS1' => 'required|numeric',
+            'chargeS2' => 'required|numeric',
+            'Matieres'=> 'required',
+            'jours1'=> 'required',
+            'jours2'=> 'required',
+        ]);
+
         $jours1 = $request->input('jours');
         $jsonjours1 = json_encode($jours1);
 

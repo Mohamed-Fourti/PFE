@@ -15,6 +15,11 @@ use App\Http\Controllers\Front\InscriptionController as FrontInscriptionControll
 use App\Http\Controllers\Admin\Publication\InscriptionController as BackInscriptionController;
 use App\Http\Controllers\Réclamation\RéclamationController;
 use App\Http\Controllers\Réclamation\TraitementController;
+use App\Http\Controllers\RattrapageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\Rattrapage\RattrapagesController as BackRattrapagesController;
+use App\Http\Controllers\Admin\Contact\ContactsController as BackContactsController;
 use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -114,11 +119,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::post('EtuMat',[BackFicheDeVœuxController::class,'storePlanEtuFichesMat'])->name('EtuMat');
     Route::resource('Listmatières',ListmatièresController::class);
 
+    Route::resource('rattrapages', BackRattrapagesController::class);
+    Route::post('rattrapages/{id}',[BackRattrapagesController::class,'destroy']);
+    Route::get('rattrapages/show/{id}',[BackRattrapagesController::class,'show'])->name('rattrapages.show');
+    Route::get('rattrapages/pdf/{id}', [BackRattrapagesController::class,'pdf'])->name('rattrapages.pdf');
+    // Route::name('rattrapages.pdf')->post('rattrapages/pdf', 'RattrapagesController@pdf');
 
-    
-
-    
-
+    Route::resource('Contact', BackContactsController::class);
 });
 
 
@@ -131,6 +138,8 @@ Route::group(['middleware' => ['auth', 'role:Enseignants']], function() {
     Route::post('fiche-De-Vœux/enregistrer',[FrontFicheDeVœuxController::class,'store'])->name('fiche-De-Vœux/enregistrer');
     
     Route::get('/', [FrontPublicationController::class,'index']);
+    Route::get('rattrapage/{sem}', [RattrapageController::class,'index']);
+    Route::post('rattrapage/enregistrer', [RattrapageController::class,'store'])->name('rattrapage/enregistrer');
 
 });
 
@@ -143,8 +152,11 @@ Route::group(['middleware' => ['auth', 'role:Techniciens']], function() {
 });
 
 
+Route::group(['middleware' => ['auth', 'role:Enseignants|admin|Techniciens|Etudiants']], function() {
 
-
+    Route::get('profile/{id}', [ProfileController::class,'index']);
+    Route::post('profile/modifier', [ProfileController::class,'update'])->name('profile/modifier');
+});
 
 
 Route::get('Publication', function(){
@@ -157,9 +169,8 @@ Route::get('Formation', function(){
     return View('Publication.Évènements.formation'); 
 });
 
-Route::get('contact', function(){
-    return View('contact'); 
-});
+Route::get('contact',[ContactController::class,'index']);
+Route::post('contact/enregistrer',[ContactController::class,'store'])->name('contact.enregistrer');
 
 Route::resource('test', testing::class);
 

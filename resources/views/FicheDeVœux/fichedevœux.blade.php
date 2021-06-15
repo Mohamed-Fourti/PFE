@@ -12,6 +12,10 @@
       <div class="card-body">
       <label for="gsm" class="col-4 col-form-label">GSM :</label>
         <input id="gsm" name="gsm" type="text" class="form-control">
+        @error('gsm')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
       <input id="" name="sem" type="text" hidden value="{{ $semid }}">
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-1' }}][Matiere]" class="custom-select">
@@ -19,7 +23,11 @@
           <option value="" disabled selected hidden>Choose</option>
           <option  value="{{ $Matiere['class'] }}:{{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
+
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-2' }}][class]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -27,6 +35,9 @@
           <option value="{{ $Matiere['class'] }}:{{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-3' }}][class]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -34,6 +45,9 @@
           <option value="{{ $Matiere['class'] }}:{{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-4' }}][class]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -41,6 +55,9 @@
           <option value="{{ $Matiere['class'] }}:{{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-5' }}][class]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -48,12 +65,23 @@
           <option value="{{ $Matiere['class'] }}:{{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         @if ($sem=='S1')
         <label for="chargeS1" class="col-4 col-form-label">Votre charge horaire du Semestre 1 :</label>
         <input id="chargeS1" name="chargeS1" type="text" class="form-control">
+        @error('chargeS1')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         @else
         <label for="chargeS2" class="col-4 col-form-label">Votre charge horaire du Semestre 2 :</label>
         <input id="chargeS2" name="chargeS2" type="text" class="form-control">
+        @error('chargeS2')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         @endif
 
 
@@ -72,9 +100,9 @@
                 <th scope="col">Lundi</th>
                 <th scope="col">Mardi</th>
                 <th scope="col">Mercredi</th>
+                <th scope="col">Jeudi</th>
                 <th scope="col">Vendredi</th>
                 <th scope="col">Samedi</th>
-                <th scope="col">Dimanche</th>
               </tr>
             </thead>
             <tbody>
@@ -82,38 +110,62 @@
                 <th scope="row">Matin</th>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Lundi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                    <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Mardi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Mercredi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Vendredi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Samedi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Dimanche">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
 
@@ -122,38 +174,62 @@
                 <th scope="row">Après Midi </th>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Lundi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Mardi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Mercredi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Jeudi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Vendredi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Samedi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -161,43 +237,71 @@
                 <th scope="row">Journée entière</th>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Lundi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Mardi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Mercredi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Merecredi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Jeudi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Vendredi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours1[]" id="_0" type="checkbox" class="custom-control-input" value="Samedi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 1.5em">
+                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+          </table>
+          @error('jours1')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         </div>
       </div>
       </div>
@@ -214,9 +318,9 @@
                 <th scope="col">Lundi</th>
                 <th scope="col">Mardi</th>
                 <th scope="col">Mercredi</th>
+                <th scope="col">Jeudi</th>
                 <th scope="col">Vendredi</th>
                 <th scope="col">Samedi</th>
-                <th scope="col">Dimanche</th>
               </tr>
             </thead>
             <tbody>
@@ -224,38 +328,62 @@
                 <th scope="row">Matin</th>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Lundi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                    <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Mardi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Mercredi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Vendredi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Samedi_Matin">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Dimanche">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Matin">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
 
@@ -264,38 +392,62 @@
                 <th scope="row">Après Midi </th>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Lundi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Mardi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Mercredi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Jeudi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Vendredi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Samedi_Après_Midi">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Après_Midi">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -303,55 +455,85 @@
                 <th scope="row">Journée entière</th>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Lundi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Mardi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Mercredi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Merecredi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Jeudi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Vendredi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 2.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="custom-control custom-checkbox">
-                    <input name="jours2[]" id="_0" type="checkbox" class="custom-control-input" value="Samedi_Journée_entière">
-                    <label for="_0" class="custom-control-label"></label>
+                  <div class="checkbox">
+                      <label style="font-size: 1.5em">
+                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Journée_entière">
+                          <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
+                      </label>
+                    </div>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+          @error('jours2')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         </div>
       </div>
     </div>
     <div class=" mt-2">
+      
 
     <div class="card">
-  <div class="card-body">
-  </div>
-  <label for="remarques" class="col-4 col-form-label">Remarques :</label>
-        <input id="remarques" name="remarques" type="text" class="form-control">
-        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-
+      <div class="card-body">
+      <label for="remarques" class="col-4 col-form-label">Remarques :</label>
+            <input id="remarques" name="remarques" type="text" class="form-control"><br><br>
+            <div class="col text-center">
+               <button name="submit" type="submit" Style ="width:200px; height:50px;" class="btn btn-primary">Envoyer</button>
+            </div>
+      </div>
+  
 </div>
 </div>
 
