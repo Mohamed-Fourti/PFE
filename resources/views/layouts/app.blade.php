@@ -3,6 +3,17 @@
 
 <head>
 
+<script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+        @if(!auth()->guest())
+        <script>
+            window.Laravel.userId = <?php echo auth()->user()->id; ?>
+        </script>
+    @endif
+
     <!--====== Required meta tags ======-->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -102,11 +113,6 @@
                                         </ul>
                                     </li>
                                     
-                                        @role('admin')
-                                        <li class="nav-item " id="navItem">
-                                            <a href="{{ url('admin') }}">Administration</a>
-                                        </li>
-                                        @endrole
                                         
                                         @role('Techniciens')
                                         <li class="nav-item" id="navItem">
@@ -118,7 +124,7 @@
                                         @endrole
                                         
                                         
-                                        @role('Enseignants')
+                                        @role('Enseignants' or 'Admin')
                                         <li class="nav-item " id="navItem">
                                             <a>Autre Services</a>
                                                 <ul class="sub-menu">
@@ -171,7 +177,16 @@
                                                 @endif
                                                 @else
                                                 <li>
-
+<!-- // add this dropdown // -->
+<li class="dropdown">
+            <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                <li class="dropdown-header">No notifications</li>
+            </ul>
+        </li>
+<!-- // ... // -->
                                                     <div class="action act">
                                                         <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/profile_img.png') }}"></div>
                                                         <div class="menu">

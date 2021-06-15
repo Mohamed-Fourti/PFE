@@ -52,12 +52,12 @@
     <div class="col-lg-8 col-md-8 col-sm-8 col-8">
       <div class="card">
         <div class="card-header">
-          Featured
+        Choisir un fichier
+
         </div>
         <div class="card-body">
           <form action="{{route('EtuMat')}}" method="post" enctype="multipart/form-data">
           @csrf
-
             <div class="file-loading">
               <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
             </div>
@@ -66,9 +66,10 @@
             <label for="département">Département</label>
             <select id="département" name="département" class="form-control">
               <option value="TI">TI </option>
-              <option value="Département GE">Département GE</option>
-              <option value="Département GM">Département GM</option>
-              <option value="Département SEG">Département SEG</option>
+              <option value="TICIT">TICIT </option>
+              <option value="GE">Département GE</option>
+              <option value="GM">Département GM</option>
+              <option value="SEG">Département SEG</option>
             </select>
             <label for="Class">Class</label>
             <input id="Class" name="class" type="text" class="form-control">
@@ -173,14 +174,76 @@
   $(document).ready( function () {
     $('#table_id1').DataTable( {
         "lengthMenu": [  9, 25, 50, 75, 100 ],
-        "order": [[ 2, "desc" ]]
+        "order": [[ 2, "desc" ]],
+        "language":
+{
+	"sEmptyTable":     "Aucune donnée disponible dans le tableau",
+	"sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+	"sInfoEmpty":      "Affichage de l'élément 0 à 0 sur 0 élément",
+	"sInfoFiltered":   "(filtré à partir de _MAX_ éléments au total)",
+	"sInfoPostFix":    "",
+	"sInfoThousands":  ",",
+	"sLengthMenu":     "Afficher _MENU_ éléments",
+	"sLoadingRecords": "Chargement...",
+	"sProcessing":     "Traitement...",
+	"sSearch":         "Rechercher :",
+	"sZeroRecords":    "Aucun élément correspondant trouvé",
+	"oPaginate": {
+		"sFirst":    "Premier",
+		"sLast":     "Dernier",
+		"sNext":     "Suivant",
+		"sPrevious": "Précédent"
+	},
+	"oAria": {
+		"sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+		"sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+	},
+	"select": {
+        	"rows": {
+         		"_": "%d lignes sélectionnées",
+         		"0": "Aucune ligne sélectionnée",
+        		"1": "1 ligne sélectionnée"
+        	}  
+	}
+}
 
 } );
 } );
 $(document).ready( function () {
     $('#table_id2').DataTable( {
         "lengthMenu": [  9, 25, 50, 75, 100 ],
-        "order": [[ 2, "desc" ]]
+        "order": [[ 2, "desc" ]],
+        "language":
+{
+	"sEmptyTable":     "Aucune donnée disponible dans le tableau",
+	"sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+	"sInfoEmpty":      "Affichage de l'élément 0 à 0 sur 0 élément",
+	"sInfoFiltered":   "(filtré à partir de _MAX_ éléments au total)",
+	"sInfoPostFix":    "",
+	"sInfoThousands":  ",",
+	"sLengthMenu":     "Afficher _MENU_ éléments",
+	"sLoadingRecords": "Chargement...",
+	"sProcessing":     "Traitement...",
+	"sSearch":         "Rechercher :",
+	"sZeroRecords":    "Aucun élément correspondant trouvé",
+	"oPaginate": {
+		"sFirst":    "Premier",
+		"sLast":     "Dernier",
+		"sNext":     "Suivant",
+		"sPrevious": "Précédent"
+	},
+	"oAria": {
+		"sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+		"sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+	},
+	"select": {
+        	"rows": {
+         		"_": "%d lignes sélectionnées",
+         		"0": "Aucune ligne sélectionnée",
+        		"1": "1 ligne sélectionnée"
+        	}  
+	}
+}
 
 } );
 } );

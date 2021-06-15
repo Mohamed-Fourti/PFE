@@ -6,9 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Réclamation;
 use App\Models\Traitement;
+use App\Models\User;
+use App\Notifications\RéclamationNotification;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class RéclamationController extends Controller
 {
@@ -67,6 +72,14 @@ class RéclamationController extends Controller
         $data=$request->all();
         $data=Arr::add($data,'user_id',Auth::user()->id);
         Réclamation::create($data);
+        foreach($usersid as $user){
+            User::findOrFail($user->user_id)->notify(new RéclamationNotification($data));
+        }
+        // Notification::send($users,new RéclamationNotification($data)) ;     
+
+        // foreach ($users as $user) {
+
+        // }
         return back()->with('message','Votre Réclamation a été crée avec succès');
     }
 

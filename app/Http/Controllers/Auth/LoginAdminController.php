@@ -18,7 +18,11 @@ class LoginAdminController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
+    public function showAdminLoginForm()
+    {
+        return view('auth.loginAdmin');
+    }
+    
     use AuthenticatesUsers;
 
     /**
@@ -26,7 +30,7 @@ class LoginAdminController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo ='/admin';
 
     /**
      * Create a new controller instance.

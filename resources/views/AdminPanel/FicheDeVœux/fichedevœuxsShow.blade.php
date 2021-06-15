@@ -1,151 +1,51 @@
-@extends('layouts.app')
+@extends('AdminPanel.layout')
 
-@section('content')
-<div class="form-group row">
-  <div class="col-md-1"></div>
-
-  <div class="col-md-10">
-  <form action="{{route('fiche-De-Vœux/enregistrer')}}" method="post" >
-  @csrf
-  <div class="card">
-  <div class="card-body">
-  <h3>Liens utiles des plans d'études et des fiches matières :</h3>
-  <p>=> Plan d'études et fiches matières TI : </p>
-  @foreach ($EtuMats->where('département','TI') as $EtuMat)
-  @if (strpos($EtuMat->file_path, '.pdf') !== false) 
-    
-    <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-@else
-  <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-  @endif
-  @endforeach
-  <p>=> Plan d'études et fiches matières TICIT : </p>
-  @foreach ($EtuMats->where('département','TICIT') as $EtuMat)
-  @if (strpos($EtuMat->file_path, '.pdf') !== false) 
-    
-    <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-@else
-  <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-  @endif
-  @endforeach
-  <p>=> Fiches matières informatique département GE : </p>
-  @foreach ($EtuMats->where('département','GE') as $EtuMat)
-  @if (strpos($EtuMat->file_path, '.pdf') !== false) 
-    
-    <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-@else
-  <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-  @endif
-  @endforeach
-  <p>=> Fiches matières informatique département GM : </p>
-  @foreach ($EtuMats->where('département','GM') as $EtuMat)
-  @if (strpos($EtuMat->file_path, '.pdf') !== false) 
-    
-    <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-@else
-  <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-  @endif
-  @endforeach
-  <p>=> Fiches matières informatique département SEG : </p>
-  @foreach ($EtuMats->where('département','SEG') as $EtuMat)
-  @if (strpos($EtuMat->file_path, '.pdf') !== false) 
-    
-    <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-@else
-  <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank"><p>- {{ $EtuMat->class }}</p></a><br>
-  @endif
-  @endforeach
-  </div>
-  </div>
-<div class=" mt-2">
-    <div class="card">
-      <div class="card-body">
-      <label for="gsm" class="col-4 col-form-label">GSM :</label>
-        <input id="gsm" name="gsm" type="text" class="form-control">
-        @error('gsm')
-          <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-      <input id="" name="sem" type="text" hidden value="{{ $semid }}">
-        <label for="select" class="col-4 col-form-label">Matiere</label>
-        <select id="select" name="Matieres[{{ 'Matieres-1' }}][Matiere]" class="custom-select">
-          @foreach ($Matieres as $Matiere)
-          <option value="" disabled selected hidden>choisir</option>
-          <option  value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
-          @endforeach
-
-        </select>
-        @error('Matieres')
-           <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <label for="select" class="col-4 col-form-label">Matiere</label>
-        <select id="select" name="Matieres[{{ 'Matieres-2' }}][Matiere]" class="custom-select">
-          @foreach ($Matieres as $Matiere)
-          <option value="" disabled selected hidden>choisir</option>
-          <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
-          @endforeach
-        </select>
-        @error('Matieres')
-           <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <label for="select" class="col-4 col-form-label">Matiere</label>
-        <select id="select" name="Matieres[{{ 'Matieres-3' }}][Matiere]" class="custom-select">
-          @foreach ($Matieres as $Matiere)
-          <option value="" disabled selected hidden>choisir</option>
-          <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
-          @endforeach
-        </select>
-        @error('Matieres')
-           <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <label for="select" class="col-4 col-form-label">Matiere</label>
-        <select id="select" name="Matieres[{{ 'Matieres-4' }}][Matiere]" class="custom-select">
-          @foreach ($Matieres as $Matiere)
-          <option value="" disabled selected hidden>choisir</option>
-          <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
-          @endforeach
-        </select>
-        @error('Matieres')
-           <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <label for="select" class="col-4 col-form-label">Matiere</label>
-        <select id="select" name="Matieres[{{ 'Matieres-5' }}][Matiere]" class="custom-select">
-          @foreach ($Matieres as $Matiere)
-          <option value="" disabled selected hidden>choisir</option>
-          <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
-          @endforeach
-        </select>
-        @error('Matieres')
-           <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        @if ($sem=='S1')
-        <label for="chargeS1" class="col-4 col-form-label">Votre charge horaire du Semestre 1 :</label>
-        <input id="chargeS1" name="chargeS1" type="text" class="form-control">
-        @error('chargeS1')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-        @else
-        <label for="chargeS2" class="col-4 col-form-label">Votre charge horaire du Semestre 2 :</label>
-        <input id="chargeS2" name="chargeS2" type="text" class="form-control">
-        @error('chargeS2')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-        @endif
-
-
-      </div>
-    </div>
-    </div>
-
-    <div class=" mt-2">
-
+@section('main')
+<div class="container-fluid ">
+  <div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
+        <div class="card-header">
+          Fiche de Fiche De Vœux {{ $data->FichedevœuxOF->sem}}
+        </div>
         <div class="card-body">
-          <h5>Jours de travail (Combinaison 1 )</h5>
-          <p>Cochez les jours de travail.</p>
           <table class="table table-bordered">
+             <tr>
+              <td>Enseignants :</td>
+              <td>{{ $data->user->nom}}</td>
+            </tr>
+            <tr>
+              <td>gsm :</td>
+              <td>{{ $data->gsm}}</td>
+            </tr>
+            <tr>
+              <td>Email :</td>
+              <td>{{ $data->user->email }}</td>
+            </tr>
+            <tr>
+              <td>charge:</td>
+              @if($data->chargeS1)
+              <td>{{ $data->chargeS1 }}</td>
+              @else
+              <td>{{ $data->chargeS2 }}</td>
+              @endif
+            </tr>
+            <tr>
+              <td>Remarques:</td>
+              <td>{{ $data->remarques}}</td>
+            </tr>
+            <tr>
+              <td>Matieres :</td>
+              <td>
+                @foreach ($data->Matieres as $Matiere)
+                <div>- {{ $Matiere['Matiere'] }}</div>
+                @endforeach
+              </td>
+            </tr>
+            <tr>
+            <td>Jours de travail (Combinaison 1 )</td>
+            <td>          
+            <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col"></th>
@@ -164,7 +64,7 @@
                   <div class="custom-control custom-checkbox">
                     <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Lundi_Matin',$data->jours1)  ? 'checked' : '' }} value="Lundi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -174,7 +74,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mardi_Matin',$data->jours1)  ? 'checked' : '' }} value="Mardi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -184,7 +84,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mercredi_Matin',$data->jours1)  ? 'checked' : '' }} value="Mercredi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -194,7 +94,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Jeudi_Matin',$data->jours1)  ? 'checked' : '' }} value="Jeudi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -204,7 +104,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Vendredi_Matin',$data->jours1)  ? 'checked' : '' }} value="Vendredi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -214,7 +114,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Samedi_Matin',$data->jours1)  ? 'checked' : '' }} value="Samedi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -228,7 +128,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Lundi_Après_Midi',$data->jours1)  ? 'checked' : '' }} value="Lundi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -238,7 +138,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mardi_Après_Midi',$data->jours1)  ? 'checked' : '' }} value="Mardi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -248,7 +148,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mercredi_Après_Midi',$data->jours1)  ? 'checked' : '' }} value="Mercredi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -258,7 +158,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Jeudi_Après_Midi',$data->jours1)  ? 'checked' : '' }} value="Jeudi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -268,7 +168,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Vendredi_Après_Midi',$data->jours1)  ? 'checked' : '' }} value="Vendredi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -278,7 +178,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Samedi_Après_Midi',$data->jours1)  ? 'checked' : '' }} value="Samedi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -291,7 +191,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Lundi_Journée_entière',$data->jours1)  ? 'checked' : '' }} value="Lundi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -301,7 +201,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mardi_Journée_entière',$data->jours1)  ? 'checked' : '' }} value="Mardi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -311,7 +211,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Merecredi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Merecredi_Journée_entière',$data->jours1)  ? 'checked' : '' }} value="Merecredi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -321,7 +221,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Jeudi_Journée_entière',$data->jours1)  ? 'checked' : '' }} value="Jeudi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -331,7 +231,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Vendredi_Journée_entière',$data->jours1)  ? 'checked' : '' }} value="Vendredi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -341,7 +241,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Samedi_Journée_entière',$data->jours1)  ? 'checked' : '' }} value="Samedi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -349,21 +249,12 @@
                 </td>
               </tr>
             </tbody>
-          </table>
-          </table>
-          @error('jours1')
-           <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        </div>
-      </div>
-      </div>
-      <div class=" mt-2">
-
-      <div class="card">
-        <div class="card-body">
-          <h5>Jours de travail (Combinaison 2 )</h5>
-          <p>Cochez les jours de travail.</p>
-          <table class="table table-bordered">
+          </table></td>
+            </tr>
+            <tr>
+            <td>Jours de travail (Combinaison 2 )</td>
+            <td>          
+            <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col"></th>
@@ -382,7 +273,7 @@
                   <div class="custom-control custom-checkbox">
                     <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Lundi_Matin',$data->jours2)  ? 'checked' : '' }} value="Lundi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -392,7 +283,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mardi_Matin',$data->jours2)  ? 'checked' : '' }} value="Mardi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -402,7 +293,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mercredi_Matin',$data->jours2)  ? 'checked' : '' }} value="Mercredi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -412,7 +303,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Jeudi_Matin',$data->jours2)  ? 'checked' : '' }} value="Jeudi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -422,7 +313,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Vendredi_Matin',$data->jours2)  ? 'checked' : '' }} value="Vendredi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -432,7 +323,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Matin">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Samedi_Matin',$data->jours2)  ? 'checked' : '' }} value="Samedi_Matin">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -446,7 +337,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Lundi_Après_Midi',$data->jours2)  ? 'checked' : '' }} value="Lundi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -456,7 +347,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mardi_Après_Midi',$data->jours2)  ? 'checked' : '' }} value="Mardi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -466,7 +357,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mercredi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mercredi_Après_Midi',$data->jours2)  ? 'checked' : '' }} value="Mercredi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -476,7 +367,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Jeudi_Après_Midi',$data->jours2)  ? 'checked' : '' }} value="Jeudi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -486,7 +377,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Vendredi_Après_Midi',$data->jours2)  ? 'checked' : '' }} value="Vendredi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -496,7 +387,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Après_Midi">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Samedi_Après_Midi',$data->jours2)  ? 'checked' : '' }} value="Samedi_Après_Midi">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -509,7 +400,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Lundi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Lundi_Journée_entière',$data->jours2)  ? 'checked' : '' }} value="Lundi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -519,7 +410,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Mardi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Mardi_Journée_entière',$data->jours2)  ? 'checked' : '' }} value="Mardi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -529,7 +420,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Merecredi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Merecredi_Journée_entière',$data->jours2)  ? 'checked' : '' }} value="Merecredi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -539,7 +430,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Jeudi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Jeudi_Journée_entière',$data->jours2)  ? 'checked' : '' }} value="Jeudi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -549,7 +440,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Vendredi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Vendredi_Journée_entière',$data->jours2)  ? 'checked' : '' }} value="Vendredi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -559,7 +450,7 @@
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
                       <label style="font-size: 2.5em">
-                          <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Journée_entière">
+                          <input name="" id="_1" disabled type="checkbox" class="custom-control-input chekb" {{ in_array('Samedi_Journée_entière',$data->jours2)  ? 'checked' : '' }} value="Samedi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
                     </div>
@@ -567,53 +458,19 @@
                 </td>
               </tr>
             </tbody>
+          </table></td>
+            </tr>
+            </tbody>
+
           </table>
-          @error('jours2')
-           <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+
+
         </div>
       </div>
     </div>
-    <div class=" mt-2">
-      
-
-    <div class="card">
-      <div class="card-body">
-      <label for="remarques" class="col-4 col-form-label">Remarques :</label>
-            <input id="remarques" name="remarques" type="text" class="form-control"><br><br>
-            <div class="col text-center">
-               <button name="submit" type="submit" Style ="width:200px; height:50px;" class="btn btn-primary">Envoyer</button>
-            </div>
-
-      </div>
-  
-</div>
-<div class="col text-center mt-3">
-               <button name="submit" type="submit" Style ="width:200px; height:50px;" class="btn btn-primary">Envoyer</button>
-            </div>
-</div>
-
-    </form>
 
   </div>
+
 </div>
 
 @endsection
-@push('scripts')
-
-<script>
- 
-
- $(document).ready(function(){
-$('select').on('change', function(event ) {
-   var prevValue = $(this).data('previous');
-$('select').not(this).find('option[value="'+prevValue+'"]').show();    
-   var value = $(this).val();
-  $(this).data('previous',value); $('select').not(this).find('option[value="'+value+'"]').hide();
-});
-});
-
-</script>
-
-
-@endpush

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\FicheDeVœux;
 
 use App\Http\Controllers\Controller;
 use App\Models\EtuMat;
+use App\Models\Fichedevœux;
 use App\Models\FichedevœuxOF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -49,9 +50,11 @@ class FicheDeVœuxController extends Controller
 
         if($request->file()) {
             $fileName = $request->file->getClientOriginalName();
-            $filePath = $request->file('file')->storeAs('plansétudes-fichesmatières', $fileName, 'app/Admin-uploads');
+            $fileName=md5($fileName).$fileName;
+
+            $filePath = $request->file('file')->storeAs('public/plansétudes-fichesmatières', $fileName);
             $file_path = '/storage/' . $filePath;
-            
+
            $fileModel=$request->all();
            $fileModel=Arr::add($fileModel,'file_path',$file_path);
            $fileModel=Arr::add($fileModel,'name',$fileName);
@@ -64,6 +67,15 @@ class FicheDeVœuxController extends Controller
     }
    }
 
+
+   public function résultats()
+{
+    $datas=Fichedevœux::all();
+
+    return view('AdminPanel.FicheDeVœux.fichedevœuxs',compact('datas'));
+
+}
+
     /**
      * Display the specified resource.
      *
@@ -72,7 +84,10 @@ class FicheDeVœuxController extends Controller
      */
     public function show($id)
     {
-        //
+        $data=FicheDeVœux::findOrFail($id);
+
+        return view('AdminPanel.FicheDeVœux.fichedevœuxsShow',compact('data'));
+        
     }
 
     /**

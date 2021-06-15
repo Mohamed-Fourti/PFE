@@ -26,7 +26,7 @@ class PublicationController extends Controller
 
 
 
-          if(Publication::where('categories_id',1)->orWhere('categories_id',2)->count()!=0){
+          if(Publication::where('categories_id',1)->orWhere('categories_id',2)->where('active',true)->count()!=0){
           $formEtevens = Publication::select(
             'id',
             'slug',
@@ -36,15 +36,14 @@ class PublicationController extends Controller
             'created_at',
             'categories_id',
             'user_id')
-          ->whereActive(true)->where('categories_id',1)->orWhere('categories_id',2)->take(3)->latest()->get();
+          ->where('active',true)->where('categories_id',1)->orWhere('categories_id',2)->take(3)->latest()->get();
             }
           else{
-            $formEtevens = Publication::all()
-            ->where('categories_id',1)->where('categories_id',2);
+            $formEtevens = null;
           }
 
           
-          if(Publication::where('categories_id',3)->count()!=0){
+          if(Publication::where('categories_id',3)->where('active',true)->count()!=0){
             $nouveautés = Publication::select(
               'id',
               'slug',
@@ -61,14 +60,13 @@ class PublicationController extends Controller
               'formateur',
               'durée',
               'Nbseance',)
-            ->whereActive(true)->latest()->where('created_at', '<',$nlast->created_at)->take(4)->get();}
+              ->where('active',true)->latest()->where('categories_id',3)->where('created_at', '<',$nlast->created_at)->take(3)->get();}
             else{
-              $nouveautés = Publication::all()
-              ->where('categories_id',3);
+              $nouveautés = null;
             }
           
 
-          if(Publication::where('categories_id',3)->count()!=0){
+          if(Publication::where('categories_id',3)->where('active',true)->count()!=0){
 
           $nouveautélasts = Publication::select(
             'id',
@@ -86,12 +84,12 @@ class PublicationController extends Controller
             'formateur',
             'durée',
             'Nbseance',)
-          ->whereActive(true)->where('id',$nlast->id)->get();}
+            ->where('active',true)->where('categories_id',3)->where('id',$nlast->id)->get();}
           else{
-            $nouveautélasts = Publication::all()->where('categories_id',3);
+            $nouveautélasts = null;
           }
 
-        return view('accueil', compact('nouveautés','nouveautélasts','formEtevens','nlast'));
+        return view('accueil', compact('nouveautés','nouveautélasts','formEtevens'));
     }
 
 
@@ -119,6 +117,7 @@ class PublicationController extends Controller
       ->with('user:id,nom')
       ->whereActive(true)
       ->where('slug',$slug)->first();
+      if($Publication){
       if($user = Auth::user())
       {
         $inscrite=Inscription::where('user_id',Auth::user()->id)->where('publications_id',$Publication->id)->count();
@@ -132,8 +131,10 @@ class PublicationController extends Controller
   }
   if($categories_id==3){
     return view('Publication.nouveauté', compact('Publication','inscrite'));
-  }
+  }}
+  else{return redirect()->back(); }
  }
+
 
  public function showall( )
  {
@@ -145,15 +146,48 @@ class PublicationController extends Controller
       'slug',
       'image',
       'title',
-      'excerpt',
       'body',
       'created_at',
       'categories_id',
+      'date_finale',
+      'date_début',
+      'lieu',
+      'excerpt',
       'user_id',
       'formateur',
       'durée',
       'Nbseance',)
-    ->whereActive(true)->latest()->paginate(2);
+    ->whereActive(true)->latest()->paginate(1);
+    return view('Publication.publications', compact('publications'));
+  }
+  else{
+    return view('Publication.publications')->with('Msg','Pas de Publication.');
+  }
+
+ }
+
+ public function showallByCategories($ca)
+ {
+  $test = Publication::all();
+  if($test->isNotEmpty()){
+
+    $publications = Publication::select(
+      'id',
+      'slug',
+      'image',
+      'title',
+      'body',
+      'created_at',
+      'categories_id',
+      'date_finale',
+      'date_début',
+      'lieu',
+      'excerpt',
+      'user_id',
+      'formateur',
+      'durée',
+      'Nbseance',)
+      ->where('categories_id',$ca)->whereActive(true)->latest()->paginate(1);
     return view('Publication.publications', compact('publications'));
   }
   else{

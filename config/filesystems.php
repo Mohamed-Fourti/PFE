@@ -54,7 +54,7 @@ return [
         
         'Admin-uploads' => [
             'driver' => 'local',
-            'root' => storage_path('/app/Admin-uploads'),
+            'root' => storage_path('Admin-uploads'),
 
         ],
 
