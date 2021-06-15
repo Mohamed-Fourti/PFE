@@ -24,6 +24,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\Rattrapage\RattrapagesController as BackRattrapagesController;
 use App\Http\Controllers\Admin\Contact\ContactsController as BackContactsController;
+use App\Http\Controllers\TableauAffichage\TableauAffichageController;
 use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -172,6 +173,8 @@ Route::group(['middleware' => ['role:Enseignants|admin']], function () {
     Route::get('ColloqueScientifique', [ColloqueScientifiques::class, 'pdf'])->name('ColloqueScientifique/pdf');
 
     Route::resource('TableauAffichage', TableauAffichageController::class);
+
+    Route::resource('Contact', BackContactsController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:Techniciens']], function () {
