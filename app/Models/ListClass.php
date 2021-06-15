@@ -11,4 +11,9 @@ class ListClass extends Model
     protected $fillable = [
         'class',
     ];  
+
+    public function TableauAffichage()
+    {
+        return $this->hasMany(TableauAffichage::class);
+    }
 }

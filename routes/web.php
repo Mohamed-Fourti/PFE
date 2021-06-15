@@ -18,6 +18,8 @@ use App\Http\Controllers\Front\ColloqueScientifiques;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Réclamation\RéclamationController;
 use App\Http\Controllers\Réclamation\TraitementController;
+use App\Http\Controllers\TableauAffichage\TableauAffichageController;
+use App\Http\Controllers\TableauAffichage\TableauAffichageEtController;
 use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -34,6 +36,7 @@ use UniSharp\LaravelFilemanager\Lfm;
 |
 */
 /* Page admin*/
+
 Route::middleware('guest')->group(function () {
     Route::prefix('Administrateur')->group(function () {
         Route::get('/', 'App\Http\Controllers\Auth\LoginAdminController@showAdminLoginForm');
@@ -53,7 +56,7 @@ Route::get('/home', function () {
 
 Auth::routes();
 
-Route::post('inscriptionPub',[FrontInscriptionController::class,'store'] )->name('inscriptionPub');
+Route::post('inscriptionPub', [FrontInscriptionController::class, 'store'])->name('inscriptionPub');
 
 /* login/register */
 
@@ -69,8 +72,6 @@ Route::middleware('guest')->group(function () {
         Route::get('/inscriptionEt', 'App\Http\Controllers\Auth\RegisterControllerEt@showRegistrationFormEt')->name('inscriptionEt');
         Route::post('/inscriptionp', 'App\Http\Controllers\Auth\RegisterControllerEt@register')->name('inscriptionp');
         Route::post('/inscriptionEt', 'App\Http\Controllers\Auth\RegisterControllerEt@import');
-        
-
     });
 });
 Route::prefix('passe')->group(function () {
@@ -82,90 +83,90 @@ Route::prefix('passe')->group(function () {
 
 /* Admin */
 
-Route::group(['middleware' => ['auth', 'role:admin']], function() { 
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::name('admin')->get('/admin', [AdminController::class, 'index']);
-    
+
     Route::resource('usersEt', EtudiantsController::class);
-    Route::post('updateEt','App\Http\Controllers\Admin\Users\EtudiantsController@update')->name('updateEt');
+    Route::post('updateEt', 'App\Http\Controllers\Admin\Users\EtudiantsController@update')->name('updateEt');
     Route::get('searchEt', 'App\Http\Controllers\Admin\Users\EtudiantsController@search');
 
     Route::resource('usersEn', EnseignantsController::class);
-    Route::post('updateEn','App\Http\Controllers\Admin\Users\EnseignantsController@update')->name('updateEn');
+    Route::post('updateEn', 'App\Http\Controllers\Admin\Users\EnseignantsController@update')->name('updateEn');
     Route::get('searchEn', 'App\Http\Controllers\Admin\Users\EnseignantsController@search');
 
     Route::resource('usersTe', TechniciensController::class);
-    Route::post('updateTe','App\Http\Controllers\Admin\Users\TechniciensController@update')->name('updateTe');
+    Route::post('updateTe', 'App\Http\Controllers\Admin\Users\TechniciensController@update')->name('updateTe');
     Route::get('searchTe', 'App\Http\Controllers\Admin\Users\TechniciensController@search');
 
     Route::resource('event', EventController::class);
-    
+
     Route::resource('Liste-etudiants', ListetudiantsController::class);
+    Route::post('Liste-etudiants/misajour', [ListetudiantsController::class, 'misajour'])->name('Liste-etudiants.misajour');
 
     Route::resource('Liste-class', ListClassesController::class);
-    Route::post('Liste-class/delete',[ListClassesController::class,'destroy'])->name('Liste-class/delete');;
+    Route::post('Liste-class/delete', [ListClassesController::class, 'destroy'])->name('Liste-class/delete');
+    Route::post('Liste-class/ajoute', [ListClassesController::class, 'ajoute'])->name('Liste-class/ajoute');
 
 
     Route::resource('publication', BackPublicationController::class);
-    Route::post('publication/{id}',[BackPublicationController::class,'destroy']);
+    Route::post('publication/{id}', [BackPublicationController::class, 'destroy']);
 
-    Route::resource('Inscriptions-list',BackInscriptionController::class );
-    Route::post('Inscriptions-list/{id}',[BackPublicationController::class,'destroy']);
+    Route::resource('Inscriptions-list', BackInscriptionController::class);
+    Route::post('Inscriptions-list/{id}', [BackPublicationController::class, 'destroy']);
 
-    Route::resource('Fiche-De-Vœux',BackFicheDeVœuxController::class);
-    Route::get('Fiche-De-Vœux/Ouverture/{id}',[BackFicheDeVœuxController::class,'Ouverture'])->name('Ouverture');
-    Route::get('Fiche-De-Vœux/Fermeture/{id}',[BackFicheDeVœuxController::class,'Fermeture'])->name('Fermeture');
-    Route::post('EtuMat',[BackFicheDeVœuxController::class,'storePlanEtuFichesMat'])->name('EtuMat');
-    Route::get('Fiche-De-Vœux/résultats',[BackFicheDeVœuxController::class,'résultats'])->name('Fiche-De-Vœux.résultats');
-    Route::get('Fiche-De-Vœux/show/{id}',[BackFicheDeVœuxController::class,'show'])->name('Fiche-De-Vœux.show');
-    Route::resource('Listmatières',ListmatièresController::class);
-
-
-
-
-
+    Route::resource('Fiche-De-Vœux', BackFicheDeVœuxController::class);
+    Route::get('Fiche-De-Vœux/Ouverture/{id}', [BackFicheDeVœuxController::class, 'Ouverture'])->name('Ouverture');
+    Route::get('Fiche-De-Vœux/Fermeture/{id}', [BackFicheDeVœuxController::class, 'Fermeture'])->name('Fermeture');
+    Route::post('EtuMat', [BackFicheDeVœuxController::class, 'storePlanEtuFichesMat'])->name('EtuMat');
+    Route::get('Fiche-De-Vœux/résultats', [BackFicheDeVœuxController::class, 'résultats'])->name('Fiche-De-Vœux.résultats');
+    Route::get('Fiche-De-Vœux/show/{id}', [BackFicheDeVœuxController::class, 'show'])->name('Fiche-De-Vœux.show');
+    Route::resource('Listmatières', ListmatièresController::class);
 });
 
 
-Route::group(['middleware' => ['role:Enseignants|admin']], function() {
+Route::group(['middleware' => ['role:Enseignants|admin']], function () {
     /* Tickets */
-    Route::get('réclamation',[RéclamationController::class,'index']);
-    Route::post('réclamation/enregistrer',[RéclamationController::class,'store'])->name('réclamation/enregistrer');
-    
-    Route::get('Fiche-De-Vœux/{sem}',[FrontFicheDeVœuxController::class,'index']);
-    Route::post('Fiche-De-Vœux/enregistrer',[FrontFicheDeVœuxController::class,'store'])->name('fiche-De-Vœux/enregistrer');
-    
-    Route::get('/', [FrontPublicationController::class,'index']);
+    Route::get('réclamation', [RéclamationController::class, 'index']);
+    Route::post('réclamation/enregistrer', [RéclamationController::class, 'store'])->name('réclamation/enregistrer');
+
+    Route::get('Fiche-De-Vœux/{sem}', [FrontFicheDeVœuxController::class, 'index']);
+    Route::post('Fiche-De-Vœux/enregistrer', [FrontFicheDeVœuxController::class, 'store'])->name('fiche-De-Vœux/enregistrer');
+
+    Route::get('/', [FrontPublicationController::class, 'index']);
 
     Route::resource('ColloqueScientifique', ColloqueScientifiques::class);
-    Route::get('ColloqueScientifique',[ColloqueScientifiques::class,'pdf'])->name('ColloqueScientifique/pdf');;
+    Route::get('ColloqueScientifique', [ColloqueScientifiques::class, 'pdf'])->name('ColloqueScientifique/pdf');
 
+    Route::resource('TableauAffichage', TableauAffichageController::class);
 });
 
-Route::group(['middleware' => ['auth', 'role:Techniciens']], function() {
-    Route::get('réclamations',[RéclamationController::class,'index']);
-    Route::get('réclamations/{id}/consulter',[RéclamationController::class,'consulter']);
-    Route::get('réclamations/{id}/traiter',[TraitementController::class,'create']);
-    Route::post('traitement/enregistrer',[TraitementController::class,'store'])->name('traitement/enregistrer');
+Route::group(['middleware' => ['auth', 'role:Techniciens']], function () {
+    Route::get('réclamations', [RéclamationController::class, 'index']);
+    Route::get('réclamations/{id}/consulter', [RéclamationController::class, 'consulter'])->name('réclamations/{id}/consulter');
+    Route::get('réclamations/{id}/traiter', [TraitementController::class, 'create']);
+    Route::post('traitement/enregistrer', [TraitementController::class, 'store'])->name('traitement/enregistrer');
+});
 
+
+Route::group(['middleware' => ['auth', 'role:Etudiants']], function () {
+    Route::get('TableauAffichage/class/{class}', [TableauAffichageEtController::class, 'index']);
+    Route::get('TableauAffichage/télécharger/{id}', [TableauAffichageEtController::class, 'télécharger'])->name('TableauAffichage.télécharger');
 });
 
 
 
-
-
-
-Route::get('Publication', function(){
-    return View('Publication.publications'); 
+Route::get('Publication', function () {
+    return View('Publication.publications');
 });
-Route::get('Évènement', function(){
-    return View('Publication.Évènements.évènement'); 
+Route::get('Évènement', function () {
+    return View('Publication.Évènements.évènement');
 });
-Route::get('Formation', function(){
-    return View('Publication.Évènements.formation'); 
+Route::get('Formation', function () {
+    return View('Publication.Évènements.formation');
 });
 
-Route::get('contact', function(){
-    return View('contact'); 
+Route::get('contact', function () {
+    return View('contact');
 });
 
 Route::resource('test', testing::class);
@@ -175,15 +176,16 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'auth'], functi
     Lfm::routes();
 });
 
-Route::get('/', [FrontPublicationController::class,'index']);
+Route::get('/', [FrontPublicationController::class, 'index']);
 
 Route::prefix('Publications')->group(function () {
     Route::get('{slug}', [FrontPublicationController::class, 'show'])->name('Publication/show');
-    Route::get('réclamations',[RéclamationController::class,'index']);
-    Route::get('/',[FrontPublicationController::class, 'showall'])->name('Publications');
-    Route::get('cat/{cat}',[FrontPublicationController::class, 'showallByCategories'])->name('Publications/cat');
+    Route::get('réclamations', [RéclamationController::class, 'index']);
+    Route::get('/', [FrontPublicationController::class, 'showall'])->name('Publications');
+    Route::get('cat/{cat}', [FrontPublicationController::class, 'showallByCategories'])->name('Publications/cat');
 });
 
-Route::group([ 'middleware' => 'auth' ], function () {
-    Route::get('/notifications', [NotificationController::class,'notifications']);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('notifications', [NotificationController::class, 'notifications']);
+    Route::get('notifications/{id}', [NotificationController::class, 'show']);
 });

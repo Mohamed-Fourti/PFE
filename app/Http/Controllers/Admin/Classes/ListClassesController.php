@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin\Classes;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use App\Models\ListClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ListEtudiant;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListClassesController extends Controller
 {
@@ -40,6 +42,21 @@ class ListClassesController extends Controller
 
 }
 
+public function ajoute()
+{
+  $data = ListEtudiant::latest()->first();
+  $tab = Excel::toCollection(new UsersImport, '../storage/app/' . $data->file_path);
+    $test=$tab[0]->pluck('class')->unique();
+    foreach($test as $ad){
+        $input['class']=$ad;
+        ListClass::firstOrCreate($input);
+
+    }
+
+    return back()->with('success', 'Succès');
+
+
+}
     public function edit($id)
     {
         //

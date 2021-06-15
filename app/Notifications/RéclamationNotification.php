@@ -6,21 +6,23 @@ use App\Models\Réclamation;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RéclamationNotification extends Notification
+class RéclamationNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-
+ public $Réclamationid;
+ public $data;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($réclamation)
+    public function __construct(Réclamation $data)
     {
-        $this->réclamation = $réclamation;
+        $this->data = $data;
     }
 
     /**
@@ -31,7 +33,7 @@ class RéclamationNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -42,10 +44,7 @@ class RéclamationNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+
     }
 
     /**
@@ -57,7 +56,23 @@ class RéclamationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'réclamation' => $this->réclamation,
+            'id' => $this->data->id,
+            'user_name' => $this->data->User->nom,
+            'priorité' => $this->data->priorite, 
+
         ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'data' => [
+                'id' => $this->data->id,
+                'user_name' => $this->data->User->nom, 
+                'priorité' => $this->data->priorite, 
+                
+                       ],
+
+        ]);
     }
 }

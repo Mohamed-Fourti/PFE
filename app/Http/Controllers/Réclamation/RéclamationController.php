@@ -67,14 +67,13 @@ class RéclamationController extends Controller
         $data=$request->all();
         $data=Arr::add($data,'user_id',Auth::user()->id);
         Réclamation::create($data);
+        $data = Réclamation::orderBy('created_at','desc')->first();
+  
+
         foreach($usersid as $user){
             User::findOrFail($user->user_id)->notify(new RéclamationNotification($data));
         }
-        // Notification::send($users,new RéclamationNotification($data)) ;     
 
-        // foreach ($users as $user) {
-
-        // }
         return back()->with('message','Votre Réclamation a été crée avec succès');
     }
 

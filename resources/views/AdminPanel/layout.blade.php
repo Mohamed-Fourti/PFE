@@ -150,7 +150,7 @@
 <script src="{{ asset('js/fr.js') }}" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/speakingurl/14.0.1/speakingurl.min.js"></script>
 
-<script src="{{ asset('DataTables/datatables.min.js') }}" defer></script>
+<script src="{{ asset('DataTables/datatables.min.js') }}" ></script>
 @stack('scripts')
 @yield('js')
 </body>
