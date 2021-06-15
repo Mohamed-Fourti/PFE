@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
   <!-- Datatable style -->
   <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}"/>
-
+  <link rel="shortcut icon" href="{{ asset('images/LOGO.png') }}" type="image/png">
 
   <script src="{{ asset('js/app.js') }}" ></script>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">

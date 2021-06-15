@@ -21,18 +21,43 @@
                         <div class="row form-group">
                             <div class="col-md-4">
                                 <label for="Matiére" class="col-4 col-form-label">Matiére :</label>
-                                <input id="Matiére" name="matiére" type="text" class="form-control">
+                                <input id="Matiére" name="matiére" type="text" class="form-control @error('matiére') is-invalid @enderror" value="{{ old('matiére') }}" autocomplete="matiére" placeholder="Matiére">
+                                @error('matiére')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                      
                             <div class="col-md-4">
-                                <label for="Séance" class="col-4 col-form-label">Séance:</label>
-
-                                <input id="Séance" name="séance" type="text" class="form-control">
+                                <label for="select" class="col-form-label @error('séance') is-invalid @enderror" value="{{ old('séance') }}" autocomplete="séance" placeholder="Séance">
+                                         Séance</label>
+                                <select id="select" name="séance" class="custom-select">
+                                    <option value="" disabled selected hidden>Choisir</option>
+                                    <option  value="Premier seance">Premier seance</option>
+                                    <option  value="Deuxième seance">Deuxième seance</option>
+                                    <option  value="Troisième seance">Troisième seance</option>
+                                    <option  value="Quatrième seance">Quatrième seance</option>
+                                    <option  value="cinquième seance">cinquième seance</option>
+                            </select>
+                                @error('séance')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                          
                             <div class="col-md-4">
                                 <label for="Labo" class="col-4 col-form-label">Labo:</label>
 
-                                <input id="Labo" name="labo" type="text" class="form-control">
+                                <input id="Labo" name="labo" type="text" class="form-control  @error('labo') is-invalid @enderror" value="{{ old('labo') }}" autocomplete="labo" placeholder="Labo">
+                                @error('labo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                              
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">

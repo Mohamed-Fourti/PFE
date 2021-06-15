@@ -17,8 +17,12 @@
                         Titre
                     </div>
                     <div class="card-body">
-                        <input name="title" id="title" type="text" class="form-control" value="{{ isset($datas->title) ? $datas->title : '' }}">
-
+                        <input name="title" id="title" type="text" class="form-control @error('title') is-invalid @enderror" value="{{ isset($datas->title) ? $datas->title : '' }}" placeholder="Titre">
+                            @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                     </div>
                 </div>
             </div>
@@ -89,6 +93,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <input id="disable1" name="date_début" type="datetime-local" value="{{ isset($datas->date_début) ? Carbon\Carbon::parse($datas->date_début)->format('Y-m-d')."T".Carbon\Carbon::parse($datas->date_début)->format('H:i') : Carbon\Carbon::now()->format('Y-m-d')."T".Carbon\Carbon::now()->format('H:i') }}" class="form-control">
+    
                             </div>
                         </div>
                     </div>
@@ -103,7 +108,6 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <input id="disable2" name="date_finale" type="datetime-local" value="{{ isset($datas->date_finale) ? Carbon\Carbon::parse($datas->date_finale)->format('Y-m-d')."T".Carbon\Carbon::parse($datas->date_finale)->format('H:i') : Carbon\Carbon::now()->format('Y-m-d')."T".Carbon\Carbon::now()->format('H:i') }}" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d')."T".Carbon\Carbon::now()->format('H:i')}}">
-
                             </div>
                         </div>
                     </div>
@@ -117,7 +121,12 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-12">
-                                <input id="disable3" name="lieu" type="text" class="form-control" value="{{ isset($datas->lieu) ? $datas->lieu : 'Iset Djerba' }}">
+                                <input id="disable3" name="lieu" type="text" class="form-control @error('lieu') is-invalid @enderror" value="{{ isset($datas->lieu) ? $datas->lieu : 'Iset Djerba' }}">
+                                @error('lieu')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -131,7 +140,8 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-12">
-                                <input  id="enabled1" name="formateur" type="text" class="form-control" value="{{ isset($datas->formateur) ? $datas->formateur : '' }}" disabled>
+                                <input  id="enabled1" name="formateur" type="text" class="form-control" value="{{ isset($datas->formateur) ? $datas->formateur : '' }}" disabled placeholder="Formateur">
+         
                             </div>
                         </div>
                     </div>
@@ -145,7 +155,8 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-12">
-                                <input id="enabled2" name="durée" type="text" class="form-control" value="{{ isset($datas->durée) ? $datas->durée : '' }}" disabled>
+                                <input id="enabled2" name="durée" type="text" class="form-control" value="{{ isset($datas->durée) ? $datas->durée : '' }}" disabled placeholder="Durée">
+
                             </div>
                         </div>
                     </div>
@@ -159,7 +170,7 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-12">
-                                <input id="enabled3" name="Nbseance" type="text" class="form-control" value="{{ isset($datas->Nbseance) ? $datas->Nbseance : '' }}" disabled>
+                                <input id="enabled3" name="Nbseance" type="text" class="form-control" value="{{ isset($datas->Nbseance) ? $datas->Nbseance : '' }}" disabled placeholder="Nombre de séances">
                             </div>
                         </div>
                     </div>
@@ -176,8 +187,12 @@
                         Extrait
                     </div>
                     <div class="card-body">
-                        <textarea name="excerpt" cols="40" rows="2" class="form-control">{{ isset($datas->excerpt) ? $datas->excerpt : '' }}</textarea>
-
+                        <textarea name="excerpt" cols="40" rows="2" class="form-control @error('excerpt') is-invalid @enderror" placeholder="Extrait">{{ isset($datas->excerpt) ? $datas->excerpt : '' }}</textarea>
+                            @error('excerpt')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                     </div>
                 </div>
             </div>
@@ -189,11 +204,26 @@
                     </div>
                     <div class="card-body">
                         <label for="Titre SEO">Titre SEO</label>
-                        <input id="Titre SEO" name="seo_title" type="text" class="form-control" value="{{ isset($datas->seo_title) ? $datas->seo_title : '' }}">
+                        <input id="Titre SEO" name="seo_title" type="text" class="form-control @error('seo_title') is-invalid @enderror" value="{{ isset($datas->seo_title) ? $datas->seo_title : '' }}" placeholder="Seo Title">
+                            @error('seo_title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                         <label for="META Keywords">META Keywords</label>
-                        <input id="META Keywords" name="meta_description" type="text" class="form-control" value="{{ isset($datas->meta_description) ? $datas->meta_description : '' }}">
+                        <input id="META Keywords" name="meta_keywords" type="text" class="form-control @error('meta_keywords') is-invalid @enderror" value="{{ isset($datas->meta_description) ? $datas->meta_description : '' }}" placeholder="Meta Description">
+                            @error('meta_keywords')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                         <label for="META Description">META Description</label>
-                        <input id="META Description" name="meta_keywords" type="text" class="form-control" value="{{ isset($datas->meta_keywords) ? $datas->meta_keywords : '' }}">
+                        <input id="META Description" name="meta_description" type="text" class="form-control @error('meta_description') is-invalid @enderror" value="{{ isset($datas->meta_keywords) ? $datas->meta_keywords : '' }}" placeholder="Meta Keywords">
+                            @error('meta_description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                     </div>
                 </div>
 
@@ -208,8 +238,12 @@
                         Contenu
                     </div>
                     <div class="card-body">
-                        <textarea id="editor1" name="body" rows="10" class="">{{ isset($datas->body) ? $datas->body : '' }}</textarea>
-
+                        <textarea id="editor1" name="body" rows="10" class="@error('body') is-invalid @enderror" >{{ isset($datas->body) ? $datas->body : '' }}</textarea>
+                            @error('body')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                     </div>
                 </div>
 
@@ -217,7 +251,7 @@
 
                 <div class="row justify-content-md-center" style="margin-top: -80px;">
 
-                    <button type="submit" class="btn btn-primary ">cree</button>
+                    <button type="submit" class="btn btn-primary ">Créer</button>
                 </div>
 
             </div>
@@ -229,7 +263,12 @@
                         slug
                     </div>
                     <div class="card-body">
-                        <input name="slug" id="slug" type="text" class="form-control" value="{{ isset($datas->slug) ? $datas->slug : '' }}">
+                        <input name="slug" id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" value="{{ isset($datas->slug) ? $datas->slug : '' }}" placeholder="Slug">
+                            @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                     </div>
                 </div>
                 <div class="card">

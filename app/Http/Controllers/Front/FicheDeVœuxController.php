@@ -65,6 +65,15 @@ class FicheDeVœuxController extends Controller
     
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'gsm' => 'required|numeric',
+            'chargeS1' => 'required|numeric',
+            'chargeS2' => 'required|numeric',
+            'Matieres'=> 'required',
+            'jours1'=> 'required',
+            'jours2'=> 'required',
+        ]);
+
         $jours1 = $request->input('jours');
         $jsonjours1 = json_encode($jours1);
 

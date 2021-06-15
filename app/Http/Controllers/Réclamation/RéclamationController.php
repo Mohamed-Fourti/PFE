@@ -11,6 +11,7 @@ use App\Notifications\RéclamationNotification;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
@@ -62,8 +63,12 @@ class RéclamationController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'matiére' => 'required|string|max:255',
+            'séance' => 'required|string|max:255',
+            'labo' => 'required|string|max:255',
+        ]);
         $usersid =DB::table('role_user')->where('role_id','4')->get('user_id');
-    
         $data=$request->all();
         $data=Arr::add($data,'user_id',Auth::user()->id);
         Réclamation::create($data);

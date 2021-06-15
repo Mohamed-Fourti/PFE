@@ -18,8 +18,12 @@ use App\Http\Controllers\Front\ColloqueScientifiques;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Réclamation\RéclamationController;
 use App\Http\Controllers\Réclamation\TraitementController;
-use App\Http\Controllers\TableauAffichage\TableauAffichageController;
 use App\Http\Controllers\TableauAffichage\TableauAffichageEtController;
+use App\Http\Controllers\RattrapageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\Rattrapage\RattrapagesController as BackRattrapagesController;
+use App\Http\Controllers\Admin\Contact\ContactsController as BackContactsController;
 use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -121,6 +125,28 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('Fiche-De-Vœux/résultats', [BackFicheDeVœuxController::class, 'résultats'])->name('Fiche-De-Vœux.résultats');
     Route::get('Fiche-De-Vœux/show/{id}', [BackFicheDeVœuxController::class, 'show'])->name('Fiche-De-Vœux.show');
     Route::resource('Listmatières', ListmatièresController::class);
+    Route::post('publication/{id}', [BackPublicationController::class, 'destroy']);
+
+    Route::resource('Inscriptions-list', BackInscriptionController::class);
+    Route::post('Inscriptions-list/{id}', [BackPublicationController::class, 'destroy']);
+
+    Route::resource('Fiche-De-Vœux', BackFicheDeVœuxController::class);
+    Route::get('Fiche-De-Vœux/Ouverture/{id}', [BackFicheDeVœuxController::class, 'Ouverture'])->name('Ouverture');
+    Route::get('Fiche-De-Vœux/Fermeture/{id}', [BackFicheDeVœuxController::class, 'Fermeture'])->name('Fermeture');
+    Route::post('EtuMat', [BackFicheDeVœuxController::class, 'storePlanEtuFichesMat'])->name('EtuMat');
+    Route::get('Fiche-De-Vœux/résultats', [BackFicheDeVœuxController::class, 'résultats'])->name('Fiche-De-Vœux.résultats');
+    Route::get('Fiche-De-Vœux/show/{id}', [BackFicheDeVœuxController::class, 'show'])->name('Fiche-De-Vœux.show');
+    Route::resource('Listmatières', ListmatièresController::class);
+
+    Route::resource('rattrapages', BackRattrapagesController::class);
+    Route::post('rattrapages/{id}', [BackRattrapagesController::class, 'destroy']);
+    Route::get('rattrapages/show/{id}', [BackRattrapagesController::class, 'show'])->name('rattrapages.show');
+    Route::get('rattrapages/pdf/{id}', [BackRattrapagesController::class, 'pdf'])->name('rattrapages.pdf');
+    // Route::name('rattrapages.pdf')->post('rattrapages/pdf', 'RattrapagesController@pdf');
+
+
+
+
 });
 
 
@@ -128,6 +154,14 @@ Route::group(['middleware' => ['role:Enseignants|admin']], function () {
     /* Tickets */
     Route::get('réclamation', [RéclamationController::class, 'index']);
     Route::post('réclamation/enregistrer', [RéclamationController::class, 'store'])->name('réclamation/enregistrer');
+
+
+    Route::get('Fiche-De-Vœux/{sem}', [FrontFicheDeVœuxController::class, 'index']);
+    Route::post('Fiche-De-Vœux/enregistrer', [FrontFicheDeVœuxController::class, 'store'])->name('fiche-De-Vœux/enregistrer');
+
+    Route::get('/', [FrontPublicationController::class, 'index']);
+    Route::get('rattrapage/{sem}', [RattrapageController::class, 'index']);
+    Route::post('rattrapage/enregistrer', [RattrapageController::class, 'store'])->name('rattrapage/enregistrer');
 
     Route::get('Fiche-De-Vœux/{sem}', [FrontFicheDeVœuxController::class, 'index']);
     Route::post('Fiche-De-Vœux/enregistrer', [FrontFicheDeVœuxController::class, 'store'])->name('fiche-De-Vœux/enregistrer');
@@ -147,13 +181,17 @@ Route::group(['middleware' => ['auth', 'role:Techniciens']], function () {
     Route::post('traitement/enregistrer', [TraitementController::class, 'store'])->name('traitement/enregistrer');
 });
 
+Route::group(['middleware' => ['auth', 'role:Enseignants|admin|Techniciens|Etudiants']], function () {
 
+
+
+    Route::get('profile/{id}', [ProfileController::class, 'index']);
+    Route::post('profile/modifier', [ProfileController::class, 'update'])->name('profile/modifier');
+});
 Route::group(['middleware' => ['auth', 'role:Etudiants']], function () {
     Route::get('TableauAffichage/class/{class}', [TableauAffichageEtController::class, 'index']);
     Route::get('TableauAffichage/télécharger/{id}', [TableauAffichageEtController::class, 'télécharger'])->name('TableauAffichage.télécharger');
 });
-
-
 
 Route::get('Publication', function () {
     return View('Publication.publications');
@@ -165,9 +203,8 @@ Route::get('Formation', function () {
     return View('Publication.Évènements.formation');
 });
 
-Route::get('contact', function () {
-    return View('contact');
-});
+Route::get('contact', [ContactController::class, 'index']);
+Route::post('contact/enregistrer', [ContactController::class, 'store'])->name('contact.enregistrer');
 
 Route::resource('test', testing::class);
 
