@@ -125,7 +125,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('rattrapages/pdf/{id}', [BackRattrapagesController::class,'pdf'])->name('rattrapages.pdf');
     // Route::name('rattrapages.pdf')->post('rattrapages/pdf', 'RattrapagesController@pdf');
 
-    Route::resource('Contact', BackContactsController::class);
 });
 
 

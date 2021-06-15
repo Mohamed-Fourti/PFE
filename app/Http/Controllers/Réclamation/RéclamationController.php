@@ -63,6 +63,7 @@ class RéclamationController extends Controller
             'séance' => 'required|string|max:255',
             'labo' => 'required|string|max:255',
         ]);
+        $usersid =DB::table('role_user')->where('role_id','4')->get('user_id');
         $data=$request->all();
         $data=Arr::add($data,'user_id',Auth::user()->id);
         Réclamation::create($data);

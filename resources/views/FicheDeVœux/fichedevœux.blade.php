@@ -288,7 +288,7 @@
                 <td>
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
-                      <label style="font-size: 1.5em">
+                      <label style="font-size: 2.5em">
                           <input name="jours1[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
@@ -506,7 +506,7 @@
                 <td>
                   <div class="custom-control custom-checkbox">
                   <div class="checkbox">
-                      <label style="font-size: 1.5em">
+                      <label style="font-size: 2.5em">
                           <input name="jours2[]" id="_1" type="checkbox" class="custom-control-input chekb" value="Samedi_Journée_entière">
                           <span class="cr"><i class="cr-icon fa fa-check" id="chekIcon"></i></span>
                       </label>
