@@ -3,16 +3,15 @@
 
 <head>
 
-<script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
+
+
+    <script>
+        window.User = {
+
+            id: "{{ optional(auth()->user())->id }}"
+        }
     </script>
-        @if(!auth()->guest())
-        <script>
-            window.Laravel.userId = <?php echo auth()->user()->id; ?>
-        </script>
-    @endif
+
 
     <!--====== Required meta tags ======-->
     <meta charset="utf-8">
@@ -26,6 +25,7 @@
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="{{ asset('images/LOGO.png') }}" type="image/png">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}" />
 
 
     <!--====== Fontawesome css ======-->
@@ -44,7 +44,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -75,11 +75,11 @@
                         <img src="{{ asset('images/flag.png') }}" alt="Logo">
 
                     </div>
-                    <div id="ministry_logo">République Tunisienne 
+                    <div id="ministry_logo">République Tunisienne
                         <br>Ministère de l’Enseignement Supérieur et de la Recherche Scientifique
                         <br>Direction générale des études technologiques
                     </div>
-                </div> 
+                </div>
             </div> <!-- row -->
         </div> <!-- container -->
     </div><!-- header logo support -->
@@ -105,64 +105,109 @@
                                     <li class="nav-item " id="navItem">
                                         <a href="{{url('Publications')}}">Publications</a>
                                     </li>
+
+                                    @role('Enseignants|admin')
+
                                     <li class="nav-item" id="navItem">
-                                        <a>Liens utiles</a>
+                                        <a href="{{ url('TableauAffichage') }}">Tableau D'affichage</a>
+                                    </li>
+                                    @endrole
+                                    @role('Etudiants')
+                                    <li class="nav-item" id="navItem">
+                                        <a href="{{ url('TableauAffichage/class',Auth::user()->class ) }}">Tableau D'affichage</a>
+                                    </li>
+                                    @endrole
+
+
+                                    @role('Techniciens')
+                                    <li class="nav-item" id="navItem">
+                                        <a>Autre Services</a>
                                         <ul class="sub-menu">
-                                            <li><a href="">Emplois du temps</a></li>
-                                            <li><a href="">Supports de cours</a></li>
+                                            <li><a href="{{ url('réclamations') }}">Réclamations</a></li>
                                         </ul>
                                     </li>
-                                    
-                                        
-                                        @role('Techniciens')
-                                        <li class="nav-item" id="navItem">
-                                            <a>Autre Services</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="{{ url('réclamations') }}">Réclamations</a></li>
-                                            </ul>
-                                       </li>
-                                        @endrole
-                                        
-                                        
-                                        @role('Enseignants' or 'Admin')
-                                        <li class="nav-item " id="navItem">
-                                            <a>Autre Services</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="{{ url('réclamation') }}">Réclamations</a></li>
-                                                    @if($FichedevœuxOF !=null)
-                                                    @if($FichedevœuxOF->sem=='S1')
-                                                        <li>
-                                                            <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S1</a>
-                                                        </li>
-                                                            @else
-                                                        <li>
-                                                            <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S2</a>
-                                                        </li>  
-                                                    @endif 
 
-                                                    @endif
-                                                    @if($FichedevœuxOF->sem=='S1')
-                                                        <li>
-                                                            <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
-                                                        </li>
-                                                            @else
-                                                        <li>
-                                                            <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
-                                                        </li>  
-                                                    @endif 
-                                                </ul>
-                                        </li>
-                                           
-                                        @endrole
+
+                                    @role('Techniciens')
+                                    <li class="nav-item" id="navItem">
+                                        <a>Autre Services</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{ url('réclamations') }}">Réclamations</a></li>
+                                        </ul>
+                                    </li>
+                                    @endrole
+
+
+                                    @role('Enseignants' or 'Admin')
+                                    <li class="nav-item " id="navItem">
+                                        <a>Autre Services</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{ url('réclamation') }}">Réclamations</a></li>
+                                            @if($FichedevœuxOF !=null)
+                                            @if($FichedevœuxOF->sem=='S1')
+                                            <li>
+                                                <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S1</a>
+                                            </li>
+                                            @else
+                                            <li>
+                                                <a href="{{ url('Fiche-De-Vœux',$FichedevœuxOF->sem) }}">Remplir fiche de vœux S2</a>
+                                            </li>
+                                            @endif
+
+                                            @endif
+                                            @if($FichedevœuxOF->sem=='S1')
+                                            <li>
+                                                <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
+                                            </li>
+                                            @else
+                                            <li>
+                                                <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
+                                            </li>
+                                            @endif
+                                        </ul>
+                                    </li>
+
+                                    @endrole
                                     <li class="nav-item " id="navItem">
                                         <a href="{{ url('contact') }}">Contact</a>
                                     </li>
-                                   
-                                            </ul>
+
+                                </ul>
+                            </div>
+                            <div class="right-icon text-right " id="conex">
+                                <ul>
+
+                                    @guest
+                                    @if (Route::has('login'))
+                                    <li>
+                                        <a class="nav-link" href="{{ route('login') }}">Connexion</a>
+                                    </li>
+                                    @endif
+
+                                    @if (Route::has('register'))
+                                    <li>
+                                        <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                                    </li>
+                                    @endif
+                                    @else
+                                    <li>
+                                        <div class="container">
+                                            <div class="action act">
+                                                <div onclick="menuToggleNot();">
+                                                    <div class="notification show-count"></div>
+                                                    <span id="CountNotification" hidden> {{auth()->user()->unreadNotifications()->count()}} </span>
+                                                </div>
+                                                <div class="menu2">
+
+                                                    <ul aria-labelledby="notificationsMenu" id="notificationsMenu">
+                                                        <li class="dropdown-header">No notifications</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="right-icon text-right "id="conex">
+                                        <div class="right-icon text-right " id="conex">
                                             <ul>
-                                             <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
+                                                <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
                                                 @guest
                                                 @if (Route::has('login'))
                                                 <li>
@@ -177,37 +222,37 @@
                                                 @endif
                                                 @else
                                                 <li>
-<!-- // add this dropdown // -->
-<li class="dropdown">
-            <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
-                <li class="dropdown-header">No notifications</li>
-            </ul>
-        </li>
-<!-- // ... // -->
-                                                    <div class="action act">
-                                                        <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/profile_img.png') }}"></div>
-                                                        <div class="menu">
-                                                            <h3>{{ Auth::user()->nom }} {{ Auth::user()->prenom }}<br><span>{{ Auth::user()->role }}</span></h3>
-                                                            <ul>
-                                                                <li><img src="{{ asset('images/618631.svg') }}"><a href="{{ url('profile',Auth::user()->id ) }}">Profile</a></li>
-                                                                <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                    document.getElementById('logout-form').submit();">
-                                                                        {{ __('Déconnexion') }}
-                                                                    </a></li>
-                                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                                    @csrf
-                                                                </form> 
-                                                            </ul>
-                                                        </div>
-                                                        </div>
+                                                    <!-- // add this dropdown // -->
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        <span class="glyphicon glyphicon-user"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                                                        <li class="dropdown-header">No notifications</li>
+                                                    </ul>
                                                 </li>
-                                            
-                                            </ul>
-                                            @endguest
-                                         </div>
+                                                <!-- // ... // -->
+                                                <div class="action act">
+                                                    <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/profile_img.png') }}"></div>
+                                                    <div class="menu">
+                                                        <h3>{{ Auth::user()->nom }} {{ Auth::user()->prenom }}<br><span>{{ Auth::user()->role }}</span></h3>
+                                                        <ul>
+                                                            <li><img src="{{ asset('images/618631.svg') }}"><a href="{{ url('profile',Auth::user()->id ) }}">Profile</a></li>
+                                                            <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();">
+                                                                    {{ __('Déconnexion') }}
+                                                                </a></li>
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                                @csrf
+                                                            </form>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                    </li>
+
+                                </ul>
+                                @endguest
+                            </div>
                         </nav> <!-- nav -->
                     </div>
                 </div> <!-- row -->
@@ -320,16 +365,24 @@
     <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
     <!--====== Counter Up js ======-->
 
-    <script src="{{ asset('js/jquery.counterup.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
 
 
     <!--====== Count Down js ======-->
-    <script src="{{ asset('js/jquery.countdown.min.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.jscroll.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.jscroll.min.js') }}"></script>
+    <!--====== file input js ======-->
 
+    <link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/fileinput.js') }}"></script>
+    <script src="{{ asset('js/fr.js') }}"></script>
+
+    <!--====== DataTables js ======-->
+
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
 
     <!--====== Main js ======-->
-    <script src="{{ asset('js/main.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
 
     <!--====== Map js ======-->
@@ -339,8 +392,18 @@
             const toggleMenu = document.querySelector('.menu');
             toggleMenu.classList.toggle('active')
         }
-        
-        
+
+        function menuToggleNot() {
+            const toggleMenu = document.querySelector('.menu2');
+            toggleMenu.classList.toggle('active')
+        }
+        $(document).ready(function() {
+            var el = document.querySelector('.notification');
+
+            el.setAttribute('data-count', parseInt(document.getElementById('CountNotification').innerHTML));
+
+
+        });
     </script>
 
     @stack('scripts')

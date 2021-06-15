@@ -12,37 +12,28 @@ class ListmatièresController extends Controller
 {
     public function index()
     {
-        
-        $datas =DB::table('list_matières')->get();
+
+        $datas = DB::table('list_matières')->get();
 
 
-        return view('AdminPanel.FicheDeVœux.listmatières',compact('datas'));
-
-
-        
+        return view('AdminPanel.FicheDeVœux.listmatières', compact('datas'));
     }
 
     public function store(Request $request)
     {
         $fileModel = new ListMatière;
 
-        if($request->file()) {
+        if ($request->file()) {
             $fileName = $request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('Admin-uploads/ListMatière', $fileName);
-            if($request->file()) {
-                
-            }
+
             $fileModel->name = $request->file->getClientOriginalName();
-            $fileModel->file_path =$filePath;
+            $fileModel->file_path = $filePath;
             $fileModel->save();
 
-            
 
-     
+
             return back()->with('success', 'Succès');
-
-        
-           
+        }
     }
-}
 }

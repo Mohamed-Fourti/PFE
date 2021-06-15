@@ -38,6 +38,14 @@
           </form>
       </div>
       </div>
+      <div class="col-md-4">
+        <form action="{{route('Liste-class/ajoute')}}" method="post" >
+        @csrf
+
+        <button  type="submit" class="btn btn-primary">Ajouter d'après la liste etudiants</button>
+        </form>
+
+        </div>
       </div>
  <div class="col-lg-6 col-md-6 col-sm-6 col-6">
  <div class="card">

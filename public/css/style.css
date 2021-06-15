@@ -460,6 +460,86 @@
 
 
 
+/* TEST */
+.action .menu2{
+    position: absolute;
+    top: 120px;
+    right: -20px;
+    padding: 10px 20px;
+    background: #fff    ;
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    border: 1px solid;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+
+}
+.action .menu2.active{
+    top: 55px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.action .menu2::before{
+    content: '';
+    position: absolute;
+    top: -8.19pt;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-left: 1px solid;
+    border-top: 1px solid;
+
+
+    transform: rotate(45deg);
+}
+.action .menu2 h3{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #555;
+    line-height: 1.2em;
+
+
+}
+.action .menu2 h3 span{
+    font-size: 14px;
+    color: #cecece;
+    font-weight: 400;
+}
+.action .menu2 ul li{
+    list-style: none;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+.action .menu2 ul li img{
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.5s;
+
+}
+
+.action .menu2 ul li:hover img{
+    opacity: 1;
+}
+.action .menu2 ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: #555;
+    transition: 0.5s;
+    font-weight: 500;
+}
+
+.action .menu2 ul li:hover a{
+    color: #ff5d94;
+}
 /* CSS Index 
 -----------------------------------
 1. Theme default
@@ -2920,6 +3000,85 @@ p.form-message.error {
 	padding-bottom: 15px;
 }
 
+/* Notifications */
+
+.notification {
+    display: inline-block;
+    position: relative;
+    padding: 0.3em;
+    border-radius: 0.2em;
+    font-size: 1.7em;
+}
+
+.notification::before, 
+.notification::after {
+    color: #07294d;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.notification::before {
+    display: block;
+    content: "\f0f3";
+    font-family: "FontAwesome";
+    transform-origin: top center;
+}
+
+.notification::after {
+    font-family: Arial;
+    font-size: 0.7em;
+    font-weight: 700;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    padding: 5px 8px;
+    line-height: 100%;
+    border: 2px #fff solid;
+    border-radius: 60px;
+    background: #ffc600;
+    opacity: 0;
+    content: attr(data-count);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: transform, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+.notification.notify::before {
+    animation: ring 1.5s ease;
+}
+
+.notification.show-count::after {
+    transform: scale(1);
+    opacity: 1;
+}
+
+@keyframes ring {
+    0% {
+        transform: rotate(35deg);
+    }
+    12.5% {
+        transform: rotate(-30deg);
+    }
+    25% {
+        transform: rotate(25deg);
+    }
+    37.5% {
+        transform: rotate(-20deg);
+    }
+    50% {
+        transform: rotate(15deg);
+    }
+    62.5% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
 
 
 

@@ -8,6 +8,18 @@ class NotificationController extends Controller
 {
     public function notifications()
     {
-        return auth()->user()->unreadnotifications()->limit(5)->get()->toArray();
+        return auth()->user()->unreadnotifications()->limit(3)->get()->toArray();
+    }
+    public function show($id)
+    {
+        $notification = auth()->user()->notifications()->where('id', $id)->first();
+
+        if ($notification) {
+            $notification->markAsRead();
+            if($notification->type =='App\Notifications\RéclamationNotification'){
+            return redirect()->route('réclamations/{id}/consulter', $notification->data['id']);
+        }
+
+        }
     }
 }
