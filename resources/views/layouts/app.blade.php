@@ -119,13 +119,7 @@
                                     @endrole
 
 
-                                    @role('Techniciens')
-                                    <li class="nav-item" id="navItem">
-                                        <a>Autre Services</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ url('réclamations') }}">Réclamations</a></li>
-                                        </ul>
-                                    </li>
+
 
 
                                     @role('Techniciens')
@@ -205,49 +199,26 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="right-icon text-right " id="conex">
-                                            <ul>
-                                                <li><a href="#" id="search"><i class="fa fa-search"></i></a></li>
-                                                @guest
-                                                @if (Route::has('login'))
-                                                <li>
-                                                    <a class="nav-link" href="{{ route('login') }}">Connexion</a>
-                                                </li>
-                                                @endif
+                                    </li>
 
-                                                @if (Route::has('register'))
-                                                <li>
-                                                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
-                                                </li>
-                                                @endif
-                                                @else
-                                                <li>
-                                                    <!-- // add this dropdown // -->
-                                                <li class="dropdown">
-                                                    <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        <span class="glyphicon glyphicon-user"></span>
-                                                    </a>
-                                                    <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
-                                                        <li class="dropdown-header">No notifications</li>
-                                                    </ul>
-                                                </li>
-                                                <!-- // ... // -->
-                                                <div class="action act">
-                                                    <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/profile_img.png') }}"></div>
-                                                    <div class="menu">
-                                                        <h3>{{ Auth::user()->nom }} {{ Auth::user()->prenom }}<br><span>{{ Auth::user()->role }}</span></h3>
-                                                        <ul>
-                                                            <li><img src="{{ asset('images/618631.svg') }}"><a href="{{ url('profile',Auth::user()->id ) }}">Profile</a></li>
-                                                            <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <li>
+
+                                        <div class="action act">
+                                            <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/profile_img.png') }}"></div>
+                                            <div class="menu">
+                                                <h3>{{ Auth::user()->nom }}<br><span>{{ Auth::user()->role }}</span></h3>
+                                                <ul>
+                                                    <li><img src="{{ asset('images/618631.svg') }}"><a href="{{ url('profile',Auth::user()->id)}}">Profile</a></li>
+                                                    <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                     document.getElementById('logout-form').submit();">
-                                                                    {{ __('Déconnexion') }}
-                                                                </a></li>
-                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                                @csrf
-                                                            </form>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                            {{ __('Déconnexion') }}
+                                                        </a></li>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </li>
 
                                 </ul>

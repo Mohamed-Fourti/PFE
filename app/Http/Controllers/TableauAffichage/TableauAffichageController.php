@@ -18,12 +18,10 @@ class TableauAffichageController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->hasRole('Enseignants|admin')) {
-            $classes = ListClass::all();
-            $datas = TableauAffichage::where('user_id', Auth::user()->id)->paginate(3);
-            return view('TableauAffichage.TableauAffichageEn', compact('datas', 'classes'));
-        } else if (Auth::user()->hasRole('Etudiants')) {
-        }
+
+        $classes = ListClass::all();
+        $datas = TableauAffichage::where('user_id', Auth::user()->id)->paginate(3);
+        return view('TableauAffichage.TableauAffichageEn', compact('datas', 'classes'));
     }
 
     /**
