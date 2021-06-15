@@ -17,6 +17,8 @@ return [
     'usersTe' => ['index'=> 'Techniciens'],
     'class' => ['index'=> 'Classes'],
     'Publication' => ['index'=> 'Classes'],
+    'rattrapages' => ['index'=> 'Rattrapage'],
+    'Contact' => ['index'=> 'Contact'],
     
     
 ];

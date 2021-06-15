@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center pb-5">
-        <div class="col-md-6">
+        <div class="col-auto">
             <div class="card" id="cardAuth">
                 <div class="fadeIn first">
                     <img src="../images/depti.png" id="icon" />

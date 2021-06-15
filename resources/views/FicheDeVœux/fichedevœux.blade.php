@@ -62,14 +62,22 @@
       <div class="card-body">
       <label for="gsm" class="col-4 col-form-label">GSM :</label>
         <input id="gsm" name="gsm" type="text" class="form-control">
-      <input id="" name="fichedevœux_o_f_s_id" type="text" hidden value="{{ $semid }}">
+        @error('gsm')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+      <input id="" name="sem" type="text" hidden value="{{ $semid }}">
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-1' }}][Matiere]" class="custom-select">
           @foreach ($Matieres as $Matiere)
           <option value="" disabled selected hidden>choisir</option>
           <option  value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
+
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-2' }}][Matiere]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -77,6 +85,9 @@
           <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-3' }}][Matiere]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -84,6 +95,9 @@
           <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-4' }}][Matiere]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -91,6 +105,9 @@
           <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <label for="select" class="col-4 col-form-label">Matiere</label>
         <select id="select" name="Matieres[{{ 'Matieres-5' }}][Matiere]" class="custom-select">
           @foreach ($Matieres as $Matiere)
@@ -98,12 +115,23 @@
           <option value="{{ $Matiere['class'] }} : {{ $Matiere['appelation'] }}">{{ $Matiere['class'] }}-{{ $Matiere['appelation'] }}</option>
           @endforeach
         </select>
+        @error('Matieres')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         @if ($sem=='S1')
         <label for="chargeS1" class="col-4 col-form-label">Votre charge horaire du Semestre 1 :</label>
         <input id="chargeS1" name="chargeS1" type="text" class="form-control">
+        @error('chargeS1')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         @else
         <label for="chargeS2" class="col-4 col-form-label">Votre charge horaire du Semestre 2 :</label>
         <input id="chargeS2" name="chargeS2" type="text" class="form-control">
+        @error('chargeS2')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         @endif
 
 
@@ -322,6 +350,10 @@
               </tr>
             </tbody>
           </table>
+          </table>
+          @error('jours1')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         </div>
       </div>
       </div>
@@ -536,6 +568,9 @@
               </tr>
             </tbody>
           </table>
+          @error('jours2')
+           <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         </div>
       </div>
     </div>
@@ -546,6 +581,9 @@
       <div class="card-body">
       <label for="remarques" class="col-4 col-form-label">Remarques :</label>
             <input id="remarques" name="remarques" type="text" class="form-control"><br><br>
+            <div class="col text-center">
+               <button name="submit" type="submit" Style ="width:200px; height:50px;" class="btn btn-primary">Envoyer</button>
+            </div>
 
       </div>
   

@@ -79,4 +79,16 @@ return [
 
         ],
     ],
+
+    'Rattrapage' => [
+        'icon'   => 'sticky-note',
+        'route' => 'rattrapages.index',
+
+    ],
+
+    'Contact' => [
+        'icon'   => 'comment-alt',
+        'route' => 'Contact.index',
+
+    ],
 ];
