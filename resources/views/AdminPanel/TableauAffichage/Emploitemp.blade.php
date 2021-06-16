@@ -3,7 +3,7 @@
 @section('main')
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
 
         @csrf
@@ -17,26 +17,38 @@
         </div>
         <div class="card-body">
 
-          <form action="{{route('Liste-etudiants.store')}}" method="post" enctype="multipart/form-data">
+          <form action="{{route('Emploi.store')}}" method="post" enctype="multipart/form-data">
 
             @csrf
+            <div class="form-group">
 
-            <div class="file-loading">
-              <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
+              <div class="file-loading">
+                <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
 
+              </div>
+              <div id="errors"></div>
             </div>
-            <div id="errors"></div>
+            <div class="form-group">
+
+              <label for="select" class="col-2 col-form-label">Classe</label>
+              <select id="select" name="list_classe_id" class="col-4 custom-select">
+                <option value="" disabled selected hidden>Choisir</option>
+                @foreach ($classes as $classe)
+                <option value="{{ $classe->id }}"> {{ $classe->class }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group row d-flex justify-content-center">
+              <div class="btn-group ">
+                <button type="submit" value="Submit" class="btn btn-success">Enregistrer</button>
+                <button type="reset" value="Reset" class="btn btn-danger">Annuler</button>
+              </div>
+            </div>
           </form>
+
+
         </div>
       </div>
-
-    </div>
-    <div class="col-md-3">
-      <form action="{{route('Liste-etudiants.misajour')}}" method="post">
-        @csrf
-
-        <button type="submit" class="btn btn-primary">Mise a jour</button>
-      </form>
 
     </div>
 
@@ -46,7 +58,7 @@
       <div class="card">
 
         <div class="card-header">
-          List etudiants
+          List de emplois
         </div>
         <div class="card-body">
           <table id="table_id" class="table">
@@ -54,14 +66,16 @@
               <tr>
                 <th scope="col">nom</th>
                 <th scope="col">Path</th>
+                <th scope="col">Class</th>
                 <th scope="col">Date de dépôt</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($datas as $data)
               <tr>
-                <td>{{ $data->name }}</td>
+                <td>{{ $data->file_name }}</td>
                 <td>{{ $data->file_path }}</td>
+                <td>{{ $data->ListClass->class }}</td>
                 <td>{{ $data->created_at }}</td>
               </tr>
               @endforeach
@@ -85,7 +99,9 @@
     allowedFileExtensions: ["xlx", "xls", "pdf", "xlsx"],
     maxFileSize: ["2024"],
     dropZoneEnabled: false,
-    elErrorContainer: '#errors'
+    elErrorContainer: '#errors',
+    showUpload: false,
+
   });
   $(document).ready(function() {
     $('#table_id').DataTable({

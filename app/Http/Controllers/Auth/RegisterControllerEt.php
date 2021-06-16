@@ -57,9 +57,8 @@ class RegisterControllerEt extends Controller
      */
     protected function validator(array $data)
     {
-        $registration_key = 'test';
         return Validator::make($data, [
-            
+
             'nom' => ['required', 'string', 'max:255', 'unique:users'],
             'prenom' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => 'required|email|unique:users,email',
@@ -67,8 +66,6 @@ class RegisterControllerEt extends Controller
 
 
         ]);
-        
-       
     }
 
     /**
@@ -86,7 +83,7 @@ class RegisterControllerEt extends Controller
             'cin' => $data['cin'],
             'class' => $data['class'],
             'password' => Hash::make($data['password']),
-            
+
         ]));
         return $user->attachRole($data['role_id']);
     }
@@ -94,47 +91,39 @@ class RegisterControllerEt extends Controller
 
     public function import(Request $request)
     {
-        
 
-        $request->validate([ 
+
+        $request->validate([
             'cin' => 'unique:users|max:255',
-            
-        ]);
-       
-        
-        $cin = $request->input('cin');
-  
 
-        $data=ListEtudiant::latest()->first();
-        $tab = Excel::toCollection(new UsersImport,'../storage/app/'. $data->file_path);
+        ]);
+
+
+        $cin = $request->input('cin');
+
+
+        $data = ListEtudiant::latest()->first();
+        $tab = Excel::toCollection(new UsersImport, '../storage/app/' . $data->file_path);
 
         foreach ($tab as $index => $value) {
-    
+
             if (
                 $ExcelImport = collect($tab[$index])
                 ->first(function ($value) use ($cin) {
                     return $value['cin'] == $cin;
                 })
             ) {
-                return view('auth.registerEtudiant',compact('ExcelImport'));
-                
+                return view('auth.registerEtudiant', compact('ExcelImport'));
             }
-          
-            
         }
         if (
-            $ExcelImport = collect($tab[$index]==null)
-        ) {return redirect('inscription')->withErrors(['CIN n"existe pas']);
-
-             
+            $ExcelImport = collect($tab[$index] == null)
+        ) {
+            return redirect('inscription')->withErrors(['CIN n"existe pas']);
         }
-    
     }
     public function showRegistrationFormet()
     {
         return view('auth.registerEtudiant');
     }
-
 }
-
-

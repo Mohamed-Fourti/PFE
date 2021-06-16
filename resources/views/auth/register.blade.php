@@ -7,7 +7,7 @@
     <div class="row justify-content-center pb-5">
         <div class="col-auto">
             <div class="card" id="cardAuth">
-            <div class="fadeIn first">
+                <div class="fadeIn first">
                     <img src="../images/depti.png" id="icon" />
                 </div>
 
@@ -18,18 +18,18 @@
                         <div class="form-group row">
                             <div class="fadeIn second">
                                 <select id="role_id" name="role_id" class="form-control">
-                                    <option value="Etudiants" >Etudiants</option>
-                                    <option value="Enseignants"  @if (old('role_id') == 'Enseignants') selected="selected" @endif>Enseignants</option>
-                                    <option value="Techniciens" @if (old('role_id') == 'Techniciens') selected="selected" @endif>Techniciens</option>
+                                    <option value="Etudiants">Etudiants</option>
+                                    <option value="Enseignants" @if (old('role_id')=='Enseignants' ) selected="selected" @endif>Enseignants</option>
+                                    <option value="Techniciens" @if (old('role_id')=='Techniciens' ) selected="selected" @endif>Techniciens</option>
                                 </select>
                             </div>
-                            <!--hover de selection-->  
-         
+                            <!--hover de selection-->
 
-                            <!--End hover de selection--> 
+
+                            <!--End hover de selection-->
                         </div>
 
-                        <div style='display:none;' class="form-group row show" >
+                        <div style='display:none;' class="form-group row show">
 
                             <div class="fadeIn second">
                                 <input id="inputType" type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" value="{{ old('nom') }}" required autocomplete="nom" autofocus placeholder="Nom">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div style='display:none;' class="form-group row show" >
+                        <div style='display:none;' class="form-group row show">
 
                             <div class="fadeIn second">
                                 <input id="inputType" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" required autocomplete="prenom" autofocus placeholder="Prénom">
@@ -55,9 +55,9 @@
                             </div>
                         </div>
 
-                        
 
-     
+
+
 
                         <div style='display:none;' class="form-group row show">
 
@@ -91,7 +91,18 @@
                             </div>
                         </div>
 
-    
+                        <div style='display:none;' class="form-group row show">
+                            <div class="fadeIn second">
+                                <input id="inputType" type="text" class="form-control @error('key') is-invalid @enderror" value="{{ old('key') }}" name="key" autocomplete="key" required placeholder="Clé d'inscription">
+
+                                @error('key')
+                                <span class="" role=" alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div style='display:none;' class="form-group row mb-0 show">
                             <div class="fadeIn fourth">
@@ -109,14 +120,14 @@
 
                         <div class="fadeIn second">
                             <input id="inputType" type="text" class="form-control @error('cin') is-invalid @enderror form-control" id="cin" name="cin" required placeholder="CIN">
-                            
+
                             @if ($errors->any())
 
 
                             <span class="text-danger" role="alert">
-                               <small> <strong> {{ $errors->first()}} </strong></small>
+                                <small> <strong> {{ $errors->first()}} </strong></small>
                             </span>
-                            
+
                             @endif
 
                         </div>
@@ -124,7 +135,7 @@
 
                     <div class="form-group row mb-0 a">
                         <div class="fadeIn fourth">
-                        <input type="submit" class=" logbtn" value="  {{ __('Enregistrer') }}">
+                            <input type="submit" class=" logbtn" value="  {{ __('Enregistrer') }}">
 
                         </div>
                     </div>
@@ -140,29 +151,21 @@
 @endsection
 @push('scripts')
 <script>
+    $("#role_id").change(function() {
+        if (this.value == "Etudiants") {
+            $(".a").show();
+        } else {
+            $(".a").hide();
+        }
 
+        if (this.value == ("Enseignants") || this.value == ("Techniciens")) {
+            $(".show").show();
+        } else {
+            $(".show").hide();
+        }
 
-    
-
-        $("#role_id").change( function() {
-            if (this.value == "Etudiants") {
-                $(".a").show();
-            } else {
-                $(".a").hide();
-            }
-
-            if (this.value == ("Enseignants") || this.value == ("Techniciens")) {
-                $(".show").show();
-            } else {
-                $(".show").hide();
-            }
-
-        });
-        $("#role_id").trigger("change");
-
-
-
-    
+    });
+    $("#role_id").trigger("change");
 </script>
 
 @endpush

@@ -51,14 +51,10 @@
                             <div class="categories mt-30">
                                 <h4>Categories</h4>
                                 <ul>
-                                    <li><a href="#">Fronted</a></li>
-                                    <li><a href="#">Backend</a></li>
-                                    <li><a href="#">Photography</a></li>
-                                    <li><a href="#">Teachnology</a></li>
-                                    <li><a href="#">GMET</a></li>
-                                    <li><a href="#">Language</a></li>
-                                    <li><a href="#">Science</a></li>
-                                    <li><a href="#">Accounting</a></li>
+                                    <li><a href="{{ route('Publications') }}">Voir tout</a></li>
+                                    <li><a href="{{ route('Publications/cat','1' )  }}">Évènement</a></li>
+                                    <li><a href="{{ route('Publications/cat','2' )  }}">Formation</a></li>
+                                    <li><a href="{{ route('Publications/cat','3' )  }}">Nouveauté</a></li>
                                 </ul>
                             </div>
                         </div> <!-- categories -->

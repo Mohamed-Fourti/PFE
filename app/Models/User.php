@@ -51,13 +51,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Publication::class);
     }
-    
-    
+
+
     public function TableauAffichage()
     {
         return $this->hasMany(TableauAffichage::class);
     }
-
-    
-
 }
