@@ -23,7 +23,7 @@ return [
             ],
         ],
     ],
- 
+
     'Class' => [
         'icon'   => 'glasses',
         'children' => [
@@ -40,7 +40,7 @@ return [
     ],
 
 
-   
+
     'Publication' => [
         'icon'   => 'calendar-week',
         'children' => [
@@ -59,8 +59,7 @@ return [
         ],
     ],
 
-    'fiche de vœux' => [
-    ],
+    'fiche de vœux' => [],
     'fiche de vœux' => [
         'icon'   => 'file-alt',
         'children' => [
@@ -90,5 +89,16 @@ return [
         'icon'   => 'comment-alt',
         'route' => 'Contact.index',
 
+    ],
+
+    'Emploi du temps' => [
+        'icon'   => 'calendar-alt',
+        'children' => [
+            [
+                'name'  => 'Emploi du temps',
+                'route' => 'Emploi.index',
+            ],
+
+        ],
     ],
 ];

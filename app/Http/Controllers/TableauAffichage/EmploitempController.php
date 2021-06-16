@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TableauAffichage;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Rattrapage;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Emploi_temp;
 use App\Models\ListClass;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-
-class RattrapageController extends Controller
+class EmploitempController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +17,9 @@ class RattrapageController extends Controller
      */
     public function index()
     {
-
-        $classes = ListClass::all();
-
-        return view('Rattrapage.indexRattrapage', compact('classes'));
+        $id = ListClass::where('class', Auth::user()->class)->first();
+        $data = Emploi_temp::where('list_classe_id', 19)->first();
+        return view('TableauAffichage.Emploitemp', compact('data'));
     }
 
     /**
@@ -33,7 +30,6 @@ class RattrapageController extends Controller
     public function create()
     {
         //
-
     }
 
     /**
@@ -44,22 +40,7 @@ class RattrapageController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'matiere'       => 'required|string|max:255',
-            'classe'        => 'required|string|max:255',
-            'motifRemplace' => 'required|string|max:255',
-            'jour1'         => 'required|date',
-            'seance1'       => 'required|string|max:255',
-            'jour2'         => 'required|date',
-            'seance2'       => 'required|string|max:255',
-            'salle'         => 'required|string|max:255',
-
-        ]);
-
-        $data = $request->all();
-        $data = Arr::add($data, 'user_id', Auth::user()->id);
-        Rattrapage::create($data);
-        return back()->with('success', 'Votre demande de rattpage a été envoyer.');
+        //
     }
 
     /**
@@ -105,9 +86,5 @@ class RattrapageController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function matiere($sem)
-    {
     }
 }

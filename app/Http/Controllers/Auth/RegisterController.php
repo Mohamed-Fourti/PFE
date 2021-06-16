@@ -49,13 +49,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $registration_key = 'test';
         return Validator::make($data, [
             'nom' => ['required', 'string', 'max:255', 'unique:users'],
             'prenom' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-                      
+            'key' => ['required', 'starts_with:A1WZ']
+
+        ], [
+            'key.starts_with' => 'Clé incorrecte'
         ]);
     }
 
@@ -71,8 +73,9 @@ class RegisterController extends Controller
             'nom' => $data['nom'],
             'prenom' => $data['prenom'],
             'email' => $data['email'],
+            'key' => $data['key'],
             'password' => Hash::make($data['password']),
-            
+
         ]));
         return $user->attachRole($data['role_id']);
     }

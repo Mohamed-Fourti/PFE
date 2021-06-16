@@ -24,6 +24,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\Rattrapage\RattrapagesController as BackRattrapagesController;
 use App\Http\Controllers\Admin\Contact\ContactsController as BackContactsController;
+use App\Http\Controllers\Admin\TableauAffichage\EmploitempController as BackEmploitempController;
+use App\Http\Controllers\TableauAffichage\EmploitempController as FrontEmploitempController;
 use App\Http\Controllers\TableauAffichage\TableauAffichageController;
 use App\Http\Controllers\testing;
 use Illuminate\Support\Facades\Route;
@@ -143,11 +145,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('rattrapages/{id}', [BackRattrapagesController::class, 'destroy']);
     Route::get('rattrapages/show/{id}', [BackRattrapagesController::class, 'show'])->name('rattrapages.show');
     Route::get('rattrapages/pdf/{id}', [BackRattrapagesController::class, 'pdf'])->name('rattrapages.pdf');
-    // Route::name('rattrapages.pdf')->post('rattrapages/pdf', 'RattrapagesController@pdf');
 
-
-
-
+    Route::resource('Emploi', BackEmploitempController::class);
 });
 
 
@@ -161,7 +160,7 @@ Route::group(['middleware' => ['role:Enseignants|admin']], function () {
     Route::post('Fiche-De-Vœux/enregistrer', [FrontFicheDeVœuxController::class, 'store'])->name('fiche-De-Vœux/enregistrer');
 
     Route::get('/', [FrontPublicationController::class, 'index']);
-    Route::get('rattrapage/{sem}', [RattrapageController::class, 'index']);
+    Route::get('rattrapage', [RattrapageController::class, 'index']);
     Route::post('rattrapage/enregistrer', [RattrapageController::class, 'store'])->name('rattrapage/enregistrer');
 
     Route::get('Fiche-De-Vœux/{sem}', [FrontFicheDeVœuxController::class, 'index']);
@@ -170,7 +169,7 @@ Route::group(['middleware' => ['role:Enseignants|admin']], function () {
     Route::get('/', [FrontPublicationController::class, 'index']);
 
     Route::resource('ColloqueScientifique', ColloqueScientifiques::class);
-    Route::get('ColloqueScientifique', [ColloqueScientifiques::class, 'pdf'])->name('ColloqueScientifique/pdf');
+    Route::post('ColloqueScientifiquee', [ColloqueScientifiques::class, 'pdf'])->name('ColloqueScientifique/pdf');
 
     Route::resource('TableauAffichage', TableauAffichageController::class);
 
@@ -194,6 +193,7 @@ Route::group(['middleware' => ['auth', 'role:Enseignants|admin|Techniciens|Etudi
 Route::group(['middleware' => ['auth', 'role:Etudiants']], function () {
     Route::get('TableauAffichage/class/{class}', [TableauAffichageEtController::class, 'index']);
     Route::get('TableauAffichage/télécharger/{id}', [TableauAffichageEtController::class, 'télécharger'])->name('TableauAffichage.télécharger');
+    Route::resource('emploi-du-temp', FrontEmploitempController::class);
 });
 
 Route::get('Publication', function () {

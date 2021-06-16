@@ -53,7 +53,7 @@
 <body>
 
     <!--====== PRELOADER PART START ======-->
-    <!--
+
     <div class="preloader">
         <div class="loader rubix-cube">
             <div class="layer layer-1"></div>
@@ -65,7 +65,7 @@
             <div class="layer layer-7"></div>
             <div class="layer layer-8"></div>
         </div>
-    </div>-->
+    </div>
     <div class="header-top pt-15 pb-15">
         <div class="container">
             <div class="row ">
@@ -113,8 +113,17 @@
                                     </li>
                                     @endrole
                                     @role('Etudiants')
+
                                     <li class="nav-item" id="navItem">
-                                        <a href="{{ url('TableauAffichage/class',Auth::user()->class ) }}">Tableau D'affichage</a>
+                                        <a>Tableau D'affichage</a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <a href="{{ url('TableauAffichage/class',Auth::user()->class ) }}">Tableau D'affichage</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ url('emploi-du-temp') }}">Emploi du temp</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     @endrole
 
@@ -132,7 +141,7 @@
                                     @endrole
 
 
-                                    @role('Enseignants' or 'Admin')
+                                    @role('Enseignants|admin')
                                     <li class="nav-item " id="navItem">
                                         <a>Autre Services</a>
                                         <ul class="sub-menu">
@@ -149,15 +158,11 @@
                                             @endif
 
                                             @endif
-                                            @if($FichedevœuxOF->sem=='S1')
+
                                             <li>
-                                                <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
+                                                <a href="{{ url('rattrapage') }}">Rattrapage</a>
                                             </li>
-                                            @else
-                                            <li>
-                                                <a href="{{ url('rattrapage',$FichedevœuxOF->sem) }}">Rattrapage</a>
-                                            </li>
-                                            @endif
+
                                         </ul>
                                     </li>
 

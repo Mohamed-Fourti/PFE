@@ -15,9 +15,8 @@ class PublicationController extends Controller
 
     public function index()
     {
-        $datas=Publication::all();
-        return view('AdminPanel.Publications.publications',compact('datas'));
-        
+        $datas = Publication::all();
+        return view('AdminPanel.Publications.publications', compact('datas'));
     }
 
     /**
@@ -28,9 +27,9 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        $active='';
-        $categories=Category::all();
-        return view('AdminPanel.Publications.newpublication',compact('categories','active'));
+        $active = '';
+        $categories = Category::all();
+        return view('AdminPanel.Publications.newpublication', compact('categories', 'active'));
     }
 
     /**
@@ -45,7 +44,6 @@ class PublicationController extends Controller
             'title'              => 'required|string|max:255',
             'date_début'         => 'required|date',
             'date_finale'        => 'required|date',
-            'lieu'               => 'required|string|max:255',
             'excerpt'            => 'required|string|max:255',
             'seo_title'          => 'required|string|max:255',
             'meta_keywords'      => 'required|string|max:255',
@@ -57,10 +55,10 @@ class PublicationController extends Controller
             'active' => $request->has('active'),
             'image' => basename($request->image),
         ]);
-        $Publication=$request->all();
-        $Publication=Arr::add($Publication,'user_id',Auth::user()->id);
-        Publication::create($Publication);        
-        
+        $Publication = $request->all();
+        $Publication = Arr::add($Publication, 'user_id', Auth::user()->id);
+        Publication::create($Publication);
+
         return back()->with('ok', __('The post has been successfully created'));
     }
 
@@ -73,10 +71,10 @@ class PublicationController extends Controller
      */
     public function edit($id)
     {
-        $active='1';
-        $categories='';
-        $datas=Publication::all()->where('id',$id)->first();
-        return view('AdminPanel.Publications.newpublication', compact('datas','categories','active'));
+        $active = '1';
+        $categories = '';
+        $datas = Publication::all()->where('id', $id)->first();
+        return view('AdminPanel.Publications.newpublication', compact('datas', 'categories', 'active'));
     }
 
     /**
@@ -94,9 +92,9 @@ class PublicationController extends Controller
             'image' => basename($request->image),
         ]);
 
-        DB::table('publications')->where('id',$request->id)->update($request->except(['_token', '_method' ]));
-        $datas=Publication::all();
-        return view('AdminPanel.Publications.publications',compact('datas'))->with('ok', __('The post has been successfully updated'));
+        DB::table('publications')->where('id', $request->id)->update($request->except(['_token', '_method']));
+        $datas = Publication::all();
+        return view('AdminPanel.Publications.publications', compact('datas'))->with('ok', __('The post has been successfully updated'));
     }
 
     /**
@@ -110,6 +108,5 @@ class PublicationController extends Controller
         $Publication = Publication::findOrFail($request->id);
         $Publication->delete();
         return back();
-
     }
 }

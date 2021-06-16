@@ -63,7 +63,7 @@ class ListetudiantsController extends Controller
                         collect($tab[$index])
                         ->first(function ($value) use ($cin) {
                             return $value['class'] == $cin->class;
-                        })==NULL
+                        }) == NULL
                     ) {
                         $ExcelImport = collect($tab[$index])
                             ->first(function ($value) use ($cin) {
@@ -73,18 +73,15 @@ class ListetudiantsController extends Controller
                             'class' => $ExcelImport['class']
                         ]);
                         $test = 1;
-
                     }
                 }
             }
         }
 
         if ($test == 0) {
-            return redirect()->back()->with('success', 'no update');
-
+            return redirect()->back()->with('success', 'Pas de mise à jour');
         } else {
-            return redirect()->back()->with('success', 'updated');
-
+            return redirect()->back()->with('success', 'mise à jour');
         }
     }
 
