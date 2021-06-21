@@ -3,68 +3,47 @@
 @section('main')
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-
-        @csrf
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-          <strong>{{ $message }}</strong>
-        </div>
-        @endif
-        <div class="card-header">
-          Choisir un fichier
-        </div>
-        <div class="card-body">
-
-          <form action="{{route('Liste-etudiants.store')}}" method="post" enctype="multipart/form-data">
-
-            @csrf
-
-            <div class="file-loading">
-              <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
-
-            </div>
-            <div id="errors"></div>
-          </form>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-md-3">
-      <form action="{{route('Liste-etudiants.misajour')}}" method="post">
-        @csrf
-
-        <button type="submit" class="btn btn-primary">Mise a jour</button>
-      </form>
-
-    </div>
-
-  </div>
-  <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
 
         <div class="card-header">
-          List etudiants
+          List de emplois
         </div>
         <div class="card-body">
-          <table id="table_id" class="table">
+          <table id="table_id" class="table table-bordered" style="width:100%">
             <thead>
               <tr>
-                <th scope="col">nom</th>
-                <th scope="col">Path</th>
-                <th scope="col">Date de dépôt</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Class</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Publié ou non</th>
+                <th scope="col">Categories</th>
                 <th scope="col">Action</th>
+
               </tr>
             </thead>
             <tbody>
-              @foreach ($datas as $data)
+
+              @foreach($datas as $data)
               <tr>
-                <td>{{ $data->name }}</td>
-                <td>{{ $data->file_path }}</td>
+                <input type="text" name="id" class="id" hidden value="{{ $data->id }}">
+                <td>{{ $data->title }}</td>
+                <td>{{ $data->class }}</td>
                 <td>{{ $data->created_at }}</td>
-                <td><a class="delete" data-toggle="modal" data-target="#delete" data-id='{{$data->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a></td>
+                <td>
+                  @if($data->active==0 )
+
+                  <span class="badge badge-warning">Pas publié</span>
+
+                  @else
+                  <span class="badge badge-success">Publié</span>
+                  @endif
+                </td>
+                <td>{{ $data->categories->title }}</td>
+                <td class="d-flex justify-content-center">
+                  <a class="delete mr-3" data-toggle="modal" data-target="#delete" data-id='{{$data->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a>
+                  <a class="edit " href="{{route('TableauAffichage-Admin.edit',$data->id)}}"><i class="fa fa-edit" style="color: #2196f3;font-size:20px;"></i></a>
+                </td>
               </tr>
               @endforeach
 
@@ -79,13 +58,13 @@
   </div>
 </div>
 
+
 <div id="delete" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <form method="POST" action="{{ route('Liste-etudiants/delete')}}">
+      <form method="POST" action="{{ route('TableauAffichage-Admin.destroy','id')}}">
         @csrf
-
         <input hidden id="id" name="id">
 
         <div class="modal-header">
@@ -105,22 +84,17 @@
     </div>
   </div>
 </div>
-
 @endsection
 @push('scripts')
+
 <script>
   $(document).on('click', '.delete', function() {
     let id = $(this).attr('data-id');
     $('#id').val(id);
   });
+</script>
 
-  $("#input-fr").fileinput({
-    language: "fr",
-    allowedFileExtensions: ["xlx", "xls", "xlsx"],
-    maxFileSize: ["2024"],
-    dropZoneEnabled: false,
-    elErrorContainer: '#errors'
-  });
+<script>
   $(document).ready(function() {
     $('#table_id').DataTable({
       "lengthMenu": [9, 25, 50, 75, 100],
@@ -157,7 +131,6 @@
           }
         }
       }
-
 
     });
   });

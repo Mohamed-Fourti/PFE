@@ -1891,7 +1891,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 });
 var NOTIFICATION_TYPES = {
   Réclamation: 'App\\Notifications\\RéclamationNotification',
-  newPost: 'App\\Notifications\\NewPost'
+  TableauAffichage: 'App\\Notifications\\TableauAffichageNotification',
+  RéclamationTraite: 'App\\Notifications\\RéclamationTraiteNotification'
 };
 var notifications = [];
 
@@ -1956,6 +1957,16 @@ function makeNotificationText(notification) {
     var user_name = notification.data.user_name;
     var priorité = notification.data.priorité;
     text += "<p>Nouvelle r\xE9clamation de ".concat(user_name, " de priorit\xE9 ").concat(priorité, " </p>");
+  }
+
+  if (notification.type === NOTIFICATION_TYPES.TableauAffichage) {
+    var _user_name = notification.data.user_name;
+    text += "<p>nouvel affichage publi\xE9 par ".concat(_user_name, " </p>");
+  }
+
+  if (notification.type === NOTIFICATION_TYPES.RéclamationTraite) {
+    var _user_name2 = notification.data.user_name;
+    text += "<p>nouvel affichage publi\xE9 par ".concat(_user_name2, " </p>");
   }
 
   return text;

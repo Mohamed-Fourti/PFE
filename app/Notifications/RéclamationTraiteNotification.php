@@ -2,15 +2,14 @@
 
 namespace App\Notifications;
 
-use App\Models\Réclamation;
-use App\Models\User;
+use App\Models\Traitement;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RéclamationNotification extends Notification implements ShouldQueue
+class RéclamationTraiteNotification extends Notification implements ShouldQueue
 {
     use Queueable;
     public $data;
@@ -19,9 +18,10 @@ class RéclamationNotification extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Réclamation $data)
+    public function __construct(Traitement $data, $user_id)
     {
         $this->data = $data;
+        $this->$user_id = $user_id;
     }
 
     /**
@@ -54,9 +54,10 @@ class RéclamationNotification extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->data->id,
-            'user_name' => $this->data->User->nom,
-            'priorité' => $this->data->priorite,
+            'id' => $this->data->réclamation_id,
+            'user_name' => $this->user_id->user_id,
+
+
 
         ];
     }
@@ -65,10 +66,8 @@ class RéclamationNotification extends Notification implements ShouldQueue
     {
         return new BroadcastMessage([
             'data' => [
-                'id' => $this->data->id,
-                'user_name' => $this->data->User->nom,
-                'priorité' => $this->data->priorite,
-
+                'id' => $this->data->user_id,
+                'user_name' => $this->data->technicien_id->nom,
             ],
 
         ]);

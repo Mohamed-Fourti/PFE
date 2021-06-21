@@ -24,25 +24,19 @@ class RéclamationController extends Controller
      */
     public function index()
     {
-        $statistiques=[];
-        $statistiques['total']=Réclamation::All()->count();
-        $statistiques['encours']=Réclamation::where('etat','en cours')->get()->count();
-        $statistiques['creation']=Réclamation::where('etat','création')->get()->count();
-        $statistiques['traité']=Réclamation::where('etat','traité')->get()->count();
-        $statistiques['priorite']=Réclamation::where('priorite')->get();
-        if(Auth::user()->hasRole('Techniciens'))
-        {
-            $Réclamations=Réclamation::paginate(4);
-            return view('Réclamation.indexRéclamationTe',compact('Réclamations','statistiques'));
-
+        $statistiques = [];
+        $statistiques['total'] = Réclamation::All()->count();
+        $statistiques['encours'] = Réclamation::where('etat', 'en cours')->get()->count();
+        $statistiques['creation'] = Réclamation::where('etat', 'création')->get()->count();
+        $statistiques['traité'] = Réclamation::where('etat', 'traité')->get()->count();
+        $statistiques['priorite'] = Réclamation::where('priorite')->get();
+        if (Auth::user()->hasRole('Techniciens')) {
+            $Réclamations = Réclamation::paginate(4);
+            return view('Réclamation.indexRéclamationTe', compact('Réclamations', 'statistiques'));
+        } else {
+            $Réclamations = Réclamation::where('user_id', Auth::user()->id)->paginate(3);
+            return view('Réclamation.indexRéclamationEn', compact('Réclamations'));
         }
-        else
-        {
-            $Réclamations=Réclamation::where('user_id',Auth::user()->id)->paginate(3);
-            return view('Réclamation.indexRéclamationEn',compact('Réclamations'));
-
-        }
-  
     }
 
     /**
@@ -52,7 +46,6 @@ class RéclamationController extends Controller
      */
     public function create()
     {
-       
     }
 
     /**
@@ -63,23 +56,23 @@ class RéclamationController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'matiére' => 'required|string|max:255',
-            'séance' => 'required|string|max:255',
-            'labo' => 'required|string|max:255',
-        ]);
-        $usersid =DB::table('role_user')->where('role_id','4')->get('user_id');
-        $data=$request->all();
-        $data=Arr::add($data,'user_id',Auth::user()->id);
+        // $validated = $request->validate([
+        //     'matiére' => 'required|string|max:255',
+        //     'séance' => 'required|string|max:255',
+        //     'labo' => 'required|string|max:255',
+        // ]);
+        $usersid = DB::table('role_user')->where('role_id', '4')->get('user_id');
+        $data = $request->all();
+        $data = Arr::add($data, 'user_id', Auth::user()->id);
         Réclamation::create($data);
-        $data = Réclamation::orderBy('created_at','desc')->first();
-  
+        $data = Réclamation::orderBy('created_at', 'desc')->first();
 
-        foreach($usersid as $user){
+
+        foreach ($usersid as $user) {
             User::findOrFail($user->user_id)->notify(new RéclamationNotification($data));
         }
 
-        return back()->with('message','Votre Réclamation a été crée avec succès');
+        return back()->with('message', 'Votre Réclamation a été crée avec succès');
     }
 
     /**
@@ -129,15 +122,14 @@ class RéclamationController extends Controller
 
     public function consulter($id)
     {
-      $traitements=Traitement::where('Réclamation_id',$id)->get();
-      $Réclamations =Réclamation::findOrFail($id);
-      if($Réclamations->etat=='création')
-      {
-        $Réclamations->etat='en cours';
-        $Réclamations->save();
-      }
+        $traitements = Traitement::where('Réclamation_id', $id)->get();
+        $Réclamations = Réclamation::findOrFail($id);
+        if ($Réclamations->etat == 'création') {
+            $Réclamations->etat = 'en cours';
+            $Réclamations->save();
+        }
 
 
-      return view('Réclamation.réclamationsShow',compact('Réclamations','traitements'));
+        return view('Réclamation.réclamationsShow', compact('Réclamations', 'traitements'));
     }
 }

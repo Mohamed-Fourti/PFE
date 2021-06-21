@@ -12,17 +12,11 @@ class EnseignantsController extends Controller
 
     public function index()
     {
-        $users=User::whereRoleIs('Enseignants')->paginate(3);
-        return view('AdminPanel.Users.UsersEn',compact('users'));
+        $users = User::whereRoleIs('Enseignants')->paginate(3);
+        return view('AdminPanel.Users.UsersEn', compact('users'));
     }
 
-    public function search(Request $request)
-    {
-        $search =$request->get('search');
-        $users=User::whereRoleIs('Enseignants')->where('nom','like','%'.$search.'%')->paginate(3);
-        return view('AdminPanel.Users.UsersEn',compact('users'));
-        
-    }
+
 
     public function create()
     {
@@ -41,24 +35,24 @@ class EnseignantsController extends Controller
         //
     }
 
- 
+
     public function edit(User $user)
     {
         //
     }
 
-   
+
     public function update(Request $request)
     {
         $update = [
             'nom'       =>  $request->nom,
             'prenom'    =>  $request->prenom,
             'email'     =>  $request->email,
-         
- 
+
+
         ];
-    DB::table('Users')->where('id',$request->id)->update($update);
-    return redirect()->back();
+        DB::table('Users')->where('id', $request->id)->update($update);
+        return redirect()->back();
     }
 
 

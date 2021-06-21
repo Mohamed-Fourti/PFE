@@ -6,10 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Mail\RéclamationTraite;
 use App\Models\Réclamation;
 use App\Models\Traitement;
+use App\Models\User;
+use App\Notifications\RéclamationNotification;
+use App\Notifications\RéclamationTraiteNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail ;
+use Illuminate\Support\Facades\Mail;
+
 class TraitementController extends Controller
 {
     /**
@@ -29,8 +33,8 @@ class TraitementController extends Controller
      */
     public function create($id)
     {
-    $Réclamation=Réclamation::findOrFail($id);
-      return view('Réclamation.traitement',compact('Réclamation'));
+        $Réclamation = Réclamation::findOrFail($id);
+        return view('Réclamation.traitement', compact('Réclamation'));
     }
 
     /**
@@ -41,21 +45,22 @@ class TraitementController extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request->all();
+        $data = $request->all();
         $data['hardware'] = $request->input('hardware');
-        $data=Arr::add($data,'technicien_id',Auth::user()->id);
+        $data = Arr::add($data, 'technicien_id', Auth::user()->id);
         Traitement::create($data);
 
-          if($request->input('résultat')=='avec succès')
-          {
-  
-            $Réclamation=Réclamation::where('id',$request->input('réclamation_id'))->first();
-            $Réclamation->etat='traité';
-            $Réclamation->save();
-            Mail::to($Réclamation->user->email)->send(new RéclamationTraite($Réclamation));
+        if ($request->input('résultat') == 'avec succès') {
 
-          }
-          return redirect('/réclamations')->with('message','Le traitement a été enrgistrée avec succès');;
+            $Réclamation = Réclamation::where('id', $request->input('réclamation_id'))->first();
+            $Réclamation->etat = 'traité';
+            $Réclamation->save();
+            $user_id = $Réclamation->user->id;
+            $data = Traitement::orderBy('created_at', 'desc')->first();
+            Mail::to($Réclamation->user->email)->send(new RéclamationTraite($Réclamation));
+            User::findOrFail($Réclamation->user->id)->notify(new RéclamationTraiteNotification($data, $user_id));
+        }
+        return redirect('/réclamations')->with('message', 'Le traitement a été enrgistrée avec succès');;
     }
 
     /**

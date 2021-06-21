@@ -16,10 +16,16 @@ class NotificationController extends Controller
 
         if ($notification) {
             $notification->markAsRead();
-            if($notification->type =='App\Notifications\RéclamationNotification'){
-            return redirect()->route('réclamations/{id}/consulter', $notification->data['id']);
-        }
+            if ($notification->type == 'App\Notifications\RéclamationNotification') {
+                return redirect()->route('réclamations/{id}/consulter', $notification->data['id']);
+            }
+            if ($notification->type == 'App\Notifications\TableauAffichageNotification') {
+                return redirect()->route('TableauAffichages', $notification->data['id']);
+            }
 
+            if ($notification->type == 'App\Notifications\RéclamationTraiteNotification') {
+                return redirect()->route('TableauAffichages', $notification->data['id']);
+            }
         }
     }
 }

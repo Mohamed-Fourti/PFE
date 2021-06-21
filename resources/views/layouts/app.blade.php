@@ -117,13 +117,14 @@
                                         <a href="{{ url('TableauAffichage') }}">Tableau D'affichage</a>
                                     </li>
                                     @endrole
+
                                     @role('Etudiants')
 
                                     <li class="nav-item" id="">
                                         <a>Tableau D'affichage</a>
                                         <ul class="sub-menu">
                                             <li>
-                                                <a href="{{ url('TableauAffichage/class',Auth::user()->class ) }}">Tableau D'affichage</a>
+                                                <a href="{{ url('TableauAffichages' ) }}">Tableau D'affichage</a>
                                             </li>
                                             <li>
                                                 <a href="{{ url('emploi-du-temp') }}">Emploi du temp</a>

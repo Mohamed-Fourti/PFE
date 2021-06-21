@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ListClass;
 use App\Models\TableauAffichage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
 
 class TableauAffichageEtController extends Controller
 {
@@ -16,11 +16,14 @@ class TableauAffichageEtController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($class)
+    public function index()
     {
 
-        $id = ListClass::where('class', $class)->first();
-        $datas = TableauAffichage::where('list_classe_id', $id->id)->paginate(3);
+        $Etclass = ListClass::where('class', Auth::user()->class)->first();
+        $datas = TableauAffichage::where('class', $Etclass->class)->orWhere('class', 'Tout')->latest()->paginate(3);
+
+
+
         return view('TableauAffichage.TableauAffichageEt', compact('datas'));
     }
 

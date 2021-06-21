@@ -42,7 +42,9 @@ window.Echo = new Echo({
 
 const NOTIFICATION_TYPES = {
     Réclamation: 'App\\Notifications\\RéclamationNotification',
-    newPost: 'App\\Notifications\\NewPost'
+    TableauAffichage: 'App\\Notifications\\TableauAffichageNotification',
+    RéclamationTraite: 'App\\Notifications\\RéclamationTraiteNotification'
+
 };
 
 
@@ -119,5 +121,13 @@ const NOTIFICATION_TYPES = {
             const priorité = notification.data.priorité;
             text +=`<p>Nouvelle réclamation de ${user_name} de priorité ${priorité} </p>`;
         } 
+        if(notification.type === NOTIFICATION_TYPES.TableauAffichage) {
+            const user_name = notification.data.user_name;
+            text +=`<p>nouvel affichage publié par ${user_name} </p>`;
+        }
+        if(notification.type === NOTIFICATION_TYPES.RéclamationTraite) {
+            const user_name = notification.data.user_name;
+            text +=`<p>nouvel affichage publié par ${user_name} </p>`;
+        }  
         return text;
     }

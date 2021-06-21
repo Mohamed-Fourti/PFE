@@ -3295,3 +3295,8 @@ p.form-message.error {
         transform: rotate(0deg);
     }
 }
+
+.white {
+    color: #fff !important;
+    font-size: x-small;
+}

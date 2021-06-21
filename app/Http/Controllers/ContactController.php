@@ -35,18 +35,11 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nom'     => 'required|string|max:255',
-            'prenom'  => 'required|string|max:255',
-            'email'   => 'required|string|max:255',
-            'tel'     => 'required|integer',
-            'message' => 'required|string|max:255',
-            
-        ]);
 
-        $data=$request->all();
+
+        $data = $request->all();
         Contact::create($data);
-         return back()->with('success','Message envoyer');
+        return back()->with('success', 'Message envoyer');
     }
 
     /**
