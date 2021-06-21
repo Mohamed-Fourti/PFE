@@ -30,29 +30,31 @@
 
 <!--====== ABOUT PART START ======-->
 
-<section id="about-part  ">
+<section id="about-part" class="pt-65">
     <div class="container">
         <div class="row">
-            <div class="col-sm-7">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                        <img src="../images/accueil/ti.jpg" class="d-block" alt="image1">
-                        </div>
-                        <div class="carousel-item">
-                        <img src="../images/accueil/banner.jpg" class="d-block" alt="image2">
-                        </div>
-                        <div class="carousel-item">
-                        <img src="../images/accueil/pc.jpg" class="d-block" alt="image3">
+            <div class="col-lg-7">
+                <div class="about-cont">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../images/accueil/ti.jpg" class="d-block" alt="image1" style="max-width:100%;height:600px ;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/accueil/banner.jpg" class="d-block" alt="image2" style="max-width:100%;height:600px;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/accueil/pc.jpg" class="d-block" alt="image3" style="max-width:100%;height:600px;">
+                            </div>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         
-            <div class="col-sm-5">
-                <div class="about-event" id="boxEvent">
+            <div class="col-lg-5">
+                <div class="about-event mt-50">
                     <div class="event-title">
-                        <h2>Évènements et Formations</h2>
+                        <h3>Évènements et Formations</h3>
                     </div>
                     <ul>
                     @if($formEtevens==null)   
@@ -61,27 +63,25 @@
                     @foreach($formEtevens as $formEteven )
 
                         <li>
-                            <div class="single-event">
-                                <div><i class="fa fa-calendar" id="temps"></i><span id="spanTemps">{{ $formEteven->created_at }}</span></div>
-                                <a href="{{ route('Publication/show', [$formEteven->slug, 'ca' => $formEteven->categories_id ] )  }}">
-                                    <h4 id="spanTemps">{{ $formEteven->title }}</h4>
-                                </a>
-                                <div><i class="fa fa-clock-o" id="temps"></i> <span id="spanTemps"> 10:00 Am - 3:00 Pm</span>
-                                <i class="fa fa-map-marker" id="temps"></i><span id="spanTemps"> Rc Auditorim</span></div>
-                            </div><hr>
+                                <div class="singel-event">
+                                    <span><i class="fa fa-calendar"></i>{{ $formEteven->created_at }}</span>
+                                    <a href="{{ route('Publication/show', [$formEteven->slug, 'ca' => $formEteven->categories_id ] )  }}">
+                                        <h4>{{ $formEteven->title }}</h4>
+                                    </a>
+                                    <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
+                                    <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
+                                </div>
                         </li>
                     
                         @endforeach
                         @endif
 
                     </ul>
-                    <a href="{{ route('Publications') }}" class="main-btn mt-55">Voir tout</a>
+                    <a href="{{ route('Publications') }}" class="main-btn mt-45">Voir tout</a>
                 </div> <!-- about event -->
             </div>
         </div> <!-- row -->
     </div> <!-- container -->
-    <div class="about-bg">
-    </div>
 </section>
 
 <!--chekbox

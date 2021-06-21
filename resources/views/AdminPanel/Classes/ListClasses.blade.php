@@ -15,7 +15,7 @@
             </div>
           @endif
            <div class="card-header">
-           Ajouter un Class
+           Ajouter un Classe
   </div>
   <div class="card-body">
  
@@ -28,8 +28,8 @@
       <input  name="class" type="text" class="form-control">
     </div>
   </div>
-  <div class="col text-center mt-3">
-               <button  type="submit" Style ="width:200px; height:50px;" class="btn btn-primary">sauvegarder</button>
+  <div class="col-12 text-center mt-3">
+               <button  type="submit" Style ="" class="btn btn-primary">Sauvegarder</button>
             </div>
         
 
@@ -54,10 +54,11 @@
   List etudiants
   </div>
   <div class="card-body">
+  <div class="table-responsive">
   <table id="table_id" class="table">
   <thead>
     <tr>
-      <th scope="col">Class</th>
+      <th scope="col">Classe</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -71,6 +72,7 @@
 
   </tbody>
 </table>
+</div>
  
   </div>
 </div>
@@ -91,7 +93,7 @@
                 <input hidden id="id" name="id">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">supprimer</h4>
+                    <h4 class="modal-title">Supprimer</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
                     </button>
                 </div>
@@ -100,7 +102,7 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="submit" class="btn btn-info waves-effect waves-light">supprimer</button>
+                    <button type="submit" class="btn btn-info waves-effect waves-light">Supprimer</button>
 
                 </div>
             </form>

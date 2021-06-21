@@ -21,7 +21,6 @@ class CreateFichedevœuxesTable extends Migration
             ->constrained()
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->string('gsm');
             $table->string('chargeS1')->nullable();
             $table->string('chargeS2')->nullable();
             $table->string('remarques')->nullable();

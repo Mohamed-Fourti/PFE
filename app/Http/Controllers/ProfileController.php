@@ -80,8 +80,13 @@ class ProfileController extends Controller
             'prenom'    =>  $request->prenom,
             'email'     =>  $request->email,
             'password'  =>  Hash::make($request->password),
-            'image'     =>  $request->image, 
+            'image'     =>  basename($request->image),
+            'gsm'     =>  $request->gsm, 
+            'class'     =>  $request->class, 
         ];
+        $request->merge([
+            'image' => basename($request->image),
+        ]);
         DB::table('Users')->where('id',Auth::user()->id)->update($update);
         return redirect()->back();
     }
