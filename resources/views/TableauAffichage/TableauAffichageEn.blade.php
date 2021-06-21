@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-4 col-form-label" for="file">File :</label>
+                            <label class="col-4 col-form-label" for="file">Fichier :</label>
                             <div class="col-8">
 
                                 <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-4 col-form-label" for="class">Class :</label>
+                            <label class="col-4 col-form-label" for="class">Classe :</label>
                             <div class="col-8">
                                 <select id="class" name="class" class="custom-select">
                                     <option>choisir</option>

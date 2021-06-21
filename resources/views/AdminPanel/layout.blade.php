@@ -35,10 +35,10 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" id="navAdmin"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-sm-inline-block">
         <a href="{{ url('/') }}" class="nav-link" id="navAdmin">@lang('Accueil')</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-sm-inline-block">
         <form action="{{ route('logout') }}" method="POST" hidden>
           @csrf                                
         </form>

@@ -35,6 +35,7 @@
         </div>
     </div>
 </div>
+</div>
 
 
 
@@ -48,7 +49,7 @@
                 <input type="text" hidden class="col-sm-9 form-control" id="deleteid" name="id" value="" />
 
                 <div class="modal-header">
-                    <h4 class="modal-title">supprimer</h4>
+                    <h4 class="modal-title">Supprimer</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
                     </button>
                 </div>
@@ -58,7 +59,7 @@
                 <div class="modal-footer">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-info waves-effect waves-light">supprimer</button>
+                    <button type="submit" class="btn btn-info waves-effect waves-light">Supprimer</button>
 
                 </div>
             </form>
@@ -70,7 +71,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Éditer</h4>
+                <h4 class="modal-title">Modifier</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
                 </button>
                 </button>
@@ -80,13 +81,13 @@
                 <input id="id" name="id">
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">nom</label>
+                        <label class="col-sm-3 col-form-label">Nom</label>
                         <div class="col-sm-9">
                             <input type="text" id="f-nom" name="nom" class="form-control" value="" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">prenom</label>
+                        <label class="col-sm-3 col-form-label">Prénom</label>
                         <div class="col-sm-9">
                             <input type="text" id="f-prenom" name="prenom" class="form-control" value="" />
                         </div>
@@ -102,7 +103,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="sumbit" class="btn btn-info waves-effect waves-light" data-toggle="modal"><i class="icofont icofont-eye-alt"></i>Éditer</button>
+                    <button type="sumbit" class="btn btn-info waves-effect waves-light" data-toggle="modal"><i class="icofont icofont-eye-alt"></i>Modifier</button>
                 </div>
             </form>
         </div>

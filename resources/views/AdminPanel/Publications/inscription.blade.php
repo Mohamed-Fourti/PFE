@@ -9,7 +9,7 @@
                 <tr>
                     <th scope="col">Date d'inscription</th>
                     <th scope="col">Etudiants</th>
-                    <th scope="col">Class</th>
+                    <th scope="col">Classe</th>
                     <th scope="col">Publication</th>
                     <th scope="col">Action</th>
 
@@ -44,7 +44,7 @@
                 <input hidden id="id" name="id">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">supprimer</h4>
+                    <h4 class="modal-title">Supprimer</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
                     </button>
                 </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="submit" class="btn btn-info waves-effect waves-light">supprimer</button>
+                    <button type="submit" class="btn btn-info waves-effect waves-light">Supprimer</button>
 
                 </div>
             </form>

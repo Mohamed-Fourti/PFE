@@ -40,7 +40,7 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
+        // $validated = $request->validate([
         //     'title'              => 'required|string|max:255',
         //     'date_début'         => 'required|date',
         //     'date_finale'        => 'required|date',
@@ -51,7 +51,6 @@ class PublicationController extends Controller
         //     'body'               => 'required|string|max:255',
         //     'slug'               => 'required|string|max:255',
         // ]);
-
         $request->merge([
             'active' => $request->has('active'),
             'image' => basename($request->image),
