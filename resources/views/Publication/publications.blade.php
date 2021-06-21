@@ -20,8 +20,8 @@
 
                         </div>
                         <div class="blog-cont">
-                            <a href="blog-singel.html">
-                                <h3>{{ $publication->title }}</h3>
+                            <a href="{{ route('Publication/show', [$publication->slug, 'ca' => $publication->categories_id ] )  }}">
+                                <h4 id="spanTemps">{{ $publication->title }}</h4>
                             </a>
                             <ul>
                                 <li><a href="#"><i class="fa fa-calendar"></i>{{ $publication->created_at }}</a></li>
@@ -32,8 +32,9 @@
 
                     @endforeach
 
-                    @endif
+
                     {{ $publications->links() }}
+                    @endif
                 </div>
 
                 <!-- courses pagination -->
@@ -79,7 +80,9 @@
             contentSelector: 'div.scrolling-pagination',
             callback: function() {
                 $('ul.pagination').remove();
-            }
+            },
+            loadingHtml: '<div style="text-align: center;"><img src="/images/Dual Ball-1s-200px.svg" alt="Loading" class="ml-auto mr-auto"/></div>',
+            padding: 20,
         });
     });
 </script>

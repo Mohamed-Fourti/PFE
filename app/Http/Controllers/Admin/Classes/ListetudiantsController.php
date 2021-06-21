@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ListEtudiant;
 use App\Models\User;
+use File;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ListetudiantsController extends Controller
@@ -103,11 +105,16 @@ class ListetudiantsController extends Controller
     {
     }
 
-    function delete($id, $name)
+    function delete(request $request)
     {
-        $file = File::findOrFail($id);
-        $file->delete();
-        unlink('..\storage\excel\uploads\\' . $name);
-        return redirect()->back()->with('msg', 'deleted');
+        $List = ListEtudiant::findOrFail($request->id);
+
+        if (Storage::exists($List->file_path)) {
+            Storage::delete($List->file_path);
+            $List->delete();
+        } else {
+            return redirect()->back()->with('success', 'fichier ne existe pas');
+        }
+        return redirect()->back()->with('success', 'deleted');
     }
 }

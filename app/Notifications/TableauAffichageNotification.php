@@ -2,15 +2,14 @@
 
 namespace App\Notifications;
 
-use App\Models\Réclamation;
-use App\Models\User;
+use App\Models\TableauAffichage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RéclamationNotification extends Notification implements ShouldQueue
+class TableauAffichageNotification extends Notification implements ShouldQueue
 {
     use Queueable;
     public $data;
@@ -19,7 +18,7 @@ class RéclamationNotification extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Réclamation $data)
+    public function __construct(TableauAffichage $data)
     {
         $this->data = $data;
     }
@@ -56,8 +55,6 @@ class RéclamationNotification extends Notification implements ShouldQueue
         return [
             'id' => $this->data->id,
             'user_name' => $this->data->User->nom,
-            'priorité' => $this->data->priorite,
-
         ];
     }
 
@@ -67,8 +64,6 @@ class RéclamationNotification extends Notification implements ShouldQueue
             'data' => [
                 'id' => $this->data->id,
                 'user_name' => $this->data->User->nom,
-                'priorité' => $this->data->priorite,
-
             ],
 
         ]);

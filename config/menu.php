@@ -59,7 +59,6 @@ return [
         ],
     ],
 
-    'fiche de vœux' => [],
     'fiche de vœux' => [
         'icon'   => 'file-alt',
         'children' => [
@@ -91,14 +90,24 @@ return [
 
     ],
 
-    'Emploi du temps' => [
+    'Tableau d\'Affichage' => [
         'icon'   => 'calendar-alt',
         'children' => [
             [
                 'name'  => 'Emploi du temps',
                 'route' => 'Emploi.index',
             ],
+            [
+                'name'  => 'Tableau d\'Affichage',
+                'route' => 'TableauAffichage-Admin.index',
+            ],
+            [
+                'name'  => 'new Tableau d\'Affichage',
+                'route' => 'TableauAffichage-Admin.create',
+            ],
 
         ],
     ],
+
+
 ];

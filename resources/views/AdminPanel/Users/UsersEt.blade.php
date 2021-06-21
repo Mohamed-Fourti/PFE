@@ -3,52 +3,39 @@
 @section('main')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <form action="searchEt" method="get">
-                <div class="input-group">
-                    <input type="search" name="search" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary">Seach</button></span>
-                </div>
-            </form>
-            </div>
-    </div>
-    <br>
-    <div class="row">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Cin</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prenom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Class</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class=" col-12">
+            <table id="table_id" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Cin</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                @foreach($users as $user)
-                <tr>
-                    <td class="id">{{ $user->id }}</td>
-                    <td>{{ $user->cin }}</td>
-                    <td class="nom">{{ $user->nom }}</td>
-                    <td class="prenom">{{ $user->prenom }}</td>
-                    <td class="email">{{ $user->email }}</td>
-                    <td class="class">{{ $user->class }}</td>
-                    <td>
-                        <a class="delete" data-toggle="modal" data-target="#delete"  data-id="{{$user->id}}" ><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:16px;"></i></a>
-                        <a class="edit" data-toggle="modal" data-target="#update"><i class="fa fa-edit" style="color: #2196f3;font-size:16px;"></i></a>
-                    </td>
-                </tr>
-                @endforeach
+                    @foreach($users as $user)
+                    <tr>
+                        <td class="id">{{ $user->id }}</td>
+                        <td>{{ $user->cin }}</td>
+                        <td class="nom">{{ $user->nom }}</td>
+                        <td class="prenom">{{ $user->prenom }}</td>
+                        <td class="email">{{ $user->email }}</td>
+                        <td class="class">{{ $user->class }}</td>
+                        <td>
+                            <a class="delete" data-toggle="modal" data-target="#delete" data-id="{{$user->id}}"><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:16px;"></i></a>
+                            <a class="edit" data-toggle="modal" data-target="#update"><i class="fa fa-edit" style="color: #2196f3;font-size:16px;"></i></a>
+                        </td>
+                    </tr>
+                    @endforeach
 
-            </tbody>
-        </table>
-        {{ $users->links() }}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -58,11 +45,11 @@
 <div id="delete" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="{{ route('usersEt.destroy','test' )}}"> 
-            {{method_field('delete')}}
+            <form method="POST" action="{{ route('usersEt.destroy','test' )}}">
+                {{method_field('delete')}}
 
-      		{{csrf_field()}}
-              <input type="text" hidden class="col-sm-9 form-control" id="deleteid" name="id" value="" />
+                {{csrf_field()}}
+                <input type="text" hidden class="col-sm-9 form-control" id="deleteid" name="id" value="" />
 
                 <div class="modal-header">
                     <h4 class="modal-title">supprimer</h4>
@@ -156,7 +143,47 @@
     $(document).on('click', '.delete', function() {
         var _this = $(this).parents('tr');
         $('#deleteid').val(_this.find('.id').text());
-})
+    })
+
+    $(document).ready(function() {
+        $('#table_id').DataTable({
+            "lengthMenu": [9, 25, 50, 75, 100],
+            "order": [
+                [2, "desc"]
+            ],
+            "language": {
+                "sEmptyTable": "Aucune donnée disponible dans le tableau",
+                "sInfo": "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+                "sInfoEmpty": "Affichage de l'élément 0 à 0 sur 0 élément",
+                "sInfoFiltered": "(filtré à partir de _MAX_ éléments au total)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Afficher _MENU_ éléments",
+                "sLoadingRecords": "Chargement...",
+                "sProcessing": "Traitement...",
+                "sSearch": "Rechercher :",
+                "sZeroRecords": "Aucun élément correspondant trouvé",
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sLast": "Dernier",
+                    "sNext": "Suivant",
+                    "sPrevious": "Précédent"
+                },
+                "oAria": {
+                    "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                    "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d lignes sélectionnées",
+                        "0": "Aucune ligne sélectionnée",
+                        "1": "1 ligne sélectionnée"
+                    }
+                }
+            }
+
+        });
+    });
 </script>
 
 @endpush

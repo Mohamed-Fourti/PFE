@@ -10,8 +10,25 @@ class TableauAffichage extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'list_classe_id',
+        'class',
         'remarques',
+        'title',
+        'slug',
+        'seo_title',
+        'excerpt',
+        'body',
+        'meta_description',
+        'meta_keywords',
+        'active',
+        'image',
+        'categories_id',
+        'date_début',
+        'date_finale',
+        'lieu',
+        'formateur',
+        'durée',
+        'Nbseance',
+        'class',
         'file_name',
         'file_path',
     ];
@@ -23,6 +40,6 @@ class TableauAffichage extends Model
 
     public function ListClass()
     {
-        return $this->belongsTo(ListClass::class,'list_classe_id');
+        return $this->belongsTo(ListClass::class, 'list_classe_id');
     }
 }

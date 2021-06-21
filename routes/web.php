@@ -25,6 +25,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\Rattrapage\RattrapagesController as BackRattrapagesController;
 use App\Http\Controllers\Admin\Contact\ContactsController as BackContactsController;
 use App\Http\Controllers\Admin\TableauAffichage\EmploitempController as BackEmploitempController;
+use App\Http\Controllers\Admin\TableauAffichage\TableauAffichageAdminController;
 use App\Http\Controllers\TableauAffichage\EmploitempController as FrontEmploitempController;
 use App\Http\Controllers\TableauAffichage\TableauAffichageController;
 use App\Http\Controllers\testing;
@@ -109,9 +110,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::resource('Liste-etudiants', ListetudiantsController::class);
     Route::post('Liste-etudiants/misajour', [ListetudiantsController::class, 'misajour'])->name('Liste-etudiants.misajour');
+    Route::post('Liste-etudiants/delete', [ListetudiantsController::class, 'delete'])->name('Liste-etudiants/delete');
 
     Route::resource('Liste-class', ListClassesController::class);
-    Route::post('Liste-class/delete', [ListClassesController::class, 'destroy'])->name('Liste-class/delete');
+    Route::post('Liste-class/delete', [ListClassesController::class, 'delete'])->name('Liste-class/delete');
     Route::post('Liste-class/ajoute', [ListClassesController::class, 'ajoute'])->name('Liste-class/ajoute');
 
 
@@ -124,10 +126,15 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('Fiche-De-Vœux', BackFicheDeVœuxController::class);
     Route::get('Fiche-De-Vœux/Ouverture/{id}', [BackFicheDeVœuxController::class, 'Ouverture'])->name('Ouverture');
     Route::get('Fiche-De-Vœux/Fermeture/{id}', [BackFicheDeVœuxController::class, 'Fermeture'])->name('Fermeture');
+    Route::post('Fiche-De-Vœux/delete', [BackFicheDeVœuxController::class, 'delete'])->name('Fiche-De-Vœux/delete');
+    Route::post('Fiche-De-Vœux/deletedemande', [BackFicheDeVœuxController::class, 'deletedemande'])->name('Fiche-De-Vœux/deletedemande');
+
     Route::post('EtuMat', [BackFicheDeVœuxController::class, 'storePlanEtuFichesMat'])->name('EtuMat');
     Route::get('Fiche-De-Vœux/résultats', [BackFicheDeVœuxController::class, 'résultats'])->name('Fiche-De-Vœux.résultats');
     Route::get('Fiche-De-Vœux/show/{id}', [BackFicheDeVœuxController::class, 'show'])->name('Fiche-De-Vœux.show');
     Route::resource('Listmatières', ListmatièresController::class);
+    Route::post('Listmatières/delete', [ListmatièresController::class, 'delete'])->name('Listmatières/delete');
+
     Route::post('publication/{id}', [BackPublicationController::class, 'destroy']);
 
     Route::resource('Inscriptions-list', BackInscriptionController::class);
@@ -147,6 +154,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('rattrapages/pdf/{id}', [BackRattrapagesController::class, 'pdf'])->name('rattrapages.pdf');
 
     Route::resource('Emploi', BackEmploitempController::class);
+
+    Route::resource('TableauAffichage-Admin', TableauAffichageAdminController::class);
+    Route::post('TableauAffichage-Admin/{id}', [TableauAffichageAdminController::class, 'destroy']);
 });
 
 
@@ -162,9 +172,6 @@ Route::group(['middleware' => ['role:Enseignants|admin']], function () {
     Route::get('/', [FrontPublicationController::class, 'index']);
     Route::get('rattrapage', [RattrapageController::class, 'index']);
     Route::post('rattrapage/enregistrer', [RattrapageController::class, 'store'])->name('rattrapage/enregistrer');
-
-    Route::get('Fiche-De-Vœux/{sem}', [FrontFicheDeVœuxController::class, 'index']);
-    Route::post('Fiche-De-Vœux/enregistrer', [FrontFicheDeVœuxController::class, 'store'])->name('fiche-De-Vœux/enregistrer');
 
     Route::get('/', [FrontPublicationController::class, 'index']);
 
@@ -184,14 +191,12 @@ Route::group(['middleware' => ['auth', 'role:Techniciens']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:Enseignants|admin|Techniciens|Etudiants']], function () {
-
-
-
     Route::get('profile/{id}', [ProfileController::class, 'index']);
     Route::post('profile/modifier', [ProfileController::class, 'update'])->name('profile/modifier');
 });
+
 Route::group(['middleware' => ['auth', 'role:Etudiants']], function () {
-    Route::get('TableauAffichage/class/{class}', [TableauAffichageEtController::class, 'index']);
+    Route::get('TableauAffichages', [TableauAffichageEtController::class, 'index'])->name('TableauAffichages');;
     Route::get('TableauAffichage/télécharger/{id}', [TableauAffichageEtController::class, 'télécharger'])->name('TableauAffichage.télécharger');
     Route::resource('emploi-du-temp', FrontEmploitempController::class);
 });
@@ -210,7 +215,6 @@ Route::get('contact', [ContactController::class, 'index']);
 Route::post('contact/enregistrer', [ContactController::class, 'store'])->name('contact.enregistrer');
 
 Route::resource('test', testing::class);
-
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'auth'], function () {
     Lfm::routes();

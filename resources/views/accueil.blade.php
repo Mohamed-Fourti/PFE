@@ -37,28 +37,30 @@
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                        <img src="../images/accueil/ti.jpg" class="d-block" alt="image1">
+                            <img src="../images/accueil/ti.jpg" class="d-block" alt="image1">
                         </div>
                         <div class="carousel-item">
-                        <img src="../images/accueil/banner.jpg" class="d-block" alt="image2">
+                            <img src="../images/accueil/banner.jpg" class="d-block" alt="image2">
                         </div>
                         <div class="carousel-item">
-                        <img src="../images/accueil/pc.jpg" class="d-block" alt="image3">
+                            <img src="../images/accueil/pc.jpg" class="d-block" alt="image3">
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
-        
+
             <div class="col-sm-5">
                 <div class="about-event" id="boxEvent">
                     <div class="event-title">
                         <h2>Évènements et Formations</h2>
                     </div>
                     <ul>
-                    @if($formEtevens==null)   
-                        <div><h4>Pas des évènements et formations</h4></div>
-                    @else
-                    @foreach($formEtevens as $formEteven )
+                        @if($formEtevens==null)
+                        <div>
+                            <h4>Pas des évènements et formations</h4>
+                        </div>
+                        @else
+                        @foreach($formEtevens as $formEteven )
 
                         <li>
                             <div class="single-event">
@@ -67,10 +69,12 @@
                                     <h4 id="spanTemps">{{ $formEteven->title }}</h4>
                                 </a>
                                 <div><i class="fa fa-clock-o" id="temps"></i> <span id="spanTemps"> 10:00 Am - 3:00 Pm</span>
-                                <i class="fa fa-map-marker" id="temps"></i><span id="spanTemps"> Rc Auditorim</span></div>
-                            </div><hr>
+                                    <i class="fa fa-map-marker" id="temps"></i><span id="spanTemps"> Rc Auditorim</span>
+                                </div>
+                            </div>
+                            <hr>
                         </li>
-                    
+
                         @endforeach
                         @endif
 
@@ -106,25 +110,29 @@ Endchekbox-->
             </div>
         </div> <!-- row -->
         <div class="row">
-            <div class="col-lg-6">
             @if($nouveautélasts==null)
 
+            <div class="col-lg-6">
 
-            
-            <div><h4>Pas de nouveautés</h4></div>
 
-   
-   
-    
-  @else
-@foreach($nouveautélasts as $nouveautélast)
+                <div>
+                    <h4>Pas de nouveautés</h4>
+                </div>
+
+            </div>
+
+
+
+            @else
+            @foreach($nouveautélasts as $nouveautélast)
+            <div class="col-lg-6">
 
                 <div class="singel-news mt-30">
                     <div class="news-thum pb-25">
-                    <a href="{{ route('Publication/show', [$nouveautélast->slug, 'ca' => $nouveautélast->categories_id ] )  }}">
-                    <img src="{{ getImage($nouveautélast, false) }}" alt="" style="width:100%"></a>
+                        <a href="{{ route('Publication/show', [$nouveautélast->slug, 'ca' => $nouveautélast->categories_id ] )  }}">
+                            <img src="{{ getImage($nouveautélast, false) }}" alt="" style="width:100%"></a>
                     </div>
-                    
+
                     <div class="news-cont">
                         <ul>
                             <li><a><i class="fa fa-calendar"></i>{{ $nouveautélast->created_at }}</a></li>
@@ -136,56 +144,64 @@ Endchekbox-->
                         <p>{{ $nouveautélast->excerpt }}</p>
                     </div>
                 </div> <!-- singel news -->
-                @endforeach 
-                 
- @endif
             </div>
- <div class="singel-news news-list">
- @if($nouveautés==null)
 
- <div class="row">
- <div class="col-sm-4">
+            @endforeach
 
-            
-<div><h4>Pas de nouveautés</h4></div>
+            @endif
 
-</div>
-</div>
+            @if($nouveautés==null)
+            <div class="singel-news news-list">
+
+                <div class="row">
+                    <div class="col-sm-4">
 
 
-@else
-                @foreach($nouveautés as $nouveauté )
-                                 <div class="row">
+                        <div>
+                            <h4>Pas de nouveautés</h4>
+                        </div>
 
-                        <div class="col-sm-4">
-                
-                            <div class="news-thum mt-30">
+                    </div>
+                </div>
+            </div>
+
+
+            @else
+            @foreach($nouveautés as $nouveauté )
+            <div class="singel-news news-list">
+
+                <div class="row">
+
+                    <div class="col-sm-4">
+
+                        <div class="news-thum mt-30">
                             <a href="{{ route('Publication/show', [$nouveauté->slug, 'ca' => $nouveauté->categories_id ] )  }}">
 
-          <img src="{{ getImage($nouveauté, true) }}" alt="" style="width:100%"></a>
-                           </div>
+                                <img src="{{ getImage($nouveauté, true) }}" alt="" style="width:100%"></a>
                         </div>
-                        <div class="col-sm-8">
-                            <div class="news-cont mt-30">
-                                <ul>
-                                    <li><a><i class="fa fa-calendar"></i>{{ $nouveauté->created_at }} </a></li>
-                                    <li><span>By </span>{{ $nouveauté->user->nom }}</li>
-                                </ul>
-                                <a>
-                            <a href="{{ route('Publication/show', $nouveauté->slug) }}">
-                                    <h3>{{ $nouveauté->title }}</h3></a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="news-cont mt-30">
+                            <ul>
+                                <li><a><i class="fa fa-calendar"></i>{{ $nouveauté->created_at }} </a></li>
+                                <li><span>By </span>{{ $nouveauté->user->nom }}</li>
+                            </ul>
+                            <a>
+                                <a href="{{ route('Publication/show', $nouveauté->slug) }}">
+                                    <h3>{{ $nouveauté->title }}</h3>
                                 </a>
-                                <p>{{ $nouveauté->excerpt }}</p>
-                            </div>
+                            </a>
+                            <p>{{ $nouveauté->excerpt }}</p>
                         </div>
-                    </div> <!-- row -->
-                @endforeach  
-                @endif
-              </div> <!-- singel news -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- singel news -->
 
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
+            @endforeach
+            @endif
+
+        </div>
+    </div> <!-- row -->
 </section>
 
 <!--====== NEWS PART ENDS ======-->
@@ -213,7 +229,7 @@ Endchekbox-->
                                 </span>
                                 <span class="cont">
                                     <h4 id="featureId">Emplois du temps en ligne</h4>
-                                    </span>
+                                </span>
                             </div> <!-- singel feature -->
                         </li>
                         <li>
@@ -233,7 +249,7 @@ Endchekbox-->
                                 </span>
                                 <span class="cont">
                                     <h4 id="featureId">Inscription en Évènement</h4>
-                                   </span>
+                                </span>
                             </div> <!-- singel feature -->
                         </li>
                     </ul>

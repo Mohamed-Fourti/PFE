@@ -5,9 +5,12 @@ namespace App\Http\Controllers\TableauAffichage;
 use App\Http\Controllers\Controller;
 use App\Models\ListClass;
 use App\Models\TableauAffichage;
+use App\Models\User;
+use App\Notifications\TableauAffichageNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TableauAffichageController extends Controller
 {
@@ -43,6 +46,7 @@ class TableauAffichageController extends Controller
     public function store(Request $request)
     {
         $fileModel = new TableauAffichage;
+        $usersid = DB::table('role_user')->where('role_id', '3')->get('user_id');
 
         if ($request->file()) {
 
@@ -56,10 +60,28 @@ class TableauAffichageController extends Controller
             $fileModel = Arr::add($fileModel, 'file_name', $fileName);
             $fileModel = Arr::add($fileModel, 'user_id', Auth::user()->id);
             TableauAffichage::create($fileModel);
+            foreach ($usersid as $userid) {
+
+                $users = User::where('id', $userid->user_id)->where('class', $request->class)->first();
+                if ($users) {
+                    $data = TableauAffichage::orderBy('created_at', 'desc')->first();
+
+                    User::findOrFail($users->id)->notify(new TableauAffichageNotification($data));
+                }
+            }
             return back()->with('success', 'Succès');
         } else {
             $fileModel = $request->all();
             $fileModel = Arr::add($fileModel, 'user_id', Auth::user()->id);
+            foreach ($usersid as $userid) {
+
+                $users = User::where('id', $userid->user_id)->where('class', $request->class)->first();
+                if ($users) {
+                    $data = TableauAffichage::orderBy('created_at', 'desc')->first();
+
+                    User::findOrFail($users->id)->notify(new TableauAffichageNotification($data));
+                }
+            }
             TableauAffichage::create($fileModel);
             return back()->with('success', 'Succès');
         }
