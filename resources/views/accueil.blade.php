@@ -108,20 +108,7 @@ Endchekbox-->
             </div>
         </div> <!-- row -->
         <div class="row">
-            @if($nouveautélasts==null)
 
-            <div class="col-lg-6">
-
-
-                <div>
-                    <h4>Pas de nouveautés</h4>
-                </div>
-
-            </div>
-
-
-
-            @else
             @foreach($nouveautélasts as $nouveautélast)
             <div class="col-lg-6">
 
@@ -142,64 +129,46 @@ Endchekbox-->
                         <p>{{ $nouveautélast->excerpt }}</p>
                     </div>
                 </div> <!-- singel news -->
-            </div>
-
-            @endforeach
-
-            @endif
-
-            @if($nouveautés==null)
-            <div class="singel-news news-list">
-
-                <div class="row">
-                    <div class="col-sm-4">
-
-
-                        <div>
-                            <h4>Pas de nouveautés</h4>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-            @else
-            @foreach($nouveautés as $nouveauté )
-            <div class="singel-news news-list">
-
-                <div class="row">
-
-                    <div class="col-sm-4">
-
-                        <div class="news-thum mt-30">
-                            <a href="{{ route('Publication/show', [$nouveauté->slug, 'ca' => $nouveauté->categories_id ] )  }}">
-
-                                <img src="{{ getImage($nouveauté, true) }}" alt="" style="width:100%"></a>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="news-cont mt-30">
-                            <ul>
-                                <li><a><i class="fa fa-calendar"></i>{{ $nouveauté->created_at }} </a></li>
-                                <li><span>By </span>{{ $nouveauté->user->nom }}</li>
-                            </ul>
-                            <a>
-                                <a href="{{ route('Publication/show', $nouveauté->slug) }}">
-                                    <h3>{{ $nouveauté->title }}</h3>
-                                </a>
-                            </a>
-                            <p>{{ $nouveauté->excerpt }}</p>
-                        </div>
-                    </div>
-                </div> <!-- row -->
             </div> <!-- singel news -->
 
             @endforeach
-            @endif
 
-        </div>
-    </div> <!-- row -->
+            @foreach($nouveautés as $nouveauté )
+            <div class="col-lg-6">
+
+                <div class="singel-news news-list">
+
+                    <div class="row">
+
+                        <div class="col-sm-4">
+
+                            <div class="news-thum mt-30">
+                                <a href="{{ route('Publication/show', [$nouveauté->slug, 'ca' => $nouveauté->categories_id ] )  }}">
+
+                                    <img src="{{ getImage($nouveauté, true) }}" alt="" style="width:100%"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="news-cont mt-30">
+                                <ul>
+                                    <li><a><i class="fa fa-calendar"></i>{{ $nouveauté->created_at }} </a></li>
+                                    <li><span>By </span>{{ $nouveauté->user->nom }}</li>
+                                </ul>
+                                <a>
+                                    <a href="{{ route('Publication/show', $nouveauté->slug) }}">
+                                        <h3>{{ $nouveauté->title }}</h3>
+                                    </a>
+                                </a>
+                                <p>{{ $nouveauté->excerpt }}</p>
+                            </div>
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- singel news -->
+
+                @endforeach
+
+            </div>
+        </div> <!-- row -->
 </section>
 
 <!--====== NEWS PART ENDS ======-->
