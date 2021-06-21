@@ -91,7 +91,7 @@
                             <li>
                                 <div class="singel-address">
                                     <div class="icon">
-                                        <i class="fas fa-envelope"></i>
+                                        <i class="far fa-envelope"></i>
                                     </div>
                                     <div class="cont">
                                         <p>isetjb@gmail.com</p>

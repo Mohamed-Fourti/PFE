@@ -122,11 +122,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <input id="disable3" name="lieu" type="text" class="form-control @error('lieu') is-invalid @enderror" value="{{ isset($datas->lieu) ? $datas->lieu : 'Iset Djerba' }}">
-                                @error('lieu')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+        
                             </div>
                         </div>
                     </div>
@@ -165,7 +161,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-2">
                 <div class="card">
                     <div class="card-header">
-                    Nombre de seances
+                    Nombre de séances
                     </div>
                     <div class="card-body">
                         <div class="form-group row">

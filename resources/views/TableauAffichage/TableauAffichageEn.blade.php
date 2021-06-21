@@ -19,7 +19,7 @@
                     <form action="{{route('TableauAffichage.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label class="col-4 col-form-label" for="file">File :</label>
+                            <label class="col-4 col-form-label" for="file">Fichier :</label>
                             <div class="col-8">
 
                                 <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-4 col-form-label" for="class">Class :</label>
+                            <label class="col-4 col-form-label" for="class">Classe :</label>
                             <div class="col-8">
                                 <select id="class" name="list_classe_id" class="custom-select">
                                     <option>choisir</option>

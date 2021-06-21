@@ -60,11 +60,6 @@
 <div class=" mt-2">
     <div class="card">
       <div class="card-body">
-      <label for="gsm" class="col-4 col-form-label">GSM :</label>
-        <input id="gsm" name="gsm" type="text" class="form-control">
-        @error('gsm')
-          <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
 
       <input id="" name="sem" type="text" hidden value="{{ $semid }}">
         <label for="select" class="col-4 col-form-label">Matiere</label>

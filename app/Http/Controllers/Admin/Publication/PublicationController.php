@@ -40,17 +40,17 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title'              => 'required|string|max:255',
-            'date_début'         => 'required|date',
-            'date_finale'        => 'required|date',
-            'excerpt'            => 'required|string|max:255',
-            'seo_title'          => 'required|string|max:255',
-            'meta_keywords'      => 'required|string|max:255',
-            'meta_description'   => 'required|string|max:255',
-            'body'               => 'required|string|max:255',
-            'slug'               => 'required|string|max:255',
-        ]);
+        // $validated = $request->validate([
+        //     'title'              => 'required|string|max:255',
+        //     'date_début'         => 'required|date',
+        //     'date_finale'        => 'required|date',
+        //     'excerpt'            => 'required|string|max:255',
+        //     'seo_title'          => 'required|string|max:255',
+        //     'meta_keywords'      => 'required|string|max:255',
+        //     'meta_description'   => 'required|string|max:255',
+        //     'body'               => 'required|string|max:255',
+        //     'slug'               => 'required|string|max:255',
+        // ]);
         $request->merge([
             'active' => $request->has('active'),
             'image' => basename($request->image),
