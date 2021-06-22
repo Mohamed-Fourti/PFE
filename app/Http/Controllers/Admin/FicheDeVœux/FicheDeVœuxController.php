@@ -48,19 +48,23 @@ class FicheDeVœuxController extends Controller
     {
 
 
-        if ($request->file()) {
-            $fileName = $request->file->getClientOriginalName();
-            $fileNameCry = md5($fileName) . $fileName;
+        $request->validate([
+            'class'              => 'required|string|max:255',
+            'file'              => 'required',
 
-            $filePath = $request->file('file')->storeAs('public/Admin-uploads/plansétudes-fichesmatières', $fileNameCry,);
+        ]);
 
-            $fileModel = $request->all();
-            $fileModel = Arr::add($fileModel, 'file_path', $filePath);
-            $fileModel = Arr::add($fileModel, 'name', $fileName);
-            EtuMat::create($fileModel);
+        $fileName = $request->file->getClientOriginalName();
+        $fileNameCry = md5($fileName) . $fileName;
 
-            return back()->with('success', 'Succès');
-        }
+        $filePath = $request->file('file')->storeAs('public/Admin-uploads/plansétudes-fichesmatières', $fileNameCry,);
+
+        $fileModel = $request->all();
+        $fileModel = Arr::add($fileModel, 'file_path', $filePath);
+        $fileModel = Arr::add($fileModel, 'name', $fileName);
+        EtuMat::create($fileModel);
+
+        return back()->with('success', 'Succès');
     }
 
 

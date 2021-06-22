@@ -55,10 +55,9 @@ class TraitementController extends Controller
             $Réclamation = Réclamation::where('id', $request->input('réclamation_id'))->first();
             $Réclamation->etat = 'traité';
             $Réclamation->save();
-            $user_id = $Réclamation->user->id;
             $data = Traitement::orderBy('created_at', 'desc')->first();
             Mail::to($Réclamation->user->email)->send(new RéclamationTraite($Réclamation));
-            User::findOrFail($Réclamation->user->id)->notify(new RéclamationTraiteNotification($data, $user_id));
+            User::findOrFail($Réclamation->user->id)->notify(new RéclamationTraiteNotification($data));
         }
         return redirect('/réclamations')->with('message', 'Le traitement a été enrgistrée avec succès');;
     }

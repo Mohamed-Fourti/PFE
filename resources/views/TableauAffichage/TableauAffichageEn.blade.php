@@ -15,12 +15,12 @@
                 <div class="card-header">
                     Création de nouveau Affichage
                 </div>
-                <div class="card-body">
+                <div class="card-body ">
                     <form action="{{route('TableauAffichage.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group ">
                             <label for="title" class="col-4 col-form-label">title</label>
-                            <div class="col-8">
+                            <div class="col-12">
                                 <div class="input-group">
 
                                     <input id="title" name="title" type="text" class="form-control">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group ">
                             <label for="slug" class="col-4 col-form-label">title</label>
-                            <div class="col-8">
+                            <div class="col-12">
                                 <div class="input-group">
 
                                     <input name="slug" id="slug" type="text" class="form-control" readonly="readonly">
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-4 col-form-label" for="file">Fichier :</label>
-                            <div class="col-8">
+                            <div class="col-12">
 
                                 <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
                                 <div id="errors"></div>
@@ -50,7 +50,7 @@
 
                         <div class="form-group">
                             <label class="col-4 col-form-label" for="class">Classe :</label>
-                            <div class="col-8">
+                            <div class="col-12">
                                 <select id="class" name="class" class="custom-select">
                                     <option>choisir</option>
                                     @foreach($classes as $class)
@@ -62,7 +62,7 @@
 
                         <div class="form-group ">
                             <label for="editor1" class="col-4 col-form-label">Remarques :</label>
-                            <div class="col-8">
+                            <div class="col-12">
                                 <textarea id="editor1" name="remarques" cols="40" rows="2" class="form-control"></textarea>
                             </div>
                         </div>

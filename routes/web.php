@@ -14,7 +14,8 @@ use App\Http\Controllers\Admin\FicheDeVœux\ListmatièresController;
 use App\Http\Controllers\Front\FicheDeVœuxController as FrontFicheDeVœuxController;
 use App\Http\Controllers\Front\InscriptionController as FrontInscriptionController;
 use App\Http\Controllers\Admin\Publication\InscriptionController as BackInscriptionController;
-use App\Http\Controllers\Front\ColloqueScientifiques;
+use App\Http\Controllers\Front\ColloqueScientifiques as FrontColloqueScientifiquesController;
+use App\Http\Controllers\Admin\ColloqueScientifique\ColloqueScientifiqueController as BackColloqueScientifiquesController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Réclamation\RéclamationController;
 use App\Http\Controllers\Réclamation\TraitementController;
@@ -153,16 +154,23 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('rattrapages/show/{id}', [BackRattrapagesController::class, 'show'])->name('rattrapages.show');
     Route::get('rattrapages/pdf/{id}', [BackRattrapagesController::class, 'pdf'])->name('rattrapages.pdf');
 
+    Route::resource('formation', BackRattrapagesController::class);
+
     Route::resource('Emploi', BackEmploitempController::class);
+    Route::post('Emploi/delete', [BackEmploitempController::class, 'delete'])->name('Emploi/delete');
 
     Route::resource('TableauAffichage-Admin', TableauAffichageAdminController::class);
-    Route::post('TableauAffichage-Admin/{id}', [TableauAffichageAdminController::class, 'destroy']);
+    Route::post('TableauAffichage-Admin/{id}', [TableauAffichageAdminController::class, 'destroy'])->name('TableauAffichage-Admin/destroy');
+
+    Route::resource('ColloqueScientifiques', BackColloqueScientifiquesController::class);
+    Route::post('ColloqueScientifiques/{id}', [BackColloqueScientifiquesController::class, 'destroy']);
+    Route::get('ColloqueScientifiques/pdf/{id}', [BackColloqueScientifiquesController::class, 'pdf'])->name('ColloqueScientifiques.pdf');
 });
 
 
 Route::group(['middleware' => ['role:Enseignants|admin']], function () {
     /* Tickets */
-    Route::get('réclamation', [RéclamationController::class, 'index']);
+    Route::get('réclamation', [RéclamationController::class, 'index'])->name('réclamation');;
     Route::post('réclamation/enregistrer', [RéclamationController::class, 'store'])->name('réclamation/enregistrer');
 
 
@@ -175,8 +183,8 @@ Route::group(['middleware' => ['role:Enseignants|admin']], function () {
 
     Route::get('/', [FrontPublicationController::class, 'index']);
 
-    Route::resource('ColloqueScientifique', ColloqueScientifiques::class);
-    Route::post('ColloqueScientifiquee', [ColloqueScientifiques::class, 'pdf'])->name('ColloqueScientifique/pdf');
+    Route::resource('ColloqueScientifique', FrontColloqueScientifiquesController::class);
+    Route::post('ColloqueScientifiquee', [FrontColloqueScientifiquesController::class, 'pdf'])->name('ColloqueScientifique/pdf');
 
     Route::resource('TableauAffichage', TableauAffichageController::class);
 
@@ -212,6 +220,8 @@ Route::get('Formation', function () {
 });
 
 Route::get('contact', [ContactController::class, 'index']);
+Route::post('contact/{id}', [BackContactsController::class, 'destroy'])->name('contact/destroy');
+
 Route::post('contact/enregistrer', [ContactController::class, 'store'])->name('contact.enregistrer');
 
 Route::resource('test', testing::class);
@@ -220,7 +230,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'auth'], functi
     Lfm::routes();
 });
 
-Route::get('/', [FrontPublicationController::class, 'index']);
+Route::get('/', [FrontPublicationController::class, 'index'])->name('/');
 
 Route::prefix('Publications')->group(function () {
     Route::get('{slug}', [FrontPublicationController::class, 'show'])->name('Publication/show');

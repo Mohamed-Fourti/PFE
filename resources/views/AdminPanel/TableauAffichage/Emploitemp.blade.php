@@ -31,12 +31,17 @@
             <div class="form-group">
 
               <label for="select" class="col-2 col-form-label">Classe</label>
-              <select id="select" name="list_classe_id" class="col-4 custom-select">
-                <option value="" disabled selected hidden>Choisir</option>
+              <select id="select" name="list_classe_id" class="col-4 custom-select @error('list_classe_id') is-invalid @enderror">
+                <option value="" disabled selected>Choisir</option>
                 @foreach ($classes as $classe)
                 <option value="{{ $classe->id }}"> {{ $classe->class }}</option>
                 @endforeach
               </select>
+              @error('list_classe_id')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
             </div>
             <div class="form-group row d-flex justify-content-center">
               <div class="btn-group ">
@@ -65,9 +70,10 @@
             <thead>
               <tr>
                 <th scope="col">nom</th>
-                <th scope="col">Path</th>
+                <th scope="col">Chemin</th>
                 <th scope="col">Class</th>
                 <th scope="col">Date de dépôt</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -77,6 +83,7 @@
                 <td>{{ $data->file_path }}</td>
                 <td>{{ $data->ListClass->class }}</td>
                 <td>{{ $data->created_at }}</td>
+                <td><a class="delete" data-toggle="modal" data-target="#delete" data-id='{{$data->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a></td>
               </tr>
               @endforeach
 
@@ -90,10 +97,39 @@
 
   </div>
 </div>
+<div id="delete" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <form method="POST" action="{{ route('Emploi/delete')}}">
+        @csrf
+
+        <input hidden id="id" name="id">
+
+        <div class="modal-header">
+          <h4 class="modal-title">supprimer</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+          </button>
+        </div>
+        <div class="modal-body">
+          Êtes-vous sûr de vouloir supprimer l'utilisateur ?
+        </div>
+        <div class="modal-footer">
+
+          <button type="submit" class="btn btn-info waves-effect waves-light">supprimer</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 @push('scripts')
 <script>
+  $(document).on('click', '.delete', function() {
+    let id = $(this).attr('data-id');
+    $('#id').val(id);
+  });
   $("#input-fr").fileinput({
     language: "fr",
     allowedFileExtensions: ["xlx", "xls", "pdf", "xlsx"],
@@ -101,6 +137,8 @@
     dropZoneEnabled: false,
     elErrorContainer: '#errors',
     showUpload: false,
+    required: true,
+
 
   });
   $(document).ready(function() {

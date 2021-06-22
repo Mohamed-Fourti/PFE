@@ -66,43 +66,46 @@
             <div class="layer layer-8"></div>
         </div>
     </div>
-<header id="header-part">
-    <div class="header-top d-none d-lg-block">
-        <div class="container">
-            <div class="row ">
-                <div class="col-lg-12 col-md-12 d-flex flex-row">
-                    <div class="">
+    <header id="header-part">
+        <div class="header-top d-none d-lg-block">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-lg-12 col-md-12 d-flex flex-row">
+                        <div class="">
 
-                        <img src="{{ asset('images/flag.png') }}" alt="Logo">
+                            <img src="{{ asset('images/flag.png') }}" alt="Logo">
 
+                        </div>
+                        <div id="ministry_logo">République Tunisienne
+                            <br>Ministère de l’Enseignement Supérieur et de la Recherche Scientifique
+                            <br>Direction générale des études technologiques
+                        </div>
                     </div>
-                    <div id="ministry_logo">République Tunisienne
-                        <br>Ministère de l’Enseignement Supérieur et de la Recherche Scientifique
-                        <br>Direction générale des études technologiques
-                    </div>
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div><!-- header logo support -->
-    
-         <div class="navigation">
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div><!-- header logo support -->
+
+        <div class="navigation" style="    height: 75px;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 col-md-7 col-sm-6 col-3">
                         <nav class="navbar navbar-expand-lg">
+
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>   
+                                <span class="icon-bar"></span>
                             </button>
-                            <div>
-                                    <a href="{{ url('/') }}">
-                                        <img src="{{ asset('images/logo.png') }}" alt="Logo">
-                                    </a>
-                                </div>
 
-                                <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+
+
+                            <div class="collapse navbar-collapse sub-menu-bar" style="    z-index: 999; background-color: #f8fafc;" controls="navbarSupportedContent" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
+                                    <div class="mr-3">
+                                        <a href="{{ url('/') }}">
+                                            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                                        </a>
+                                    </div>
                                     <li class="nav-item" id="">
                                         <a href="{{ url('/') }}">Accueil</a>
                                     </li>
@@ -168,6 +171,9 @@
                                             <li>
                                                 <a href="{{ url('rattrapage') }}">Rattrapage</a>
                                             </li>
+                                            <li>
+                                                <a href="{{ url('ColloqueScientifique') }}">Formation</a>
+                                            </li>
 
                                         </ul>
                                     </li>
@@ -179,49 +185,50 @@
 
                                 </ul>
                             </div>
-                            </nav> <!-- nav -->
+                        </nav> <!-- nav -->
                     </div>
 
-                            <div class="col-lg-3 col-md-5 col-sm-6 col-9">
-                            <div class="right-icon text-right">
-                                <ul>
+                    <div class="col-lg-3 col-md-5 col-sm-6 col-9">
+                        <div class="right-icon text-right">
+                            <ul>
 
-                                    @guest
-                                    @if (Route::has('login'))
-                                    <li>
-                                        <a class="nav-link" href="{{ route('login') }}">Connexion</a>
-                                    </li>
-                                    @endif
+                                @guest
+                                @if (Route::has('login'))
+                                <li>
+                                    <a class="nav-link" href="{{ route('login') }}">Connexion</a>
+                                </li>
+                                @endif
 
-                                    @if (Route::has('register'))
-                                    <li>
-                                        <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
-                                    </li>
-                                    @endif
-                                    @else
-                                    <li>
-                                        <div class="container">
-                                            <div class="action act">
-                                                <div onclick="menuToggleNot();">
-                                                    <div class="notification show-count"></div>
-                                                    <span id="CountNotification" hidden> {{auth()->user()->unreadNotifications()->count()}} </span>
-                                                </div>
-                                                <div class="menu2">
+                                @if (Route::has('register'))
+                                <li>
+                                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                                </li>
+                                @endif
+                                @else
+                                <li>
+                                    <div class="container">
+                                        <div class="action ">
+                                            <div onclick="menuToggleNot();">
+                                                <div class="notification show-count"></div>
+                                                <span id="CountNotification" hidden> {{auth()->user()->unreadNotifications()->count()}} </span>
+                                            </div>
+                                            <div class="menu2">
 
-                                                    <ul aria-labelledby="notificationsMenu" id="notificationsMenu">
-                                                        <li class="dropdown-header">No notifications</li>
-                                                    </ul>
-                                                </div>
+                                                <ul aria-labelledby="notificationsMenu" id="notificationsMenu">
+                                                    <li class="dropdown-header">No notifications</li>
+                                                </ul>
                                             </div>
                                         </div>
-                                    </li>
+                                    </div>
+                                </li>
 
-                                    <li>
+                                <li>
+                                    <div class="container">
 
-                                        <div class="action act">
-                                            <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/profile_img.png') }}"></div>
+                                        <div class="action ">
+                                            <div class="profile" onclick="menuToggle();"><img src="/storage/{{Auth::user()->image}}"></div>
                                             <div class="menu">
-                                                <h3>{{ Auth::user()->nom }}  {{ Auth::user()->prenom }}<br><span>{{ Auth::user()->role }}</span></h3>
+                                                <h3>{{ Auth::user()->nom }} {{ Auth::user()->prenom }}<br><span>{{ Auth::user()->role }}</span></h3>
                                                 <ul>
                                                     <li><img src="{{ asset('images/618631.svg') }}"><a href="{{ url('profile',Auth::user()->id)}}">Profile</a></li>
                                                     <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -234,14 +241,15 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </li>
+                                    </div>
+                                </li>
 
-                                </ul>
-                                @endguest
-                            </div> <!-- right icon -->
-                        </div> <!-- row -->
-                    </div> <!-- container -->
-                </div>
+                            </ul>
+                            @endguest
+                        </div> <!-- right icon -->
+                    </div> <!-- row -->
+                </div> <!-- container -->
+            </div>
     </header>
 
     @yield('content')
@@ -308,7 +316,7 @@
                                         <p>isetjb@gmail.com</p>
                                     </div>
                                 </li>
-                  
+
                             </ul>
                         </div> <!-- footer address -->
                     </div>

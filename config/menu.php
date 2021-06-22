@@ -78,6 +78,12 @@ return [
         ],
     ],
 
+    'Formation' => [
+        'icon'   => 'fas fa-atlas',
+        'route' => 'ColloqueScientifiques.index',
+
+    ],
+
     'Rattrapage' => [
         'icon'   => 'sticky-note',
         'route' => 'rattrapages.index',

@@ -3,11 +3,8 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <style>
-    body {
-      font-family: DejaVu Sans, sans-serif;
-    }
+
   </style>
 </head>
 
@@ -18,11 +15,11 @@
     Département Technologies de l'Informatique
   </div>
   <div>الجمهورية التونسية <br> وزارة التعليم العالي
-     <div>{{ $data->classe }}</div>
     و البحث العلمي <br> الادارة العامة للدراسات التكنولوجية<br>
     <br> المعهد العالي للدراسات التكنولوجية بجربة
     قسم تكنولوجيا الاعلامية
   </div>
+  <div>{{ $data->classe }}</div>
 
   <div>Date:</div>
   <h4>AVIS AUX ETUDIANTS DE LA CLASSE</h4>

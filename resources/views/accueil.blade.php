@@ -30,7 +30,7 @@
 
 <!--====== ABOUT PART START ======-->
 
-<section id="about-part" class="pt-65">
+<section id="about-part">
     <div class="container">
         <div class="row">
             <div class="col-lg-7">
@@ -108,6 +108,7 @@ Endchekbox-->
             </div>
         </div> <!-- row -->
         <div class="row">
+            @if($nouveautélasts!=null)
 
             @foreach($nouveautélasts as $nouveautélast)
             <div class="col-lg-6">
@@ -132,6 +133,9 @@ Endchekbox-->
             </div> <!-- singel news -->
 
             @endforeach
+            @endif
+
+            @if($nouveautés!=null)
 
             @foreach($nouveautés as $nouveauté )
             <div class="col-lg-6">
@@ -166,6 +170,7 @@ Endchekbox-->
                 </div> <!-- singel news -->
 
                 @endforeach
+                @endif
 
             </div>
         </div> <!-- row -->

@@ -59,7 +59,8 @@
           <form action="{{route('EtuMat')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="file-loading">
-              <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
+              <input id="input-fr" name="file" type="file" class="file @error('file') is-invalid @enderror" data-show-preview="false">
+
             </div>
             <div id="errors"></div>
 
@@ -71,94 +72,106 @@
               <option value="GM">Département GM</option>
               <option value="SEG">Département SEG</option>
             </select>
-            <label for="Class">Class</label>
-            <input id="Class" name="class" type="text" class="form-control">
-            <label for="Sem">Sem</label>
-            <select id="Sem" name="sem" class="form-control">
+            <div>
+              <label for="Class">Class</label>
+              <input id="Class" name="class" type="text" class="@error('class') is-invalid @enderror form-control">
 
-              @foreach($datas as $data)
-              <option value="{{$data->id}}">{{$data->sem}}</option>
-              @endforeach
-            </select>
-            <br>
-            <button type="submit" class="btn btn-primary ">cree</button>
+
+              @error('class')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+
+              <label for="Sem">Sem</label>
+              <select id="Sem" name="sem" class="form-control">
+
+                @foreach($datas as $data)
+                <option value="{{$data->id}}">{{$data->sem}}</option>
+                @endforeach
+              </select>
+              <br>
+              <button type="submit" class="btn btn-primary ">cree</button>
 
           </form>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="col-md-12">
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-      <div class="card">
+    <div class="row">
 
-        <div class="card-header">
-          List des plans d'études et des fiches matières S1.
+      <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="card">
+
+          <div class="card-header">
+            List des plans d'études et des fiches matières S1.
+          </div>
+          <div class="card-body table-responsive">
+            <table id="table_id1" class="table">
+
+              <thead>
+                <tr>
+                  <th scope="col">Département</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Action</th>
+
+                  <th scope="col">Nom de fichier</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($EtuMats->where('sem','1') as $EtuMat)
+                <tr>
+                  <td>{{ $EtuMat->département }}</td>
+                  <td>{{ $EtuMat->class }}</td>
+                  <td><a class="delete" data-toggle="modal" data-target="#delete" data-id='{{$EtuMat->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a></td>
+                  <td>{{ $EtuMat->name }}</td>
+                </tr>
+                @endforeach
+
+              </tbody>
+
+            </table>
+
+          </div>
         </div>
-        <div class="card-body table-responsive">
-          <table id="table_id1" class="table">
 
-            <thead>
-              <tr>
-                <th scope="col">Département</th>
-                <th scope="col">Class</th>
-                <th scope="col">Action</th>
-
-                <th scope="col">Nom de fichier</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($EtuMats->where('sem','1') as $EtuMat)
-              <tr>
-                <td>{{ $EtuMat->département }}</td>
-                <td>{{ $EtuMat->class }}</td>
-                <td><a class="delete" data-toggle="modal" data-target="#delete" data-id='{{$EtuMat->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a></td>
-                <td>{{ $EtuMat->name }}</td>
-              </tr>
-              @endforeach
-
-            </tbody>
-
-          </table>
-
-        </div>
       </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+        <div class="card">
 
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-      <div class="card">
+          <div class="card-header">
+            List des plans d'études et des fiches matières S2.
+          </div>
+          <div class="card-body table-responsive">
+            <table id="table_id2" class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Département</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Nom de fichier</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($EtuMats->where('sem','2') as $EtuMat)
+                <tr>
+                  <td>{{ $EtuMat->département }}</td>
+                  <td>{{ $EtuMat->class }}</td>
+                  <td>{{ $EtuMat->name }}</td>
+                  <td><a class="delete" data-toggle="modal" data-target="#delete" data-id='{{$EtuMat->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a></td>
 
-        <div class="card-header">
-          List des plans d'études et des fiches matières S2.
+                </tr>
+                @endforeach
+
+              </tbody>
+            </table>
+
+          </div>
         </div>
-        <div class="card-body table-responsive">
-          <table id="table_id2" class="table">
-            <thead>
-              <tr>
-                <th scope="col">Département</th>
-                <th scope="col">Class</th>
-                <th scope="col">Nom de fichier</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($EtuMats->where('sem','2') as $EtuMat)
-              <tr>
-                <td>{{ $EtuMat->département }}</td>
-                <td>{{ $EtuMat->class }}</td>
-                <td>{{ $EtuMat->name }}</td>
-                <td><a class="delete" data-toggle="modal" data-target="#delete" data-id='{{$EtuMat->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a></td>
 
-              </tr>
-              @endforeach
-
-            </tbody>
-          </table>
-
-        </div>
       </div>
-
     </div>
 
 
@@ -207,7 +220,9 @@
     maxFileSize: ["2024"],
     showUpload: false,
     dropZoneEnabled: false,
-    elErrorContainer: '#errors'
+    elErrorContainer: '#errors',
+    required: true,
+
   });
   $(document).ready(function() {
     $('#table_id1').DataTable({

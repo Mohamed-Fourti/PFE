@@ -26,6 +26,7 @@ class User extends Authenticatable
         'cin',
         'class',
         'image',
+        'gsm',
     ];
 
     /**

@@ -81,8 +81,15 @@ class ListClassesController extends Controller
 
     function delete(request $request)
     {
-        $Publication = ListClass::findOrFail($request->id);
-        $Publication->delete();
-        return back();
+        $List = ListClass::findOrFail($request->id);
+
+        if (Storage::exists($List->file_path)) {
+            Storage::delete($List->file_path);
+            $List->delete();
+        } else {
+            return redirect()->back()->with('msg', 'fichier ne existe pas');
+        }
+        return redirect()->back()->with('msg', 'deleted');
+    }
     }
 }

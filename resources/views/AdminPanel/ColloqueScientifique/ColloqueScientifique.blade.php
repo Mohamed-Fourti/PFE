@@ -7,12 +7,10 @@
     <table id="table_id" class="table table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prénom</th>
-                <th scope="col">Email</th>
-                <th scope="col">Tel</th>
-                <th scope="col">Message</th>
+                <th scope="col">Enseignants</th>
+                <th scope="col">de</th>
+                <th scope="col">à</th>
+                <th scope="col">Date de création</th>
                 <th scope="col">Action</th>
 
             </tr>
@@ -21,13 +19,13 @@
 
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data->id }}</td>
-                <td>{{ $data->nom }}</td>
-                <td>{{ $data->prenom }}</td>
-                <td>{{ $data->email }}</td>
-                <td>{{ $data->tel }}</td>
-                <td>{{ $data->message }}</td>
+                <input type="text" name="id" class="id" hidden value="{{ $data->id }}">
+                <td>{{ $data->user->prenom }}{{ $data->user->nom }}</td>
+                <td>{{ $data->من }}</td>
+                <td>{{ $data->إلى }}</td>
+                <td>{{ $data->created_at }}</td>
                 <td class="d-flex justify-content-center">
+                    <a class="show " href="{{route('ColloqueScientifiques.show',$data->id)}}"><i class="fa fa-eye" style="color: green;font-size:20px;"></i></a>
                     <a class="delete mr-3" data-toggle="modal" data-target="#delete" data-id='{{$data->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a>
                 </td>
             </tr>
@@ -41,7 +39,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <form method="POST" action="{{ route('contact/destroy','id')}}">
+            <form method="POST" action="{{ route('ColloqueScientifiques.destroy','id')}}">
                 @csrf
                 <input hidden id="id" name="id">
 
@@ -51,7 +49,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Êtes-vous sûr de vouloir supprimer le message ?
+                    Êtes-vous sûr de vouloir supprimer la demnade ?
                 </div>
                 <div class="modal-footer">
 

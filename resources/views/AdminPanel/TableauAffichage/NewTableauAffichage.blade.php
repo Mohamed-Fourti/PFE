@@ -10,7 +10,7 @@
     <input name="id" type="text" hidden value="{{ isset($datas->id) ? $datas->id : '' }}">
 
     <div class="row">
-      <div class="col-lg-8 col-md-8 col-sm-7 col-6">
+      <div class="col-lg-5 col-md-5 col-sm-4 col-3">
 
         <div class="card">
           <div class="card-header">
@@ -25,31 +25,7 @@
             @enderror
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-3 col-2">
-        <div class="card">
-          <div class="card-header">
-            Publication
-          </div>
-          <div class="card-body">
-            @if($active)
-            @if($datas->active==1 )
 
-
-            <input name="active" id="Publié" type="checkbox" value="false" checked>
-            <label for="Publié" class="">Publié</label>
-            @else
-            <input name="active" id="Publié" type="checkbox" value="false">
-            <label for="Publié" class="">Publié</label>
-            @endif
-
-            @else
-            <input name="active" id="Publié" type="checkbox" value="1">
-            <label for="Publié">Publié</label>
-            @endif
-
-          </div>
-        </div>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3 col-2">
         <div class="card">
@@ -82,6 +58,81 @@
           </div>
         </div>
       </div>
+      <div class="col-lg-4 col-md-4 col-sm-3 col-2">
+        <div class="card">
+          <div class="card-header">
+            file
+          </div>
+          <div class="card-body">
+
+
+
+            <div class="file-loading">
+              <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
+
+            </div>
+            <div id="errors"></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-5 col-2">
+        <div class="card">
+          <div class="card-header">
+            Remarque
+          </div>
+          <div class="card-body">
+
+
+
+            <div class="form-group ">
+              <div class="col-12">
+                <textarea id="text" name="remarques" cols="40" rows="4" class="form-control"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-5 col-2">
+
+        <div class="row justify-content-md-center">
+
+          <button type="submit" class="btn btn-primary ">Créer</button>
+        </div>
+        <hr style="  border-top: 3px solid #6cb2eb;">
+
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+        <div class="card">
+          <div class="card-header">
+            Publication
+          </div>
+          <div class="card-body">
+            @if($active)
+            @if($datas->active==1 )
+
+
+            <input name="active" id="Publié" type="checkbox" value="false" checked>
+            <label for="Publié" class="">Publié</label>
+            @else
+            <input name="active" id="Publié" type="checkbox" value="false">
+            <label for="Publié" class="">Publié</label>
+            @endif
+
+            @else
+            <input name="active" id="Publié" type="checkbox" value="1">
+            <label for="Publié">Publié</label>
+            @endif
+
+          </div>
+        </div>
+
+      </div>
+
       <div class="col-lg-3 col-md-3 col-sm-3 col-2">
         <div class="card">
           <div class="card-header">
@@ -262,31 +313,13 @@
 
 
 
-        <div class="row justify-content-md-center">
 
-          <button type="submit" class="btn btn-primary ">Créer</button>
-        </div>
 
       </div>
 
 
       <div class="col-lg-4 col-md-4 col-sm-7 col-6">
-        <div class="card">
-          <div class="card-header">
-            file
-          </div>
-          <div class="card-body">
 
-
-
-            <div class="file-loading">
-              <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
-
-            </div>
-            <div id="errors"></div>
-
-          </div>
-        </div>
         <div class="card">
           <div class="card-header">
             Image

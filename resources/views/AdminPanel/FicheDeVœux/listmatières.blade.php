@@ -113,7 +113,9 @@
     allowedFileExtensions: ["xlx", "xls", "xlsx"],
     maxFileSize: ["2024"],
     dropZoneEnabled: false,
-    elErrorContainer: '#errors'
+    elErrorContainer: '#errors',
+    required: true,
+
   });
   $(document).ready(function() {
     $('#table_id').DataTable({

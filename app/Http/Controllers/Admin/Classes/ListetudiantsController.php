@@ -41,7 +41,7 @@ class ListetudiantsController extends Controller
             $fileModel->save();
 
 
-            return back()->with('success', 'Succès');
+            return back()->with('msg', 'Succès');
         }
     }
 
@@ -50,40 +50,44 @@ class ListetudiantsController extends Controller
         $cins = User::select('cin', 'id', 'class')->get();
         $test = 0;
         $data = ListEtudiant::latest()->first();
-        $tab = Excel::toCollection(new UsersImport, '../storage/app/' . $data->file_path);
-        foreach ($cins as $cin) {
+        if ($data) {
+            $tab = Excel::toCollection(new UsersImport, '../storage/app/' . $data->file_path);
+            foreach ($cins as $cin) {
 
-            foreach ($tab as $index => $value) {
+                foreach ($tab as $index => $value) {
 
-                if (
-                    collect($tab[$index])
-                    ->first(function ($value) use ($cin) {
-                        return $value['cin'] == $cin->cin;
-                    })
-                ) {
                     if (
                         collect($tab[$index])
                         ->first(function ($value) use ($cin) {
-                            return $value['class'] == $cin->class;
-                        }) == NULL
+                            return $value['cin'] == $cin->cin;
+                        })
                     ) {
-                        $ExcelImport = collect($tab[$index])
+                        if (
+                            collect($tab[$index])
                             ->first(function ($value) use ($cin) {
-                                return $value['cin'] == $cin->cin;
-                            })->only('class');
-                        User::where('id', $cin->id)->update([
-                            'class' => $ExcelImport['class']
-                        ]);
-                        $test = 1;
+                                return $value['class'] == $cin->class;
+                            }) == NULL
+                        ) {
+                            $ExcelImport = collect($tab[$index])
+                                ->first(function ($value) use ($cin) {
+                                    return $value['cin'] == $cin->cin;
+                                })->only('class');
+                            User::where('id', $cin->id)->update([
+                                'class' => $ExcelImport['class']
+                            ]);
+                            $test = 1;
+                        }
                     }
                 }
             }
-        }
 
-        if ($test == 0) {
-            return redirect()->back()->with('success', 'Pas de mise à jour');
+            if ($test == 0) {
+                return redirect()->back()->with('msg', 'Pas de mise à jour');
+            } else {
+                return redirect()->back()->with('msg', 'mise à jour');
+            }
         } else {
-            return redirect()->back()->with('success', 'mise à jour');
+            return redirect()->back()->with('msg', 'Aucun fichier excel à mettre à jour à partir de ');
         }
     }
 
@@ -113,8 +117,8 @@ class ListetudiantsController extends Controller
             Storage::delete($List->file_path);
             $List->delete();
         } else {
-            return redirect()->back()->with('success', 'fichier ne existe pas');
+            return redirect()->back()->with('msg', 'fichier ne existe pas');
         }
-        return redirect()->back()->with('success', 'deleted');
+        return redirect()->back()->with('msg', 'deleted');
     }
 }

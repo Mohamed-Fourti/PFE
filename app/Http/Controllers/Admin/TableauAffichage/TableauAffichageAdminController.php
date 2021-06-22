@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\ListClass;
 use App\Models\TableauAffichage;
-use App\Models\TableauAffichageAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +19,7 @@ class TableauAffichageAdminController extends Controller
      */
     public function index()
     {
-        $datas = TableauAffichageAdmin::all();
+        $datas = TableauAffichage::all();
 
 
         return view('AdminPanel.TableauAffichage.ListTableauAffichage', compact('datas'));
@@ -47,6 +46,11 @@ class TableauAffichageAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'              => 'required|string|max:255',
+
+        ]);
+
         $fileModel = $request->except('image');
 
         $request->merge([
@@ -112,7 +116,7 @@ class TableauAffichageAdminController extends Controller
      */
     public function destroy(request $request)
     {
-        $Publication = TableauAffichageAdmin::findOrFail($request->id);
+        $Publication = TableauAffichage::findOrFail($request->id);
         $Publication->delete();
         return back();
     }

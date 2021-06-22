@@ -13,11 +13,11 @@
           <table id="table_id" class="table table-bordered" style="width:100%">
             <thead>
               <tr>
+                <th scope="col">Auteur</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Class</th>
                 <th scope="col">Date de création</th>
                 <th scope="col">Publié ou non</th>
-                <th scope="col">Categories</th>
                 <th scope="col">Action</th>
 
               </tr>
@@ -27,8 +27,10 @@
               @foreach($datas as $data)
               <tr>
                 <input type="text" name="id" class="id" hidden value="{{ $data->id }}">
+                <td>{{ $data->user->nom }}</td>
                 <td>{{ $data->title }}</td>
                 <td>{{ $data->class }}</td>
+
                 <td>{{ $data->created_at }}</td>
                 <td>
                   @if($data->active==0 )
@@ -39,10 +41,8 @@
                   <span class="badge badge-success">Publié</span>
                   @endif
                 </td>
-                <td>{{ $data->categories->title }}</td>
                 <td class="d-flex justify-content-center">
                   <a class="delete mr-3" data-toggle="modal" data-target="#delete" data-id='{{$data->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a>
-                  <a class="edit " href="{{route('TableauAffichage-Admin.edit',$data->id)}}"><i class="fa fa-edit" style="color: #2196f3;font-size:20px;"></i></a>
                 </td>
               </tr>
               @endforeach
@@ -63,7 +63,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <form method="POST" action="{{ route('TableauAffichage-Admin.destroy','id')}}">
+      <form method="POST" action="{{ route('TableauAffichage-Admin/destroy','id')}}">
         @csrf
         <input hidden id="id" name="id">
 

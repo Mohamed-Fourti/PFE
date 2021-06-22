@@ -44,14 +44,10 @@ class RattrapageController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'matiere'       => 'required|string|max:255',
             'classe'        => 'required|string|max:255',
             'motifRemplace' => 'required|string|max:255',
-            'jour1'         => 'required|date',
-            'seance1'       => 'required|string|max:255',
-            'jour2'         => 'required|date',
-            'seance2'       => 'required|string|max:255',
             'salle'         => 'required|string|max:255',
 
         ]);

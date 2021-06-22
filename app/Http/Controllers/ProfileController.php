@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Mpdf\Tag\Input;
 
 class ProfileController extends Controller
 {
@@ -19,8 +20,8 @@ class ProfileController extends Controller
      */
     public function index($id)
     {
-        $data=User::where('id',$id)->first();
-        return view('profile',compact('data'));
+        $data = User::where('id', $id)->first();
+        return view('profile', compact('data'));
     }
 
     /**
@@ -52,7 +53,6 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -75,20 +75,48 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $update = [
-            'nom'       =>  $request->nom,
-            'prenom'    =>  $request->prenom,
-            'email'     =>  $request->email,
-            'password'  =>  Hash::make($request->password),
-            'image'     =>  basename($request->image),
-            'gsm'     =>  $request->gsm, 
-            'class'     =>  $request->class, 
-        ];
-        $request->merge([
-            'image' => basename($request->image),
-        ]);
-        DB::table('Users')->where('id',Auth::user()->id)->update($update);
-        return redirect()->back();
+        if ($request->get('password') == '') {
+            if ($request->file('image')) {
+
+                $fileName = $request->image->getClientOriginalName();
+
+                $filePath = $request->file('image')->storeAs(Auth::user()->id . '/photo_de_profil/', $fileName, ['disk' => 'public']);
+
+                $fileModel = $request->except(['_token', 'password', 'image']);
+                $fileModel = Arr::add($fileModel, 'image', $filePath);
+
+                User::where('id', Auth::user()->id)->update($fileModel);
+
+                return redirect()->back();
+
+
+                return back()->with('success', 'Succès');
+            }
+            $fileModel = $request->except(['_token', 'password']);
+
+            User::where('id', Auth::user()->id)->update($fileModel);
+            return redirect()->back();
+        } else {
+
+            if ($request->file()) {
+                $fileName = $request->image->getClientOriginalName();
+
+                $filePath = $request->file('image')->storeAs('public/' . Auth::user()->id . '//photo_de_profil/', $fileName);
+
+                $fileModel = $request->except(['_token', 'image']);
+                $fileModel = Arr::add($fileModel, 'image', $filePath);
+
+                User::where('id', Auth::user()->id)->update($fileModel);
+                return redirect()->back();
+
+
+                return back()->with('success', 'Succès');
+            }
+            $fileModel = $request->except(['_token']);
+
+            User::where('id', Auth::user()->id)->update($fileModel);
+            return redirect()->back();
+        }
     }
 
     /**
