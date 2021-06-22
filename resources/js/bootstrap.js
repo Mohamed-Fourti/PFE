@@ -126,8 +126,9 @@ const NOTIFICATION_TYPES = {
             text +=`<p>nouvel affichage publié par ${user_name} </p>`;
         }
         if(notification.type === NOTIFICATION_TYPES.RéclamationTraite) {
+            const id = notification.data.id;
             const user_name = notification.data.user_name;
-            text +=`<p>nouvel affichage publié par ${user_name} </p>`;
+            text +=`<p> Votre Réclamation N°${id} a été triaté par ${user_name} </p>`;
         }  
         return text;
     }

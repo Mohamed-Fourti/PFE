@@ -1965,8 +1965,9 @@ function makeNotificationText(notification) {
   }
 
   if (notification.type === NOTIFICATION_TYPES.RéclamationTraite) {
+    var id = notification.data.id;
     var _user_name2 = notification.data.user_name;
-    text += "<p>nouvel affichage publi\xE9 par ".concat(_user_name2, " </p>");
+    text += "<p> Votre R\xE9clamation N\xB0".concat(id, " a \xE9t\xE9 triat\xE9 par ").concat(_user_name2, " </p>");
   }
 
   return text;

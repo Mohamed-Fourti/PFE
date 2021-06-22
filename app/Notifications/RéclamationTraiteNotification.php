@@ -18,10 +18,9 @@ class RéclamationTraiteNotification extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Traitement $data, $user_id)
+    public function __construct(Traitement $data)
     {
         $this->data = $data;
-        $this->$user_id = $user_id;
     }
 
     /**
@@ -55,9 +54,7 @@ class RéclamationTraiteNotification extends Notification implements ShouldQueue
     {
         return [
             'id' => $this->data->réclamation_id,
-            'user_name' => $this->user_id->user_id,
-
-
+            'user_name' => $this->data->technicien_id,
 
         ];
     }
@@ -66,8 +63,8 @@ class RéclamationTraiteNotification extends Notification implements ShouldQueue
     {
         return new BroadcastMessage([
             'data' => [
-                'id' => $this->data->user_id,
-                'user_name' => $this->data->technicien_id->nom,
+                'id' => $this->data->réclamation_id,
+                'user_name' => $this->data->technicien->nom,
             ],
 
         ]);

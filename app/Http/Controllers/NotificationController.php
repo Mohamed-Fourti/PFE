@@ -24,7 +24,7 @@ class NotificationController extends Controller
             }
 
             if ($notification->type == 'App\Notifications\RéclamationTraiteNotification') {
-                return redirect()->route('TableauAffichages', $notification->data['id']);
+                return redirect()->route('réclamation');
             }
         }
     }

@@ -26,7 +26,20 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-4 col-sm-3 col-2">
+                <div class="card">
+                    <div class="card-header">
+                        slug
+                    </div>
+                    <div class="card-body">
+                        <input readonly name="slug" id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" value="{{ isset($datas->slug) ? $datas->slug : '' }}" placeholder="Slug">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-3 col-sm-3 col-2">
                 <div class="card">
                     <div class="card-header">
                         Publication
@@ -254,14 +267,7 @@
 
 
             <div class="col-lg-4 col-md-4 col-sm-7 col-6">
-                <div class="card">
-                    <div class="card-header">
-                        slug
-                    </div>
-                    <div class="card-body">
-                        <input name="slug" id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" value="{{ isset($datas->slug) ? $datas->slug : '' }}" placeholder="Slug">
-                    </div>
-                </div>
+
                 <div class="card">
                     <div class="card-header">
                         Image
@@ -275,7 +281,7 @@
                         </div>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary text-white" class="btn btn-outline-secondary" type="button">Button</a>
+                                <a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary text-white" class="btn btn-outline-secondary" type="button">Image</a>
                             </div>
                             <input id="image" class="form-control" type="text" name="image" value="{{ old('image', isset($datas) ? getImage($datas) : '') }}">
                         </div>

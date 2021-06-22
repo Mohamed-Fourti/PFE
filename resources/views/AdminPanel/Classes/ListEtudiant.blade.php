@@ -4,14 +4,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
+
       <div class="card">
 
-        @csrf
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-          <strong>{{ $message }}</strong>
-        </div>
-        @endif
+
         <div class="card-header">
           Choisir un fichier
         </div>
@@ -37,7 +33,14 @@
 
         <button type="submit" class="btn btn-primary">Mise a jour</button>
       </form>
+      </br>
 
+      @csrf
+      @if ($message = Session::get('msg'))
+      <div class="alert alert-success ">
+        <strong>{{ $message }}</strong>
+      </div>
+      @endif
     </div>
 
   </div>
@@ -119,7 +122,9 @@
     allowedFileExtensions: ["xlx", "xls", "xlsx"],
     maxFileSize: ["2024"],
     dropZoneEnabled: false,
-    elErrorContainer: '#errors'
+    elErrorContainer: '#errors',
+    required: true,
+
   });
   $(document).ready(function() {
     $('#table_id').DataTable({

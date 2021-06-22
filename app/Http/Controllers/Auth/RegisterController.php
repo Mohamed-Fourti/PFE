@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'prenom' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'key' => ['required', 'starts_with:A1WZ']
+            'key' => ['required', 'starts_with:PFE']
 
         ], [
             'key.starts_with' => 'Clé incorrecte'

@@ -40,10 +40,10 @@ class ColloqueScientifiques extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request->except(['_token']);
-        $data=Arr::add($data,'user_id',Auth::user()->id);
-        DB::table('colloque_scientifiques')->insert($data); 
-
+        $data = $request->except(['_token']);
+        $data = Arr::add($data, 'user_id', Auth::user()->id);
+        ColloqueScientifique::create($data);
+        return redirect()->route('/');
     }
 
     /**
@@ -60,13 +60,13 @@ class ColloqueScientifiques extends Controller
 
 
 
-    public function pdf()
+    public function pdf($id)
     {
         $id = Auth::user()->id;
-        $data= ColloqueScientifique::where('user_id',1)->first();;
+        $data = ColloqueScientifique::where($id)->first();;
         $pdf = PDF::loadView('Demand.ColloqueScientifiquePDF', compact('data'));
-        
-        return $pdf->download('rgpd.pdf');        
+
+        return $pdf->download('rgpd.pdf');
     }
     /**
      * Show the form for editing the specified resource.

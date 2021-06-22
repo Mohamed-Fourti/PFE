@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ColloqueScientifique extends Model
 {
+    public $timestamps = true;
+
     use HasFactory;
     protected $fillable = [
         'الصفة',
@@ -21,4 +23,8 @@ class ColloqueScientifique extends Model
         'user_id'
 
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
