@@ -108,7 +108,7 @@ return [
                 'route' => 'TableauAffichage-Admin.index',
             ],
             [
-                'name'  => 'new Tableau d\'Affichage',
+                'name'  => 'Nouveau Tableau d\'Affichage',
                 'route' => 'TableauAffichage-Admin.create',
             ],
 

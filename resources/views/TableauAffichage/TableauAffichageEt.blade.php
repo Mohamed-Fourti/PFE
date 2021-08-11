@@ -23,17 +23,15 @@
                         @endif
                         <div class="blog-cont">
 
-
+                            <h4 id="spanTemps">{{ $data->title }}</h4>
                             <ul>
                                 <li><i class="fa fa-calendar"></i> {{ $data->created_at }}</li>
                                 <li><i class="fa fa-user "></i> Publier par {{ $data->user->nom }}</li>
                             </ul>
-                            {!! $data->remarques !!}
+
+                            {!! $data->body !!}
 
 
-                            <a class="btn btn-secondary" href="{{$data->file_path}}">
-                                <h4 id="spanTemps">Télécharger</h4>
-                            </a>
                         </div>
                     </div> <!-- singel blog -->
 
@@ -53,12 +51,6 @@
                 <div class="saidbar">
                     <div class="row">
                         <div class="col-lg-12 col-md-6">
-                            <div class="saidbar-search mt-30">
-                                <form action="#">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div> <!-- saidbar search -->
                             <div class="categories mt-30">
                                 <h4>Categories</h4>
                                 <ul>

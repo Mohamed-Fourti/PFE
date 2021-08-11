@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\TableauAffichage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inscription;
 use App\Models\ListClass;
 use App\Models\TableauAffichage;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class TableauAffichageEtController extends Controller
     {
 
         $Etclass = ListClass::where('class', Auth::user()->class)->first();
-        $datas = TableauAffichage::where('class', $Etclass->class)->orWhere('class', 'Tout')->latest()->paginate(3);
+        $datas = TableauAffichage::where('class', $Etclass->id)->orWhere('class', 'Tout')->latest()->paginate(3);
 
 
 
@@ -54,7 +55,7 @@ class TableauAffichageEtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
     }
 

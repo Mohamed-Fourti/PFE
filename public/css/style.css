@@ -748,8 +748,7 @@ p {
     -ms-user-select: none;
     user-select: none;
     border: 1px solid #ffc600;
-    padding: 0 35px;
-    font-size: 16px;
+    font-size: 11px;
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
     line-height: 50px;

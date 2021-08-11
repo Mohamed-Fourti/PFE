@@ -8,7 +8,9 @@ use App\Models\Rattrapage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ListClass;
-
+use App\Models\User;
+use App\Notifications\RattrapageNotification;
+use Illuminate\Support\Facades\DB;
 
 class RattrapageController extends Controller
 {
@@ -55,6 +57,12 @@ class RattrapageController extends Controller
         $data = $request->all();
         $data = Arr::add($data, 'user_id', Auth::user()->id);
         Rattrapage::create($data);
+        $usersid = DB::table('role_user')->where('role_id', '1')->get('user_id');
+        $dataUser = Rattrapage::orderBy('created_at', 'desc')->first();
+
+        foreach ($usersid as $users) {
+            User::findOrFail($users->user_id)->notify(new RattrapageNotification($dataUser));
+        }
         return back()->with('success', 'Votre demande de rattpage a été envoyer.');
     }
 

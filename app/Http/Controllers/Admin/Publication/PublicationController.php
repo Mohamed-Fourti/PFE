@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Publication;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Inscription;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -41,13 +42,8 @@ class PublicationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'              => 'required|string|max:255',
-            'excerpt'            => 'required|string|max:255',
-            'seo_title'          => 'required|string|max:255',
-            'meta_keywords'      => 'required|string|max:255',
-            'meta_description'   => 'required|string|max:255',
-            'body'               => 'required|string|max:255',
-            'slug'               => 'required|string|max:255',
+            'title'              => 'required',
+            'body'               => 'required',
         ]);
 
         $request->merge([
@@ -87,13 +83,9 @@ class PublicationController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'title'              => 'required|string|max:255',
-            'excerpt'            => 'required|string|max:255',
-            'seo_title'          => 'required|string|max:255',
-            'meta_keywords'      => 'required|string|max:255',
-            'meta_description'   => 'required|string|max:255',
-            'body'               => 'required|string|max:255',
-            'slug'               => 'required|string|max:255',
+            'title'              => 'required',
+            'excerpt'            => 'required',
+            'body'               => 'required',
         ]);
 
         $request->merge([
@@ -114,7 +106,7 @@ class PublicationController extends Controller
      */
     public function destroy(request $request)
     {
-        $Publication = Publication::findOrFail($request->id);
+        $Publication = Inscription::findOrFail($request->id);
         $Publication->delete();
         return back();
     }

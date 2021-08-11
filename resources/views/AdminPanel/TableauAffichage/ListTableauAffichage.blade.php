@@ -17,7 +17,6 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Class</th>
                 <th scope="col">Date de création</th>
-                <th scope="col">Publié ou non</th>
                 <th scope="col">Action</th>
 
               </tr>
@@ -32,15 +31,7 @@
                 <td>{{ $data->class }}</td>
 
                 <td>{{ $data->created_at }}</td>
-                <td>
-                  @if($data->active==0 )
 
-                  <span class="badge badge-warning">Pas publié</span>
-
-                  @else
-                  <span class="badge badge-success">Publié</span>
-                  @endif
-                </td>
                 <td class="d-flex justify-content-center">
                   <a class="delete mr-3" data-toggle="modal" data-target="#delete" data-id='{{$data->id}}'><i class="fa fa-trash" aria-hidden="true" style="color: red;font-size:20px;"></i></a>
                 </td>

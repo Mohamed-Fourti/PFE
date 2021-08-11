@@ -23,41 +23,41 @@
                                 <label for="Matiére" class="col-4 col-form-label">Matiére :</label>
                                 <input id="Matiére" name="matiére" type="text" class="form-control @error('matiére') is-invalid @enderror" value="{{ old('matiére') }}" autocomplete="matiére" placeholder="Matiére">
                                 @error('matiére')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-                      
+
                             <div class="col-md-4">
                                 <label for="select" class="col-form-label @error('séance') is-invalid @enderror" value="{{ old('séance') }}" autocomplete="séance" placeholder="Séance">
-                                         Séance</label>
+                                    Séance</label>
                                 <select id="select" name="séance" class="custom-select">
                                     <option value="" disabled selected hidden>Choisir</option>
-                                    <option  value="Premier seance">Premier seance</option>
-                                    <option  value="Deuxième seance">Deuxième seance</option>
-                                    <option  value="Troisième seance">Troisième seance</option>
-                                    <option  value="Quatrième seance">Quatrième seance</option>
-                                    <option  value="cinquième seance">cinquième seance</option>
-                            </select>
+                                    <option value="Premier seance">Premier seance</option>
+                                    <option value="Deuxième seance">Deuxième seance</option>
+                                    <option value="Troisième seance">Troisième seance</option>
+                                    <option value="Quatrième seance">Quatrième seance</option>
+                                    <option value="cinquième seance">cinquième seance</option>
+                                </select>
                                 @error('séance')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-                          
+
                             <div class="col-md-4">
                                 <label for="Labo" class="col-4 col-form-label">Labo:</label>
 
                                 <input id="Labo" name="labo" type="text" class="form-control  @error('labo') is-invalid @enderror" value="{{ old('labo') }}" autocomplete="labo" placeholder="Labo">
                                 @error('labo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-                              
+
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -102,7 +102,7 @@
                                                 <th scope="row">Logiciels Manquants</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie4' }}][nom]" value="Logiciels Manquants">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie4' }}][quantity]" min="1" >
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie4' }}][quantity]" min="1">
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie4' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -111,7 +111,7 @@
                                                 <th scope="row">Périphériques Manquants</th>
                                                 <input type="hidden" name="propriétés[{{ 'Anomalie5' }}][nom]" value="Périphériques Manquants">
                                                 <td>
-                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie5' }}][quantity]" min="1" >
+                                                    <input type="number" id="quantity" name="propriétés[{{ 'Anomalie5' }}][quantity]" min="1">
                                                 </td>
                                                 <td><textarea id="textarea" name="propriétés[{{ 'Anomalie5' }}][description]" cols="40" rows="1" class="form-control"></textarea>
                                                 </td>
@@ -205,7 +205,7 @@
                                             <thead>
 
                                                 <th scope="col">Anomalie</th>
-                                                <th scope="col">quantity</th>
+                                                <th scope="col">Numéro de poste</th>
                                                 <th scope="col">description</th>
 
                                             </thead>

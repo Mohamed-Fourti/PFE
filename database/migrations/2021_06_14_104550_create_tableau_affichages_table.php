@@ -20,11 +20,8 @@ class CreateTableauAffichagesTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('class');
-            $table->string('remarques')->nullable();
-            $table->string('file_name')->nullable();
-            $table->string('file_path')->nullable();
             $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->text('excerpt')->nullable();;
             $table->text('body')->nullable();;
             $table->string('seo_title')->nullable();

@@ -80,6 +80,12 @@
                             <br>Ministère de l’Enseignement Supérieur et de la Recherche Scientifique
                             <br>Direction générale des études technologiques
                         </div>
+                        <div>
+                            @if(Auth::user())
+
+                            <h6 style="color:white;">Bienvenue {{ Auth::user()->nom }} {{ Auth::user()->prenom }}</h6>
+                            @endif
+                        </div>
                     </div>
                 </div> <!-- row -->
             </div> <!-- container -->
@@ -115,9 +121,16 @@
                                     </li>
 
                                     @role('Enseignants|admin')
-
-                                    <li class="nav-item" id="">
-                                        <a href="{{ url('TableauAffichage') }}">Tableau D'affichage</a>
+                                    <li class="nav-item">
+                                        <a>Tableau D'affichage</a>
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <a href="{{ url('TableauAffichage') }}">Support du cours</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ url('PublicationEn') }}">Créer Publication</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     @endrole
 
@@ -169,19 +182,23 @@
                                             @endif
 
                                             <li>
-                                                <a href="{{ url('rattrapage') }}">Rattrapage</a>
+                                                <a href="{{ url('ColloqueScientifique') }}">Formation</a>
+
                                             </li>
                                             <li>
-                                                <a href="{{ url('ColloqueScientifique') }}">Formation</a>
+                                                <a href="{{ url('rattrapage') }}">Rattrapage</a>
                                             </li>
 
                                         </ul>
                                     </li>
 
                                     @endrole
+                                    @guest
+
                                     <li class="nav-item">
                                         <a href="{{ url('contact') }}">Contact</a>
                                     </li>
+                                    @endguest
 
                                 </ul>
                             </div>
@@ -210,7 +227,13 @@
                                         <div class="action ">
                                             <div onclick="menuToggleNot();">
                                                 <div class="notification show-count"></div>
-                                                <span id="CountNotification" hidden> {{auth()->user()->unreadNotifications()->count()}} </span>
+                                                <span id="CountNotification" hidden> {{auth()->user()->unreadNotifications()
+                                                ->where('type','!=', 'App\Notifications\NewUserNotification')
+                                                ->where('type','!=', 'App\Notifications\ficheDeVœuxNotification')
+                                                ->where('type','!=', 'App\Notifications\ColloqueScientifiqueNotification')
+                                                ->where('type','!=', 'App\Notifications\ficheDeVœuxOFNotification')
+                                                ->where('type','!=', 'App\Notifications\RattrapageNotification')
+                                                ->where('type','!=', 'App\Notifications\ContactNotification')->count()}} </span>
                                             </div>
                                             <div class="menu2">
 
@@ -226,9 +249,12 @@
                                     <div class="container">
 
                                         <div class="action ">
+                                            @if(Auth::user()->image)
                                             <div class="profile" onclick="menuToggle();"><img src="/storage/{{Auth::user()->image}}"></div>
+                                            @else
+                                            <div class="profile" onclick="menuToggle();"><img src="{{ asset('images/default.jpg') }}"></div>
+                                            @endif
                                             <div class="menu">
-                                                <h3>{{ Auth::user()->nom }} {{ Auth::user()->prenom }}<br><span>{{ Auth::user()->role }}</span></h3>
                                                 <ul>
                                                     <li><img src="{{ asset('images/618631.svg') }}"><a href="{{ url('profile',Auth::user()->id)}}">Profile</a></li>
                                                     <li><img src="{{ asset('images/1250678.svg') }}"><a href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin\FicheDeVœux;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OvertureFv;
 use App\Models\EtuMat;
 use App\Models\Fichedevœux;
 use App\Models\FichedevœuxOF;
+use App\Models\User;
+use App\Notifications\ficheDeVœuxOFNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class FicheDeVœuxController extends Controller
@@ -57,7 +61,7 @@ class FicheDeVœuxController extends Controller
         $fileName = $request->file->getClientOriginalName();
         $fileNameCry = md5($fileName) . $fileName;
 
-        $filePath = $request->file('file')->storeAs('public/Admin-uploads/plansétudes-fichesmatières', $fileNameCry,);
+        $filePath = $request->file('file')->storeAs('public/Admin-uploads/plansétudes-fichesmatières', $fileName,);
 
         $fileModel = $request->all();
         $fileModel = Arr::add($fileModel, 'file_path', $filePath);
@@ -115,6 +119,17 @@ class FicheDeVœuxController extends Controller
 
 
         DB::table('fichedevœux_o_f_s')->where('id', $id)->update(array('active' => '1'));
+
+        $usersid = DB::table('role_user')->where('role_id', '2')->get();
+        $dataUser = 'Ouverture';
+
+        foreach ($usersid as $users) {
+            $email = User::where('id', $users->user_id)->first();
+
+            User::findOrFail($users->user_id)->notify(new ficheDeVœuxOFNotification($dataUser));
+            Mail::to($email->email)->send(new OvertureFv());
+        }
+
         return back();
     }
 

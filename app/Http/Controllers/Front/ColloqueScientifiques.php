@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\ColloqueScientifique;
+use App\Models\User;
+use App\Notifications\ColloqueScientifiqueNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +45,12 @@ class ColloqueScientifiques extends Controller
         $data = $request->except(['_token']);
         $data = Arr::add($data, 'user_id', Auth::user()->id);
         ColloqueScientifique::create($data);
+        $usersid = DB::table('role_user')->where('role_id', '1')->get('user_id');
+        $dataUser = ColloqueScientifique::orderBy('created_at', 'desc')->first();
+
+        foreach ($usersid as $users) {
+            User::findOrFail($users->user_id)->notify(new ColloqueScientifiqueNotification($dataUser));
+        }
         return redirect()->route('/');
     }
 

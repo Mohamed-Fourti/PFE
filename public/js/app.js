@@ -1892,7 +1892,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 var NOTIFICATION_TYPES = {
   Réclamation: 'App\\Notifications\\RéclamationNotification',
   TableauAffichage: 'App\\Notifications\\TableauAffichageNotification',
-  RéclamationTraite: 'App\\Notifications\\RéclamationTraiteNotification'
+  RéclamationTraite: 'App\\Notifications\\RéclamationTraiteNotification',
+  Fiche: 'App\\Notifications\\ficheDeVœuxOFNotification'
 };
 var notifications = [];
 
@@ -1967,7 +1968,11 @@ function makeNotificationText(notification) {
   if (notification.type === NOTIFICATION_TYPES.RéclamationTraite) {
     var id = notification.data.id;
     var _user_name2 = notification.data.user_name;
-    text += "<p> Votre R\xE9clamation N\xB0".concat(id, " a \xE9t\xE9 triat\xE9 par ").concat(_user_name2, " </p>");
+    text += "<p> Votre R\xE9clamation N\xB0".concat(id, " a \xE9t\xE9 triat\xE9  </p>");
+  }
+
+  if (notification.type === NOTIFICATION_TYPES.Fiche) {
+    text += "<p>Fiche De V\u0153ux est ouvert </p>";
   }
 
   return text;

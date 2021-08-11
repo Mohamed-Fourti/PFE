@@ -7,7 +7,6 @@
     <table id="table_id" class="table table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th scope="col">Id</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Email</th>
@@ -21,7 +20,6 @@
 
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data->id }}</td>
                 <td>{{ $data->nom }}</td>
                 <td>{{ $data->prenom }}</td>
                 <td>{{ $data->email }}</td>

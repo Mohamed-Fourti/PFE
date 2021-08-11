@@ -8,6 +8,7 @@ use App\Models\ListClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ListEtudiant;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ListClassesController extends Controller
@@ -90,6 +91,5 @@ class ListClassesController extends Controller
             return redirect()->back()->with('msg', 'fichier ne existe pas');
         }
         return redirect()->back()->with('msg', 'deleted');
-    }
     }
 }

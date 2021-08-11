@@ -40,7 +40,7 @@
     <mj-section background-color="#1f2e78">
       <mj-column width="100%">
                   <mj-text color="#212b35" font-weight="bold" font-size="20px">
-Les traitements effectué
+                    
           </mj-text>
     </mj-section>
     <mj-wrapper padding-top="0" padding-bottom="0" css-class="body-section">
@@ -51,28 +51,12 @@ Les traitements effectué
           Bonjour
           </mj-text>
           <mj-text color="#637381" font-size="16px">
-Votre Réclamation  N° {{ $Réclamation->id }} a été triaté .<br>
+L'option pour le remplissage de Fiche De Vœux est ouvert
           </mj-text>
           <mj-text color="#637381" font-size="16px">
               <mj-section>
       <mj-column>
-        <table>
-          <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
-            <th style="padding: 0 15px 0 0;">Traitement</th>
-            <th style="padding: 0 15px;">résultat</th>
-            <th style="padding: 0 0 0 15px;">Par</th>
-          </tr>
-            @foreach ($Réclamation->traitements as $traitement)
 
-          <tr>
-            <td style="padding: 0 15px 0 0;">{{ $traitement->created_at}}</td>
-            <td style="padding: 0 15px;">{{ $traitement->résultat}}</td>
-            <td style="padding: 0 0 0 15px;">{{ $traitement->technicien->nom}}</td>
-          </tr>
-            @endforeach
-
-         
-        </-table>
       </mj-column>
     </mj-section>
  

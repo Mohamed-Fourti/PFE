@@ -26,6 +26,9 @@ class NotificationController extends Controller
             if ($notification->type == 'App\Notifications\RéclamationTraiteNotification') {
                 return redirect()->route('réclamation');
             }
+            if ($notification->type == 'App\\Notifications\\ficheDeVœuxOFNotification') {
+                return redirect()->route('/');
+            }
         }
     }
 }

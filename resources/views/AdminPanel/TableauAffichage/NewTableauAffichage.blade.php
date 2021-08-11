@@ -52,7 +52,6 @@
 
                 @endif
 
-
               </div>
             </div>
           </div>
@@ -106,32 +105,7 @@
 
       </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-3 col-2">
-        <div class="card">
-          <div class="card-header">
-            Publication
-          </div>
-          <div class="card-body">
-            @if($active)
-            @if($datas->active==1 )
 
-
-            <input name="active" id="Publié" type="checkbox" value="false" checked>
-            <label for="Publié" class="">Publié</label>
-            @else
-            <input name="active" id="Publié" type="checkbox" value="false">
-            <label for="Publié" class="">Publié</label>
-            @endif
-
-            @else
-            <input name="active" id="Publié" type="checkbox" value="1">
-            <label for="Publié">Publié</label>
-            @endif
-
-          </div>
-        </div>
-
-      </div>
 
       <div class="col-lg-3 col-md-3 col-sm-3 col-2">
         <div class="card">
