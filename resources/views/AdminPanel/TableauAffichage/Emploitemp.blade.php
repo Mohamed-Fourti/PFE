@@ -32,7 +32,7 @@
 
               <label for="select" class="col-2 col-form-label">Classe</label>
               <select id="select" name="list_classe_id" class="col-4 custom-select @error('list_classe_id') is-invalid @enderror">
-                <option value="" disabled selected>Choisir</option>
+                <option value="" disabled selected>Choisir un classe</option>
                 @foreach ($classes as $classe)
                 <option value="{{ $classe->id }}"> {{ $classe->class }}</option>
                 @endforeach

@@ -25,9 +25,6 @@
                             <li class="nav-item">
                                 <a id="instructor-tab" data-toggle="tab" href="#instructor" role="tab" aria-controls="instructor" aria-selected="false">Formateur</a>
                             </li>
-                            <li class="nav-item">
-                                <a id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Commenter</a>
-                            </li>
                         </ul>
 
                         <div class="tab-content" id="myTabContent">
@@ -56,109 +53,7 @@
                                     </div>
                                 </div> <!-- instructor cont -->
                             </div>
-                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                                <div class="reviews-cont">
-                                    <div class="title">
-                                        <h6>Student Reviews</h6>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <div class="singel-reviews">
-                                                <div class="reviews-author">
-                                                    <div class="author-thum">
-                                                        <img src="images/review/r-1.jpg" alt="Reviews">
-                                                    </div>
-                                                    <div class="author-name">
-                                                        <h6>Bobby Aktar</h6>
-                                                        <span>April 03, 2019</span>
-                                                    </div>
-                                                </div>
-                                                <div class="reviews-description pt-20">
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
-                                                    <div class="rating">
-                                                        <ul>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- singel reviews -->
-                                        </li>
-                                        <li>
-                                            <div class="singel-reviews">
-                                                <div class="reviews-author">
-                                                    <div class="author-thum">
-                                                        <img src="images/review/r-3.jpg" alt="Reviews">
-                                                    </div>
-                                                    <div class="author-name">
-                                                        <h6>Tania Aktar</h6>
-                                                        <span>April 20, 2019</span>
-                                                    </div>
-                                                </div>
-                                                <div class="reviews-description pt-20">
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
-                                                    <div class="rating">
-                                                        <ul>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                        </ul>
-                                                        <span>/ 5 Star</span>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- singel reviews -->
-                                        </li>
-                                    </ul>
-                                    <div class="title pt-15">
-                                        <h6>Leave A Comment</h6>
-                                    </div>
-                                    <div class="reviews-form">
-                                        <form action="#">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-singel">
-                                                        <input type="text" placeholder="Fast name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-singel">
-                                                        <input type="text" placeholder="Last Name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-singel">
-                                                        <div class="rate-wrapper">
-                                                            <div class="rate-label">Your Rating:</div>
-                                                            <div class="rate">
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-singel">
-                                                        <textarea placeholder="Comment"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-singel">
-                                                        <button type="button" class="main-btn">Post Comment</button>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- row -->
-                                        </form>
-                                    </div>
-                                </div> <!-- reviews cont -->
-                            </div>
+
                         </div> <!-- tab content -->
                     </div>
                 </div> <!-- corses singel left -->

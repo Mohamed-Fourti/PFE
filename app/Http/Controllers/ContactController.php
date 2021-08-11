@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\User;
+use App\Notifications\ContactNotification;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -39,6 +42,12 @@ class ContactController extends Controller
 
         $data = $request->all();
         Contact::create($data);
+        $usersid = DB::table('role_user')->where('role_id', 1)->get();
+        $dataUser = Contact::orderBy('created_at', 'desc')->first();
+
+        foreach ($usersid as $users) {
+            User::findOrFail($users->user_id)->notify(new ContactNotification($dataUser));
+        }
         return back()->with('success', 'Message envoyer');
     }
 

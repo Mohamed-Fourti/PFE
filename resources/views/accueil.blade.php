@@ -70,8 +70,8 @@
                                 <a href="{{ route('Publication/show', [$formEteven->slug, 'ca' => $formEteven->categories_id ] )  }}">
                                     <h4>{{ $formEteven->title }}</h4>
                                 </a>
-                                <span><i class="fa fa-clock-o"></i> 10:00 Am - 3:00 Pm</span>
-                                <span><i class="fa fa-map-marker"></i> Rc Auditorim</span>
+                                <span><i class="fa fa-clock-o"></i> {{ $formEteven->created_at }}</span>
+                                <span><i class="fa fa-map-marker"></i> {{ $formEteven->lieu }}</span>
                             </div>
                         </li>
 
@@ -122,7 +122,7 @@ Endchekbox-->
                     <div class="news-cont">
                         <ul>
                             <li><a><i class="fa fa-calendar"></i>{{ $nouveautélast->created_at }}</a></li>
-                            <li><span>By</span>{{ $nouveautélast->user->nom }}</li>
+                            <li><span>Par</span> {{ $nouveautélast->user->nom }}</li>
                         </ul>
                         <a href="{{ route('Publication/show', [$nouveautélast->slug, 'ca' => $nouveautélast->categories_id ] )  }}">
                             <h3>{{ $nouveautélast->title }}</h3>
@@ -136,9 +136,9 @@ Endchekbox-->
             @endif
 
             @if($nouveautés!=null)
-
-            @foreach($nouveautés as $nouveauté )
             <div class="col-lg-6">
+
+                @foreach($nouveautés as $nouveauté )
 
                 <div class="singel-news news-list">
 
@@ -156,7 +156,7 @@ Endchekbox-->
                             <div class="news-cont mt-30">
                                 <ul>
                                     <li><a><i class="fa fa-calendar"></i>{{ $nouveauté->created_at }} </a></li>
-                                    <li><span>By </span>{{ $nouveauté->user->nom }}</li>
+                                    <li><span>By </span> {{ $nouveauté->user->nom }}</li>
                                 </ul>
                                 <a>
                                     <a href="{{ route('Publication/show', $nouveauté->slug) }}">
@@ -171,8 +171,8 @@ Endchekbox-->
 
                 @endforeach
                 @endif
-
             </div>
+
         </div> <!-- row -->
 </section>
 

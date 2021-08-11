@@ -93,7 +93,7 @@
 
                         <div style='display:none;' class="form-group row show">
                             <div class="fadeIn second">
-                                <input id="inputType" type="text" class="form-control @error('key') is-invalid @enderror" value="{{ old('key') }}" name="key" autocomplete="key" required placeholder="Clé d'inscription">
+                                <input id="inputType" type="password" class="form-control @error('key') is-invalid @enderror" value="{{ old('key') }}" name="key" autocomplete="key" required placeholder="Clé d'inscription">
 
                                 @error('key')
                                 <span class="" role=" alert">

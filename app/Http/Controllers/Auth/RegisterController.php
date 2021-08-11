@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Notifications\NewUserNotification;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -77,6 +79,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
 
         ]));
+        $usersid = DB::table('role_user')->where('role_id', '1')->get('user_id');
+        $dataUser = User::orderBy('created_at', 'desc')->first();
+
+        foreach ($usersid as $users) {
+            User::findOrFail($users->user_id)->notify(new NewUserNotification($dataUser));
+        }
+
         return $user->attachRole($data['role_id']);
     }
 }

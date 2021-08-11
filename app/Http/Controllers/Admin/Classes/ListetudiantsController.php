@@ -49,9 +49,10 @@ class ListetudiantsController extends Controller
     {
         $cins = User::select('cin', 'id', 'class')->get();
         $test = 0;
-        $data = ListEtudiant::latest()->first();
+        $data = ListEtudiant::orderBy('created_at', 'DESC')->first();
+        $tab = Excel::toCollection(new UsersImport, '../storage/app/' . $data->file_path);
         if ($data) {
-            $tab = Excel::toCollection(new UsersImport, '../storage/app/' . $data->file_path);
+
             foreach ($cins as $cin) {
 
                 foreach ($tab as $index => $value) {
@@ -66,7 +67,7 @@ class ListetudiantsController extends Controller
                             collect($tab[$index])
                             ->first(function ($value) use ($cin) {
                                 return $value['class'] == $cin->class;
-                            }) == NULL
+                            }) != NULL
                         ) {
                             $ExcelImport = collect($tab[$index])
                                 ->first(function ($value) use ($cin) {
@@ -119,6 +120,6 @@ class ListetudiantsController extends Controller
         } else {
             return redirect()->back()->with('msg', 'fichier ne existe pas');
         }
-        return redirect()->back()->with('msg', 'deleted');
+        return redirect()->back()->with('msg', 'supprimé');
     }
 }

@@ -11,7 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-} catch (e) {}
+} catch (e) { }
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -43,92 +43,97 @@ window.Echo = new Echo({
 const NOTIFICATION_TYPES = {
     Réclamation: 'App\\Notifications\\RéclamationNotification',
     TableauAffichage: 'App\\Notifications\\TableauAffichageNotification',
-    RéclamationTraite: 'App\\Notifications\\RéclamationTraiteNotification'
+    RéclamationTraite: 'App\\Notifications\\RéclamationTraiteNotification',
+    Fiche: 'App\\Notifications\\ficheDeVœuxOFNotification'
 
 };
 
 
 
 
-    var notifications = [];
-    var delay = ( function() {
-        var timer = 0;
-        return function(callback, ms) {
-            clearTimeout (timer);
-            timer = setTimeout(callback, ms);
-        };
-    })();
-    
+var notifications = [];
+var delay = (function () {
+    var timer = 0;
+    return function (callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
 
-    $(document).ready(function() {
-        var el = document.querySelector('.notification');
 
-        if(User.id) {
-            $.get(`/notifications`, function (data) {
-                addNotifications(data, "#notifications");
-            });
+$(document).ready(function () {
+    var el = document.querySelector('.notification');
 
-            window.Echo.private('App.Models.User.' + User.id)
+    if (User.id) {
+        $.get(`/notifications`, function (data) {
+            addNotifications(data, "#notifications");
+        });
+
+        window.Echo.private('App.Models.User.' + User.id)
             .notification((notification) => {
                 addNotifications([notification], '#notifications');
-                document.getElementById('CountNotification').innerHTML = parseInt(document.getElementById('CountNotification').innerHTML)+1;
-                delay(function(){
-                    var count = Number(el.getAttribute('data-count')) ;
+                document.getElementById('CountNotification').innerHTML = parseInt(document.getElementById('CountNotification').innerHTML) + 1;
+                delay(function () {
+                    var count = Number(el.getAttribute('data-count'));
                     el.setAttribute('data-count', count + 1);
                     el.classList.remove('notify');
 
-                }, 400 ); // end delay
+                }, 400); // end delay
 
-                    el.classList.add('notify'); 
-                 
+                el.classList.add('notify');
+
 
             });
-        }
-    });
-    
-    function addNotifications(newNotifications, target) {
-        notifications = _.concat(newNotifications,notifications );
-        notifications.slice(0,3);
-        showNotifications(notifications, target);
     }
-    
-    function showNotifications(notifications, target) {
-        if(notifications.length) {
-            var htmlElements = notifications.map(function (notification) {
-                return makeNotification(notification);
-            });
-            $(target + 'Menu').html(htmlElements.join(''));
-            $(target).addClass('has-notifications')
-        } else {
-            $(target + 'Menu').html('<li>No notifications</li>');
-            $(target).removeClass('has-notifications');
-        }
-    }
-    
-    function makeNotification(notification) {
-        var notificationText = makeNotificationText(notification);
-        const id = notification.id;
+});
 
-        return `<li><a  href="/notifications/${id}">${notificationText}</a></li>`;
-    }
-    
+function addNotifications(newNotifications, target) {
+    notifications = _.concat(newNotifications, notifications);
+    notifications.slice(0, 3);
+    showNotifications(notifications, target);
+}
 
-    
-    function makeNotificationText(notification) {
-        var text = '';
-        if(notification.type === NOTIFICATION_TYPES.Réclamation) {
-            const user_name = notification.data.user_name;
-            const priorité = notification.data.priorité;
-            text +=`<p>Nouvelle réclamation de ${user_name} de priorité ${priorité} </p>`;
-        } 
-        if(notification.type === NOTIFICATION_TYPES.TableauAffichage) {
-            const user_name = notification.data.user_name;
-            text +=`<p>nouvel affichage publié par ${user_name} </p>`;
-        }
-        if(notification.type === NOTIFICATION_TYPES.RéclamationTraite) {
-            const id = notification.data.id;
-            const user_name = notification.data.user_name;
-            text +=`<p> Votre Réclamation N°${id} a été triaté par ${user_name} </p>`;
-        }  
-        return text;
+function showNotifications(notifications, target) {
+    if (notifications.length) {
+        var htmlElements = notifications.map(function (notification) {
+            return makeNotification(notification);
+        });
+        $(target + 'Menu').html(htmlElements.join(''));
+        $(target).addClass('has-notifications')
+    } else {
+        $(target + 'Menu').html('<li>No notifications</li>');
+        $(target).removeClass('has-notifications');
     }
+}
+
+function makeNotification(notification) {
+    var notificationText = makeNotificationText(notification);
+    const id = notification.id;
+
+    return `<li><a  href="/notifications/${id}">${notificationText}</a></li>`;
+}
+
+
+
+function makeNotificationText(notification) {
+    var text = '';
+    if (notification.type === NOTIFICATION_TYPES.Réclamation) {
+        const user_name = notification.data.user_name;
+        const priorité = notification.data.priorité;
+        text += `<p>Nouvelle réclamation de ${user_name} de priorité ${priorité} </p>`;
+    }
+    if (notification.type === NOTIFICATION_TYPES.TableauAffichage) {
+        const user_name = notification.data.user_name;
+        text += `<p>nouvel affichage publié par ${user_name} </p>`;
+    }
+    if (notification.type === NOTIFICATION_TYPES.RéclamationTraite) {
+        const id = notification.data.id;
+        const user_name = notification.data.user_name;
+        text += `<p> Votre Réclamation N°${id} a été triaté  </p>`;
+    }
+    if (notification.type === NOTIFICATION_TYPES.Fiche) {
+
+        text += `<p>Fiche De Vœux est ouvert </p>`;
+    }
+    return text;
+}

@@ -18,7 +18,7 @@ class EmploitempController extends Controller
     public function index()
     {
         $id = ListClass::where('class', Auth::user()->class)->first();
-        $data = Emploi_temp::where('list_classe_id', 19)->first();
+        $data = Emploi_temp::where('list_classe_id', $id->id)->first();
         return view('TableauAffichage.Emploitemp', compact('data'));
     }
 

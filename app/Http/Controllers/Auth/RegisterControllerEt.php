@@ -16,6 +16,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use App\Imports\UsersImportClass;
 use App\Models\ListEtudiant;
+use App\Notifications\NewUserNotification;
+use Illuminate\Support\Facades\DB;
 
 class RegisterControllerEt extends Controller
 {
@@ -59,8 +61,8 @@ class RegisterControllerEt extends Controller
     {
         return Validator::make($data, [
 
-            'nom' => ['required', 'string', 'max:255', 'unique:users'],
-            'prenom' => ['required', 'string', 'max:255', 'unique:users'],
+            'nom' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
             'email' => 'required|email|unique:users,email',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
 
@@ -85,6 +87,15 @@ class RegisterControllerEt extends Controller
             'password' => Hash::make($data['password']),
 
         ]));
+
+
+        $usersid = DB::table('role_user')->where('role_id', '1')->get('user_id');
+        $dataUser = User::orderBy('created_at', 'desc')->first();
+
+        foreach ($usersid as $users) {
+            User::findOrFail($users->user_id)->notify(new NewUserNotification($dataUser));
+        }
+
         return $user->attachRole($data['role_id']);
     }
 

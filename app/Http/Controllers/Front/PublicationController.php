@@ -32,6 +32,7 @@ class PublicationController extends Controller
         'image',
         'title',
         'excerpt',
+        'lieu',
         'created_at',
         'categories_id',
         'user_id'

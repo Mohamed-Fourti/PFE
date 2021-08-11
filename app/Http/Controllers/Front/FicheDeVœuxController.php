@@ -8,6 +8,8 @@ use App\Models\EtuMat;
 use App\Models\Fichedevœux;
 use App\Models\FichedevœuxOF;
 use App\Models\ListMatière;
+use App\Models\User;
+use App\Notifications\ficheDeVœuxNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +86,12 @@ class FicheDeVœuxController extends Controller
         $data = Arr::add($data, 'jours2', $jsonjours2);
         Fichedevœux::create($data);
 
+        $usersid = DB::table('role_user')->where('role_id', 1)->get();
+        $dataUser = Fichedevœux::orderBy('created_at', 'desc')->first();
+
+        foreach ($usersid as $users) {
+            User::findOrFail($users->user_id)->notify(new ficheDeVœuxNotification($dataUser));
+        }
         return back()->with('message', 'Le traitement a été enrgistrée avec succès');;
     }
 }

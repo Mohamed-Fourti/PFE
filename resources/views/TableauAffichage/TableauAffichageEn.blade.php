@@ -19,7 +19,7 @@
                     <form action="{{route('TableauAffichage.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group ">
-                            <label for="title" class="col-4 col-form-label">title</label>
+                            <label for="title" class="col-4 col-form-label">Titre</label>
                             <div class="col-12">
                                 <div class="input-group">
 
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label for="slug" class="col-4 col-form-label">title</label>
+                            <label for="slug" class="col-4 col-form-label">Slug</label>
                             <div class="col-12">
                                 <div class="input-group">
 
@@ -45,6 +45,16 @@
                                 <input id="input-fr" name="file" type="file" class="file" data-show-preview="false">
                                 <div id="errors"></div>
 
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="lien" class="col-4 col-form-label">Lien</label>
+                            <div class="col-12">
+                                <div class="input-group">
+
+                                    <input id="lien" name="lien" type="text" class="form-control">
+
+                                </div>
                             </div>
                         </div>
 

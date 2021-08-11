@@ -14,11 +14,11 @@
           @foreach ($EtuMats->where('département','TI') as $EtuMat)
           @if (strpos($EtuMat->file_path, '.pdf') !== false)
 
-          <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
+          <a href="http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @else
-          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
+          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @endif
@@ -27,11 +27,11 @@
           @foreach ($EtuMats->where('département','TICIT') as $EtuMat)
           @if (strpos($EtuMat->file_path, '.pdf') !== false)
 
-          <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
+          <a href="http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières{{ $EtuMat->name }}" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @else
-          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
+          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @endif
@@ -40,11 +40,11 @@
           @foreach ($EtuMats->where('département','GE') as $EtuMat)
           @if (strpos($EtuMat->file_path, '.pdf') !== false)
 
-          <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
+          <a href="http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @else
-          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
+          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @endif
@@ -53,11 +53,11 @@
           @foreach ($EtuMats->where('département','GM') as $EtuMat)
           @if (strpos($EtuMat->file_path, '.pdf') !== false)
 
-          <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
+          <a href="http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @else
-          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
+          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @endif
@@ -66,11 +66,11 @@
           @foreach ($EtuMats->where('département','SEG') as $EtuMat)
           @if (strpos($EtuMat->file_path, '.pdf') !== false)
 
-          <a href="http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
+          <a href="http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @else
-          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://ad25c59bef89.ngrok.io/storage/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
+          <a href="https://view.officeapps.live.com/op/embed.aspx?src=http://5a5195746e04.ngrok.io/storage/Admin-uploads/plansétudes-fichesmatières/{{ $EtuMat->name }}&embedded=true" target="_blank">
             <p>- {{ $EtuMat->class }}</p>
           </a><br>
           @endif
@@ -80,11 +80,6 @@
       <div class=" mt-2">
         <div class="card">
           <div class="card-body">
-            <label for="gsm" class="col-4 col-form-label">GSM :</label>
-            <input id="gsm" name="gsm" type="text" class="form-control">
-            @error('gsm')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
 
             <input id="" name="fichedevœux_o_f_s_id" type="text" hidden value="{{ $semid }}">
             <label for="select" class="col-4 col-form-label">Matiere</label>

@@ -48,6 +48,8 @@ class TableauAffichageAdminController extends Controller
     {
         $request->validate([
             'title'              => 'required|string|max:255',
+            'slug'              => 'required|string|max:255',
+            'class'            => 'required',
 
         ]);
 
@@ -61,7 +63,7 @@ class TableauAffichageAdminController extends Controller
             $fileName = $request->file->getClientOriginalName();
             $fileNameCry = md5($fileName) . $fileName;
 
-            $filePath = $request->file('file')->storeAs('public/plansétudes-fichesmatières', $fileNameCry);
+            $filePath = $request->file('file')->storeAs(Auth::user()->id . '/TableauAffichage', $fileNameCry, ['disk' => 'public']);
             $file_path = '/storage/' . $filePath;
             $fileModel = Arr::add($fileModel, 'file_path', $file_path);
             $fileModel = Arr::add($fileModel, 'file_name', $fileName);
